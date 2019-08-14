@@ -1,5 +1,27 @@
 import "./index.scss";
 
-const div = document.createElement("p");
-div.innerText = "Hello World!";
-document.body.appendChild(div);
+import { init } from "kontra/src/core.js";
+import GameLoop from "kontra/src/gameLoop.js";
+import Sprite from "kontra/src/sprite.js";
+
+init();
+
+const sprite = Sprite({
+  x: 100,
+  y: 100,
+  dx: 2,
+  width: 20,
+  height: 40,
+  color: "red"
+});
+
+const loop = GameLoop({
+  update() {
+    sprite.update();
+  },
+  render() {
+    sprite.render();
+  }
+});
+
+loop.start();
