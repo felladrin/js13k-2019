@@ -1,10 +1,9 @@
 import "./index.scss";
-
 import { init } from "kontra/src/core.js";
 import GameLoop from "kontra/src/gameLoop.js";
 import Sprite from "kontra/src/sprite.js";
 
-init();
+const kontra = init();
 
 const sprite = Sprite({
   x: 100,
@@ -18,6 +17,10 @@ const sprite = Sprite({
 const loop = GameLoop({
   update() {
     sprite.update();
+
+    if (sprite.x > kontra.canvas.width) {
+      sprite.x = -sprite.width;
+    }
   },
   render() {
     sprite.render();
