@@ -41,6 +41,7 @@
     }
   },
   "browserslist": [
-    "defaults"
+    "Last 1 Chrome version",
+    "Last 1 Firefox version"
   ]
 }
