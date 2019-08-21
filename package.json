@@ -8,7 +8,7 @@
     "parcel": "parcel src/index.html -d dist/bundled",
     "clean-dist-dir": "rimraf dist",
     "make-dist-dir": "mkdirp dist/bundled dist/inlined dist/zipped",
-    "parcel-build": "parcel build src/index.html -d dist/bundled --no-source-maps",
+    "parcel-build": "parcel build src/index.html -d dist/bundled --no-source-maps --experimental-scope-hoisting",
     "inline-build": "html-inline -i dist/bundled/index.html -o dist/inlined/index.html",
     "zip": "node ./scripts/zip.js",
     "lint": "eslint \"src/**/*.{js,ts}\" --fix"

@@ -1,8 +1,11 @@
 import "./index.scss";
-import { init } from "kontra/src/core.js";
-import GameLoop from "kontra/src/gameLoop.js";
-import Sprite from "kontra/src/sprite.js";
-import { initKeys, bindKeys } from "kontra/src/keyboard.js";
+import {
+  init,
+  GameLoop,
+  Sprite,
+  initKeys,
+  bindKeys
+} from "kontra/src/kontra.js";
 
 function resizeGame(): void {
   const gameArea = document.getElementById("gameArea") as HTMLDivElement;
