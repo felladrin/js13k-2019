@@ -1,4 +1,5 @@
 import "./index.scss";
+import "./soundbox-player.ts";
 import {
   init,
   GameLoop,
