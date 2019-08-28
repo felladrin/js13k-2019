@@ -1,209 +1,129 @@
 import "./index.scss";
-import "./soundbox-player.ts";
-import "./jsfx.js";
-import {
-  init,
-  GameLoop,
-  Sprite,
-  initKeys,
-  bindKeys
-} from "kontra/src/kontra.js";
 
-function resizeGame(): void {
-  const gameArea = document.getElementById("gameArea") as HTMLDivElement;
-  const widthToHeight = 16 / 9;
-  let newWidth = window.innerWidth;
-  let newHeight = window.innerHeight;
-  const newWidthToHeight = newWidth / newHeight;
-
-  if (newWidthToHeight > widthToHeight) {
-    newWidth = newHeight * widthToHeight;
-    gameArea.style.height = newHeight + "px";
-    gameArea.style.width = newWidth + "px";
-  } else {
-    newHeight = newWidth / widthToHeight;
-    gameArea.style.width = newWidth + "px";
-    gameArea.style.height = newHeight + "px";
-  }
-
-  gameArea.style.marginTop = -newHeight / 2 + "px";
-  gameArea.style.marginLeft = -newWidth / 2 + "px";
-
-  const gameCanvas = document.getElementById("gameCanvas") as HTMLCanvasElement;
-  gameCanvas.width = newWidth;
-  gameCanvas.height = newHeight;
+enum Scene {
+  Menu = "Menu",
+  Tutorial = "Tutorial",
+  Credits = "Credits",
+  GamePlay = "GamePlay",
+  GameOver = "GameOver"
 }
 
-window.addEventListener("load", resizeGame, false);
-window.addEventListener("resize", resizeGame, false);
-window.addEventListener("orientationchange", resizeGame, false);
+class SceneManager {
+  public currentScene: Scene = Scene.Menu;
 
-const { canvas } = init("gameCanvas");
+  constructor() {
+    SceneManager.displayScene(this.currentScene);
+  }
 
-initKeys();
-const arrows = [37, 38, 39, 40];
-canvas.addEventListener(
-  "keydown",
-  function(e) {
-    if (arrows.indexOf(e.which) !== -1) {
-      e.preventDefault();
+  static displayScene(scene: Scene): void {
+    for (const sceneKey in Scene) {
+      const sceneElement = SceneManager.getSceneElement(Scene[sceneKey]);
+      if (scene == sceneKey) {
+        sceneElement.classList.remove("inactive");
+      } else {
+        sceneElement.classList.add("inactive");
+      }
     }
-  },
-  true
-);
-const grid = 15;
-const numRows = canvas.height / grid;
-const numCols = canvas.width / grid;
-const snake = Sprite();
-const apple = Sprite();
+  }
 
-// keep track of which cells of the game are open so the apple doesn't spawn on
-// top of the snake
-const freeCells = [];
-for (let row = 0; row < numRows; row++) {
-  for (let col = 0; col < numCols; col++) {
-    freeCells.push(row * numCols + col);
+  static getSceneElement(scene: string): HTMLDivElement {
+    return document.querySelector(`div[data-scene="${scene}"]`);
   }
 }
 
-/**
- * Get a random integer between min (inclusive) and max (exclusive)
- * @see https://stackoverflow.com/a/1527820/2124254
- */
-function getRandomInt(min, max): number {
-  return Math.floor(Math.random() * (max - min)) + min;
+enum GamePlayState {
+  PresentingPhaseInfo,
+  FadingInScene,
+  AwaitingUserResponse,
+  CongratulatingPlayer
 }
 
-/**
- * Get a random open cell for the apple
- */
-function getApplePos(): { x: number; y: number } {
-  const cell = getRandomInt(0, freeCells.length - 1);
-  return {
-    x: (cell % numCols) * grid,
-    y: ((cell / numCols) | 0) * grid
-  };
+class GamePlayStateManager {
+  public currentState: GamePlayState = GamePlayState.PresentingPhaseInfo;
 }
 
-/**
- * Reset the snake and apple position
- */
-function reset(): void {
-  snake.init({
-    x: 10 * grid,
-    y: 5 * grid,
-    dx: grid,
-    color: "green",
-    cells: [],
-    maxCells: 4,
-    update: function() {
-      snake.advance();
+class CountDownTimer {
+  private count = 0;
+  private intervalTimerId = 0;
 
-      // wrap snake position on edge of screen
-      if (this.x < 0) {
-        this.x = canvas.width - grid;
-      } else if (this.x >= canvas.width) {
-        this.x = 0;
-      }
-      if (this.y < 0) {
-        this.y = canvas.height - grid;
-      } else if (this.y >= canvas.height) {
-        this.y = 0;
-      }
+  private static readonly ONE_SECOND = 1000;
 
-      // keep track of where snake has been. front of the array is always the head
-      this.cells.unshift({ x: this.x, y: this.y });
-      const cellIndex = freeCells.indexOf(
-        (this.y / grid) * numCols + this.x / grid
-      );
-      freeCells.splice(cellIndex, 1);
+  constructor(private initialCount: number, private onTimeOver: () => void) {
+    this.reset();
+  }
 
-      // remove cells as we move away from them
-      if (this.cells.length > this.maxCells) {
-        const cell = this.cells.pop();
-        freeCells.push((cell.y / grid) * numCols + cell.x / grid);
-      }
+  public reset(): void {
+    this.count = this.initialCount;
+  }
 
-      // check for collision with apple or body
-      this.cells.forEach(
-        function(cell, index): void {
-          // snake ate apple, only the front of the snake can eat an apple
-          if (index === 0 && cell.x === apple.x && cell.y === apple.y) {
-            this.maxCells++;
-            const pos = getApplePos();
-            apple.x = pos.x;
-            apple.y = pos.y;
-          }
+  public start(): void {
+    this.intervalTimerId = setInterval(
+      this.handleTimeout,
+      CountDownTimer.ONE_SECOND
+    );
+  }
 
-          // check collision with all cells after this one (modified bubble sort)
-          for (let i = index + 1; i < this.cells.length; i++) {
-            // collision, reset game
-            if (cell.x === this.cells[i].x && cell.y === this.cells[i].y) {
-              reset();
-            }
-          }
-        }.bind(this)
-      );
-    },
-    render: function() {
-      this.context.fillStyle = this.color;
+  public stop(): void {
+    clearInterval(this.intervalTimerId);
+  }
 
-      this.cells.forEach(
-        function(cell): void {
-          this.context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
-        }.bind(this)
-      );
+  private handleTimeout(): void {
+    this.count--;
+
+    if (this.count == 0) {
+      this.stop();
+      this.onTimeOver();
     }
-  });
-
-  const pos = getApplePos();
-  apple.init({
-    x: pos.x,
-    y: pos.y,
-    color: "red",
-    width: grid - 1,
-    height: grid - 1
-  });
+  }
 }
 
-// we don't want the controls to update at 15fps so we'll update the movement
-// outside the game loop for more tight feeling controls
-bindKeys("left", function() {
-  // prevent snake from backtracking on itself
-  if (snake.dx === 0) {
-    snake.dx = -grid;
-    snake.dy = 0;
-  }
-});
-bindKeys("up", function() {
-  if (snake.dy === 0) {
-    snake.dy = -grid;
-    snake.dx = 0;
-  }
-});
-bindKeys("right", function() {
-  if (snake.dx === 0) {
-    snake.dx = grid;
-    snake.dy = 0;
-  }
-});
-bindKeys("down", function() {
-  if (snake.dy === 0) {
-    snake.dy = grid;
-    snake.dx = 0;
-  }
-});
+class Game {
+  countDownTimer: CountDownTimer;
+  sceneManager: SceneManager;
 
-const loop = GameLoop({
-  fps: 15, // snake plays great at 15fps
-  update: function() {
-    snake.update();
-  },
-  render: function() {
-    apple.render();
-    snake.render();
+  public start(): void {
+    this.countDownTimer = new CountDownTimer(10, (): void => {});
+    this.sceneManager = new SceneManager();
   }
-});
 
-reset();
-loop.start();
+  public loop(): void {
+    this.countDownTimer.reset();
+    // fadeInSentence();
+    // fadeInQuestion();
+    // fadeInOptions();
+    this.countDownTimer.start();
+    // awaitUserResponse();
+  }
+}
+
+new Game().start();
+
+class Carousel {
+  carousel: HTMLDivElement;
+  cellCount = 3;
+  selectedIndex = 0;
+
+  constructor() {
+    this.carousel = document.querySelector(".carousel");
+
+    const prevButton = document.querySelector(".previous-button");
+    prevButton.addEventListener("click", () => {
+      this.selectedIndex--;
+      this.rotate();
+    });
+
+    const nextButton = document.querySelector(".next-button");
+    nextButton.addEventListener("click", () => {
+      this.selectedIndex++;
+      this.rotate();
+    });
+  }
+
+  rotate(): void {
+    const angle = (this.selectedIndex / this.cellCount) * -360;
+    this.carousel.style.transform =
+      "translateZ(-288px) rotateY(" + angle + "deg)";
+  }
+}
+
+new Carousel();

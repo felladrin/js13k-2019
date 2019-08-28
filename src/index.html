@@ -2,12 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JS 13K Game</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    />
+    <title>Back Read</title>
   </head>
   <body>
-    <div id="gameArea">
-      <canvas id="gameCanvas"></canvas>
+    <div data-scene="Menu" class="scene inactive">
+      <div class="perspective">
+        <div class="carousel">
+          <div class="carousel-cell"><div>START</div></div>
+          <div class="carousel-cell"><div>TUTORIAL</div></div>
+          <div class="carousel-cell"><div>CREDITS</div></div>
+        </div>
+      </div>
+      <div class="carousel-control">
+        <p style="text-align: center;">
+          <button class="previous-button">◁</button>
+          <button class="accept-button">✔</button>
+          <button class="next-button">▷</button>
+        </p>
+      </div>
+    </div>
+    <div data-scene="Tutorial" class="scene inactive">
+      <p>Tutorial Scene</p>
+    </div>
+    <div data-scene="Credits" class="scene inactive">
+      <p>Credits Scene</p>
+    </div>
+    <div data-scene="GamePlay" class="scene inactive">
+      <p>GamePlay Scene</p>
+    </div>
+    <div data-scene="GameOver" class="scene inactive">
+      <p>GameOver Scene</p>
     </div>
     <script src="index.ts"></script>
   </body>
