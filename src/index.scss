@@ -1,11 +1,68 @@
 * {
   box-sizing: border-box;
+  user-select: none;
 }
 
 body {
   margin: 0;
   overflow: hidden;
   font-family: sans-serif;
+}
+
+@media screen and (min-width: 1024px) and (orientation: landscape),
+  screen and (min-height: 1024px) and (orientation: portrait) {
+  body {
+    background-color: ghostwhite;
+  }
+
+  .container {
+    width: 100vw;
+    height: calc((16 / 9) * 100vw);
+    max-height: 100vh;
+    max-width: calc((9 / 16) * 100vh);
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+  }
+
+  .container {
+    border: 16px black solid;
+    border-top-width: 60px;
+    border-bottom-width: 60px;
+    border-radius: 36px;
+  }
+
+  /* The horizontal line on the top of the device */
+  .container:before {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 5px;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #333;
+    border-radius: 10px;
+  }
+
+  /* The circle on the bottom of the device */
+  .container:after {
+    content: "";
+    display: block;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    left: 50%;
+    bottom: -65px;
+    transform: translate(-50%, -50%);
+    background: #333;
+    border-radius: 50%;
+  }
 }
 
 div[data-scene="Menu"] {
@@ -16,15 +73,14 @@ div[data-scene="Menu"] {
     margin: 40px auto;
     perspective: 1000px;
 
-    .carousel {
+    .menu-carousel {
       width: 100%;
       height: 100%;
       position: absolute;
-      transform: translateZ(-60px);
       transform-style: preserve-3d;
       transition: transform 1s;
 
-      .carousel-cell {
+      .menu-option {
         position: absolute;
         width: 190px;
         height: 120px;
@@ -37,22 +93,31 @@ div[data-scene="Menu"] {
         color: white;
         text-align: center;
 
+        &:hover {
+          cursor: pointer;
+
+          div {
+            transform: rotateY(0deg);
+          }
+        }
+
         div {
           transform: rotateY(180deg);
+          transition: 0.5s;
         }
       }
 
-      .carousel-cell:nth-child(1) {
+      .menu-option:nth-child(1) {
         background: hsla(0, 100%, 50%, 0.8);
         transform: rotateY(0deg) translateZ(60px);
       }
 
-      .carousel-cell:nth-child(2) {
+      .menu-option:nth-child(2) {
         background: hsla(40, 100%, 50%, 0.8);
         transform: rotateY(120deg) translateZ(60px);
       }
 
-      .carousel-cell:nth-child(3) {
+      .menu-option:nth-child(3) {
         background: hsla(80, 100%, 50%, 0.8);
         transform: rotateY(240deg) translateZ(60px);
       }

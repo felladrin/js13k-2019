@@ -9,33 +9,40 @@
     <title>Back Read</title>
   </head>
   <body>
-    <div data-scene="Menu" class="scene inactive">
-      <div class="perspective">
-        <div class="carousel">
-          <div class="carousel-cell"><div>START</div></div>
-          <div class="carousel-cell"><div>TUTORIAL</div></div>
-          <div class="carousel-cell"><div>CREDITS</div></div>
+    <div class="container">
+      <div data-scene="Menu" class="scene inactive">
+        <div class="perspective">
+          <div class="menu-carousel">
+            <div class="menu-option" data-option="GamePlay">
+              <div>START</div>
+            </div>
+            <div class="menu-option" data-option="Tutorial">
+              <div>TUTORIAL</div>
+            </div>
+            <div class="menu-option" data-option="Credits">
+              <div>CREDITS</div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-control">
+          <p style="text-align: center;">
+            <button class="previous-button">&larr;</button>
+            <button class="next-button">&rarr;</button>
+          </p>
         </div>
       </div>
-      <div class="carousel-control">
-        <p style="text-align: center;">
-          <button class="previous-button">◁</button>
-          <button class="accept-button">✔</button>
-          <button class="next-button">▷</button>
-        </p>
+      <div data-scene="Tutorial" class="scene inactive">
+        <p>Tutorial Scene</p>
       </div>
-    </div>
-    <div data-scene="Tutorial" class="scene inactive">
-      <p>Tutorial Scene</p>
-    </div>
-    <div data-scene="Credits" class="scene inactive">
-      <p>Credits Scene</p>
-    </div>
-    <div data-scene="GamePlay" class="scene inactive">
-      <p>GamePlay Scene</p>
-    </div>
-    <div data-scene="GameOver" class="scene inactive">
-      <p>GameOver Scene</p>
+      <div data-scene="Credits" class="scene inactive">
+        <p>Credits Scene</p>
+      </div>
+      <div data-scene="GamePlay" class="scene inactive">
+        <p>GamePlay Scene</p>
+      </div>
+      <div data-scene="GameOver" class="scene inactive">
+        <p>GameOver Scene</p>
+      </div>
     </div>
     <script src="index.ts"></script>
   </body>

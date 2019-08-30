@@ -99,30 +99,47 @@ class Game {
 new Game().start();
 
 class Carousel {
-  carousel: HTMLDivElement;
-  cellCount = 3;
+  menuCarousel: HTMLDivElement;
+  prevButton: HTMLButtonElement;
+  nextButton: HTMLButtonElement;
+  cellCount: number;
   selectedIndex = 0;
 
   constructor() {
-    this.carousel = document.querySelector(".carousel");
+    this.queryElements();
+    this.addEventListeners();
+    this.cellCount = this.menuCarousel.children.length;
+  }
 
-    const prevButton = document.querySelector(".previous-button");
-    prevButton.addEventListener("click", () => {
+  queryElements(): void {
+    this.menuCarousel = document.querySelector(".menu-carousel");
+    this.prevButton = document.querySelector(".previous-button");
+    this.nextButton = document.querySelector(".next-button");
+  }
+
+  addEventListeners(): void {
+    this.prevButton.addEventListener("click", () => {
       this.selectedIndex--;
       this.rotate();
     });
 
-    const nextButton = document.querySelector(".next-button");
-    nextButton.addEventListener("click", () => {
+    this.nextButton.addEventListener("click", () => {
       this.selectedIndex++;
       this.rotate();
     });
+
+    const menuOptions = this.menuCarousel.children;
+    for (let i = 0; i < menuOptions.length; i++) {
+      const menuOption = menuOptions[i] as HTMLDivElement;
+      menuOption.addEventListener("click", () => {
+        SceneManager.displayScene(menuOption.dataset["option"] as Scene);
+      });
+    }
   }
 
   rotate(): void {
     const angle = (this.selectedIndex / this.cellCount) * -360;
-    this.carousel.style.transform =
-      "translateZ(-288px) rotateY(" + angle + "deg)";
+    this.menuCarousel.style.transform = "rotateY(" + angle + "deg)";
   }
 }
 
