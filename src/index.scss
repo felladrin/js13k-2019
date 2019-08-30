@@ -1,3 +1,8 @@
+$game-lateral-border-size: 16px;
+$game-top-bottom-size: 60px;
+$game-width: 360px + $game-lateral-border-size;
+$game-height: 640px + $game-top-bottom-size;
+
 * {
   box-sizing: border-box;
   user-select: none;
@@ -9,24 +14,39 @@ body {
   font-family: sans-serif;
 }
 
-@media screen and (min-width: 1024px) and (orientation: landscape),
-  screen and (min-height: 1024px) and (orientation: portrait) {
+.header {
+  overflow: hidden;
+  background-color: #8f8655;
+  width: 100%;
+  color: white;
+  padding: 14px 16px;
+  text-align: center;
+
+  .text {
+    opacity: 1;
+    transition-duration: 500ms;
+
+    &.being-updated {
+      opacity: 0;
+    }
+  }
+}
+
+@media screen and (min-width: $game-width) and (min-height: $game-height) {
   body {
     background-color: ghostwhite;
   }
 
   .container {
-    width: 100vw;
-    height: calc((16 / 9) * 100vw);
-    max-height: 100vh;
-    max-width: calc((9 / 16) * 100vh);
+    width: $game-width;
+    height: $game-height;
     margin: auto;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: white;
+    background-color: #eedc80;
   }
 
   .container {
@@ -108,17 +128,17 @@ div[data-scene="Menu"] {
       }
 
       .menu-option:nth-child(1) {
-        background: hsla(0, 100%, 50%, 0.8);
+        background: rgba(255, 0, 0, 0.95);
         transform: rotateY(0deg) translateZ(60px);
       }
 
       .menu-option:nth-child(2) {
-        background: hsla(40, 100%, 50%, 0.8);
+        background: rgba(138, 205, 0, 0.95);
         transform: rotateY(120deg) translateZ(60px);
       }
 
       .menu-option:nth-child(3) {
-        background: hsla(80, 100%, 50%, 0.8);
+        background: rgba(255, 170, 0, 0.95);
         transform: rotateY(240deg) translateZ(60px);
       }
     }

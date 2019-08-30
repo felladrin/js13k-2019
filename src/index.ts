@@ -144,3 +144,30 @@ class Carousel {
 }
 
 new Carousel();
+
+class Header {
+  static element: HTMLDivElement = document.querySelector(".header > .text");
+
+  public static changeInnerHTML(innerHTML: string): Promise<void> {
+    return new Promise((resolve): void => {
+      const resolvePromise = (): void => resolve();
+
+      const updateInnerHTML = (): void => {
+        Header.element.innerHTML = innerHTML;
+        Header.element.addEventListener("transitionend", resolvePromise, {
+          once: true
+        });
+        Header.element.classList.remove("being-updated");
+      };
+
+      Header.element.addEventListener("transitionend", updateInnerHTML, {
+        once: true
+      });
+      Header.element.classList.add("being-updated");
+    });
+  }
+}
+
+Header.changeInnerHTML("<strong>It</strong> <em>Works</em>!").then(() => {
+  Header.changeInnerHTML("Back Read").then();
+});
