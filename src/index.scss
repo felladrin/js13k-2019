@@ -3,6 +3,99 @@ $game-top-bottom-size: 60px;
 $game-width: 360px + $game-lateral-border-size;
 $game-height: 640px + $game-top-bottom-size;
 
+$color-brown: #916848;
+$color-beige: #f5b390;
+$color-purple: #342739;
+$color-cyan: #3b8d89;
+$color-green: #bed678;
+$color-light-blue: #a6d9ee;
+$color-blue: #0d74b6;
+
+.speaker {
+  vertical-align: middle;
+  box-sizing: border-box;
+  display: inline-block;
+  background: currentColor;
+  background-clip: content-box;
+  width: 1em;
+  height: 1em;
+  border: 0.333em solid transparent;
+  border-right-color: currentColor;
+  position: relative;
+  left: -0.337em;
+
+  &.on:before,
+  &.on:after {
+    content: "";
+    background: currentColor;
+    width: 0.1em;
+    position: absolute;
+  }
+
+  &.on:before {
+    height: 0.333em;
+    right: -0.533em;
+  }
+
+  &.on:after {
+    height: 0.667em;
+    right: -0.733em;
+    top: -50%;
+  }
+
+  &.off:before,
+  &.off:after {
+    content: "";
+    background: currentColor;
+    width: 0.1em;
+    position: absolute;
+    height: 1.2em;
+    margin-top: -0.333em;
+    top: -0.1em;
+    left: 0.1em;
+    transform: translateX(0.333em) rotate(-45deg);
+  }
+
+  &.off:before {
+    background: #04233d;
+    left: 0.2em;
+  }
+}
+
+.css-clock {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+  position: relative;
+  display: block;
+
+  &::before {
+    content: "";
+    height: 9px;
+    width: 1px;
+    background-color: #636363;
+    display: block;
+    position: absolute;
+    left: 9px;
+    top: 3px;
+    opacity: 0.6;
+  }
+
+  &::after {
+    content: "";
+    height: 6px;
+    width: 1px;
+    background-color: #636363;
+    display: block;
+    position: absolute;
+    top: 7px;
+    left: 11px;
+    transform: rotate(45deg);
+    opacity: 0.6;
+  }
+}
+
 * {
   box-sizing: border-box;
   user-select: none;
@@ -12,23 +105,44 @@ body {
   margin: 0;
   overflow: hidden;
   font-family: sans-serif;
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAA7VBMVEUAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEDe9fDC4/zX8fG11+6y0e15mbXq///u//652vSu1PKrwr6etrRzj6294v7m/P3C4Pvh9/e92vfk+va30vOw1PK12O+nvr19nrikurZ4krVvj6tshqr////0///O7v/G5P/D2/7h/Py+1/zl/vvs//q+3Pqz2ffa9fba8fG01PDC1cy9z8i6zMS0yMR8n76Do7yhvLusv7qCo7l2jbSnvbJ6lrJxiK5viaoSVG2nAAAAF3RSTlMABDIHFn8QHguae2ZbNSwgnI6MdEMcCRKrcsoAAADDSURBVDjL7dLHFoJADEBRGGXA3hUEKaJURbH33tv/f46wH7L3HF+WubuE2mMcoymgwzEbB8VpeEOg0EZyDxSabDdA0W3UzEUzFJFA2JptQFzbgiBsZtFCk2tB9vIZJc4tV3VVdd2SIsSdr9c7wSi8RxYeL4qKZRj8ZHxBcQKQVuJO8X1d1yUpxRLAyxKdT77AMEyylCaB/twZJJhyBiGUzWESmAb7TAVzHFeN0QTweBeT4LFy6RR8bsyy8MPQYdS/X+gLp8ATaP9llugAAAAASUVORK5CYII="),
+    auto;
+}
+
+a,
+button,
+.button,
+.menu-option:hover,
+.speaker {
+  cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAolBMVEUAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB77zEsqgBu7RFf3QNU2QBGuwAopgAfngCH9UeF+zh/9DNs6g9k4QZf3gQ7sQCK/j6H/DxKwgAinwCV/1Z49hpQvhRp5wto5wti5QIipACK+k2R/0By8BRZ3ABRyAA/tQBDtAAbnwC9d09BAAAAFHRSTlMABTMCFn0QHgqbgGZbLiCOjHRDHCnm7AYAAACqSURBVDjL7dLJEoIwDIBhFltkdaOtUBWUHcHd938149k2d2f4r/kOmUmMB6WmbSBVVThDRXV9WqhIiv0JFUl5QAWAGBdJEeMCAIjypRVds4MuTacT47D9dh/eGsG4OEIiz0a1ACDyPuP81jIQvyDNRH6WUtZ1ynxHCWDuLjxCyCpQAt5L11tbUBhRBWBt7RJrQ+eQqVwyXRL0WFHg4+emjoM/jAnZxtQ/9AFcVA7F82ZJgQAAAABJRU5ErkJggg=="),
+    auto;
 }
 
 .header {
   overflow: hidden;
-  background-color: #8f8655;
+  background-color: rgb(0, 0, 0, 0.3);
   width: 100%;
   color: white;
   padding: 14px 16px;
   text-align: center;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
 
-  .text {
+  .center {
     opacity: 1;
     transition-duration: 500ms;
 
     &.being-updated {
       opacity: 0;
     }
+  }
+}
+
+.scene {
+  height: 100%;
+
+  &.inactive {
+    display: none;
   }
 }
 
@@ -46,7 +160,11 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #eedc80;
+    background: $color-green;
+    background: radial-gradient(circle, $color-green 0%, $color-cyan 100%);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: center;
   }
 
   .container {
@@ -86,11 +204,15 @@ body {
 }
 
 div[data-scene="Menu"] {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
   .perspective {
     position: relative;
     width: 210px;
     height: 140px;
-    margin: 40px auto;
+    margin: 0 auto;
     perspective: 1000px;
 
     .menu-carousel {
@@ -114,8 +236,6 @@ div[data-scene="Menu"] {
         text-align: center;
 
         &:hover {
-          cursor: pointer;
-
           div {
             transform: rotateY(0deg);
           }
@@ -143,8 +263,25 @@ div[data-scene="Menu"] {
       }
     }
   }
+
+  .previous,
+  .next {
+    display: inline-block;
+    border: 0;
+    padding: 6px 17px;
+    margin: 0 10px;
+    background-color: $color-green;
+    border-radius: 50%;
+    font-size: 25px;
+
+    &:hover {
+      background-color: $color-cyan;
+    }
+  }
 }
 
-.scene.inactive {
-  display: none;
+div[data-scene="GamePlay"] {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  align-items: center;
 }

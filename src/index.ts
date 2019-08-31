@@ -1,11 +1,13 @@
 import "./index.scss";
+import "./soundbox-player";
 
 enum CssSelector {
   Scene = 'div[data-scene="*"]',
   MenuCarousel = ".menu-carousel",
-  PreviousButton = ".previous-button",
-  NextButton = ".next-button",
-  HeaderText = ".header > .text"
+  PreviousButton = ".previous.button",
+  NextButton = ".next.button",
+  HeaderText = ".header .center",
+  Speaker = ".speaker"
 }
 
 enum Scene {
@@ -154,8 +156,12 @@ class Carousel {
 new Carousel();
 
 class Header {
-  static element: HTMLDivElement = document.querySelector(
+  static headerTextElement: HTMLDivElement = document.querySelector(
     CssSelector.HeaderText
+  );
+
+  static speakerElement: HTMLDivElement = document.querySelector(
+    CssSelector.Speaker
   );
 
   public static changeInnerHTML(innerHTML: string): Promise<void> {
@@ -163,21 +169,46 @@ class Header {
       const resolvePromise = (): void => resolve();
 
       const updateInnerHTML = (): void => {
-        Header.element.innerHTML = innerHTML;
-        Header.element.addEventListener("transitionend", resolvePromise, {
-          once: true
-        });
-        Header.element.classList.remove("being-updated");
+        Header.headerTextElement.innerHTML = innerHTML;
+        Header.headerTextElement.addEventListener(
+          "transitionend",
+          resolvePromise,
+          {
+            once: true
+          }
+        );
+        Header.headerTextElement.classList.remove("being-updated");
       };
 
-      Header.element.addEventListener("transitionend", updateInnerHTML, {
-        once: true
-      });
-      Header.element.classList.add("being-updated");
+      Header.headerTextElement.addEventListener(
+        "transitionend",
+        updateInnerHTML,
+        {
+          once: true
+        }
+      );
+      Header.headerTextElement.classList.add("being-updated");
     });
+  }
+
+  public get isSoundEnabled() {
+    return Header.speakerElement.classList.contains("on");
+  }
+
+  public static toggleSound() {
+    Header.speakerElement.classList.toggle("on");
+    Header.speakerElement.classList.toggle("off");
   }
 }
 
 Header.changeInnerHTML("<strong>It</strong> <em>Works</em>!").then(() => {
   Header.changeInnerHTML("Back Read").then();
+});
+
+Header.speakerElement.addEventListener("click", () => {
+  Header.toggleSound();
+});
+
+document.querySelector(".header .center").addEventListener("click", () => {
+  location.reload();
 });
