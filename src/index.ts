@@ -1,5 +1,13 @@
 import "./index.scss";
 
+enum CssSelector {
+  Scene = 'div[data-scene="*"]',
+  MenuCarousel = ".menu-carousel",
+  PreviousButton = ".previous-button",
+  NextButton = ".next-button",
+  HeaderText = ".header > .text"
+}
+
 enum Scene {
   Menu = "Menu",
   Tutorial = "Tutorial",
@@ -27,7 +35,7 @@ class SceneManager {
   }
 
   static getSceneElement(scene: string): HTMLDivElement {
-    return document.querySelector(`div[data-scene="${scene}"]`);
+    return document.querySelector(CssSelector.Scene.replace("*", scene));
   }
 }
 
@@ -112,9 +120,9 @@ class Carousel {
   }
 
   queryElements(): void {
-    this.menuCarousel = document.querySelector(".menu-carousel");
-    this.prevButton = document.querySelector(".previous-button");
-    this.nextButton = document.querySelector(".next-button");
+    this.menuCarousel = document.querySelector(CssSelector.MenuCarousel);
+    this.prevButton = document.querySelector(CssSelector.PreviousButton);
+    this.nextButton = document.querySelector(CssSelector.NextButton);
   }
 
   addEventListeners(): void {
@@ -146,7 +154,9 @@ class Carousel {
 new Carousel();
 
 class Header {
-  static element: HTMLDivElement = document.querySelector(".header > .text");
+  static element: HTMLDivElement = document.querySelector(
+    CssSelector.HeaderText
+  );
 
   public static changeInnerHTML(innerHTML: string): Promise<void> {
     return new Promise((resolve): void => {
