@@ -11,6 +11,113 @@ $color-green: #bed678;
 $color-light-blue: #a6d9ee;
 $color-blue: #0d74b6;
 
+.background1 {
+  background: $color-green;
+  background: radial-gradient(circle, $color-green 0%, $color-cyan 100%);
+}
+
+.background2 {
+  background: linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0) 25%,
+      rgba(255, 255, 255, 0.2) 25%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 0) 75%,
+      rgba(255, 255, 255, 0.2) 75%
+    ),
+    linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0) 25%,
+      rgba(255, 255, 255, 0.2) 25%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 0) 75%,
+      rgba(255, 255, 255, 0.2) 75%
+    ),
+    $color-light-blue;
+  background-size: 20em 20em;
+}
+
+.background3 {
+  background: repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0) 5px,
+      rgba(10, 35, 45, 0.15) 5px,
+      rgba(10, 35, 45, 0.15) 10px,
+      rgba(211, 119, 111, 0) 10px,
+      rgba(211, 119, 111, 0) 35px,
+      rgba(111, 211, 151, 0.15) 35px,
+      rgba(168, 211, 111, 0.15) 40px,
+      rgba(10, 35, 45, 0.15) 40px,
+      rgba(10, 35, 45, 0.15) 50px,
+      rgba(10, 35, 45, 0) 50px,
+      rgba(10, 35, 45, 0) 60px,
+      rgba(111, 211, 211, 0.15) 60px,
+      rgba(111, 137, 211, 0.15) 70px,
+      rgba(247, 242, 84, 0.15) 70px,
+      rgba(84, 247, 209, 0.15) 80px,
+      rgba(247, 179, 84, 0) 80px,
+      rgba(247, 179, 84, 0) 90px,
+      rgba(135, 111, 211, 0.15) 90px,
+      rgba(111, 165, 211, 0.15) 110px,
+      rgba(211, 119, 111, 0) 110px,
+      rgba(211, 119, 111, 0) 120px,
+      rgba(10, 45, 35, 0.15) 120px,
+      rgba(19, 10, 45, 0.15) 140px
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0) 5px,
+      rgba(10, 35, 45, 0.15) 5px,
+      rgba(10, 35, 45, 0.15) 10px,
+      rgba(211, 119, 111, 0) 10px,
+      rgba(211, 119, 111, 0) 35px,
+      rgba(211, 111, 185, 0.15) 35px,
+      rgba(111, 174, 211, 0.15) 40px,
+      rgba(10, 22, 45, 0.15) 40px,
+      rgba(10, 18, 45, 0.15) 50px,
+      rgba(10, 35, 45, 0) 50px,
+      rgba(10, 35, 45, 0) 60px,
+      rgba(111, 160, 211, 0.15) 60px,
+      rgba(126, 111, 211, 0.15) 70px,
+      rgba(247, 212, 84, 0.15) 70px,
+      rgba(247, 179, 84, 0.15) 80px,
+      rgba(247, 179, 84, 0) 80px,
+      rgba(247, 179, 84, 0) 90px,
+      rgba(111, 211, 197, 0.15) 90px,
+      rgba(111, 211, 179, 0.15) 110px,
+      rgba(211, 119, 111, 0) 110px,
+      rgba(211, 119, 111, 0) 140px,
+      rgba(10, 45, 32, 0.15) 140px,
+      rgba(17, 10, 45, 0.15) 160px
+    ),
+    #252937;
+}
+
+//noinspection CssReplaceWithShorthandSafely
+.background4 {
+  background: linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.1) 25%,
+      rgba(0, 0, 0, 0) 25%,
+      rgba(0, 0, 0, 0) 75%,
+      rgba(0, 0, 0, 0.1) 75%,
+      rgba(0, 0, 0, 0.0980392) 0
+    ),
+    linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.1) 25%,
+      rgba(0, 0, 0, 0) 25%,
+      rgba(0, 0, 0, 0) 75%,
+      rgba(0, 0, 0, 0.1) 75%,
+      rgba(0, 0, 0, 0.1) 0
+    ),
+    $color-cyan;
+  background-position: 0 0, 40px 40px;
+  background-size: 80px 80px;
+}
+
 .speaker {
   vertical-align: middle;
   box-sizing: border-box;
@@ -113,6 +220,7 @@ a,
 button,
 .button,
 .menu-option:hover,
+.answer:hover,
 .speaker {
   cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAolBMVEUAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB77zEsqgBu7RFf3QNU2QBGuwAopgAfngCH9UeF+zh/9DNs6g9k4QZf3gQ7sQCK/j6H/DxKwgAinwCV/1Z49hpQvhRp5wto5wti5QIipACK+k2R/0By8BRZ3ABRyAA/tQBDtAAbnwC9d09BAAAAFHRSTlMABTMCFn0QHgqbgGZbLiCOjHRDHCnm7AYAAACqSURBVDjL7dLJEoIwDIBhFltkdaOtUBWUHcHd938149k2d2f4r/kOmUmMB6WmbSBVVThDRXV9WqhIiv0JFUl5QAWAGBdJEeMCAIjypRVds4MuTacT47D9dh/eGsG4OEIiz0a1ACDyPuP81jIQvyDNRH6WUtZ1ynxHCWDuLjxCyCpQAt5L11tbUBhRBWBt7RJrQ+eQqVwyXRL0WFHg4+emjoM/jAnZxtQ/9AFcVA7F82ZJgQAAAABJRU5ErkJggg=="),
     auto;
@@ -160,8 +268,6 @@ button,
     bottom: 0;
     left: 0;
     right: 0;
-    background: $color-green;
-    background: radial-gradient(circle, $color-green 0%, $color-cyan 100%);
     display: grid;
     grid-template-rows: auto 1fr;
     align-items: center;
@@ -248,17 +354,17 @@ div[data-scene="Menu"] {
       }
 
       .menu-option:nth-child(1) {
-        background: rgba(255, 0, 0, 0.95);
+        background: rgba(82, 156, 79, 0.95);
         transform: rotateY(0deg) translateZ(60px);
       }
 
       .menu-option:nth-child(2) {
-        background: rgba(138, 205, 0, 0.95);
+        background: rgba(33, 175, 154, 0.95);
         transform: rotateY(120deg) translateZ(60px);
       }
 
       .menu-option:nth-child(3) {
-        background: rgba(255, 170, 0, 0.95);
+        background: rgba(228, 152, 0, 0.95);
         transform: rotateY(240deg) translateZ(60px);
       }
     }
@@ -270,12 +376,13 @@ div[data-scene="Menu"] {
     border: 0;
     padding: 6px 17px;
     margin: 0 10px;
-    background-color: $color-green;
+    background-color: #ffffff5c;
+    color: $color-blue;
     border-radius: 50%;
     font-size: 25px;
 
     &:hover {
-      background-color: $color-cyan;
+      background-color: $color-light-blue;
     }
   }
 }
@@ -284,4 +391,39 @@ div[data-scene="GamePlay"] {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   align-items: center;
+}
+
+.answer {
+  display: inline-block;
+  box-sizing: content-box;
+  margin: 0.5em;
+  padding: 0 1.5em;
+  border: 1px solid rgba(211, 211, 211, 1);
+  border-radius: 0.2em;
+  font: normal normal bold 1em/2em Arial, Helvetica, sans-serif;
+  color: rgba(114, 114, 114, 1);
+  text-overflow: clip;
+  white-space: nowrap;
+  background: rgba(234, 234, 234, 1);
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8), 0 1px 0 0 rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+
+  &:hover {
+    border: 1px solid rgba(178, 178, 178, 1);
+    color: rgba(76, 76, 76, 1);
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8) inset,
+      0 1px 0 0 rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    position: relative;
+    top: 1px;
+    border: 1px solid rgba(211, 211, 211, 1);
+    color: rgba(114, 114, 114, 1);
+    background: rgba(247, 247, 247, 1);
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8) inset,
+      0 1px 0 0 rgba(0, 0, 0, 0.3) inset;
+    transition: none;
+  }
 }
