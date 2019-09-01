@@ -12,7 +12,6 @@ $color-light-blue: #a6d9ee;
 $color-blue: #0d74b6;
 
 .background1 {
-  background: $color-green;
   background: radial-gradient(circle, $color-green 0%, $color-cyan 100%);
 }
 
@@ -208,6 +207,11 @@ $color-blue: #0d74b6;
   user-select: none;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   overflow: hidden;
@@ -254,6 +258,13 @@ button,
   }
 }
 
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+}
+
 @media screen and (min-width: $game-width) and (min-height: $game-height) {
   body {
     background-color: ghostwhite;
@@ -268,9 +279,6 @@ button,
     bottom: 0;
     left: 0;
     right: 0;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    align-items: center;
   }
 
   .container {
@@ -391,6 +399,7 @@ div[data-scene="GamePlay"] {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   align-items: center;
+  text-align: center;
 }
 
 .answer {
@@ -426,4 +435,10 @@ div[data-scene="GamePlay"] {
       0 1px 0 0 rgba(0, 0, 0, 0.3) inset;
     transition: none;
   }
+}
+
+.sentence {
+  font-size: 25px;
+  transform: rotateY(180deg);
+  text-transform: uppercase;
 }
