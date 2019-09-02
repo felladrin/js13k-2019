@@ -1477,4 +1477,6 @@ const song = {
   numChannels: 7 // Number of channels
 };
 
-GameAudio.create(song, true, true);
+export const playBackgroundMusic = () => {
+  GameAudio.create(song, true, true);
+};

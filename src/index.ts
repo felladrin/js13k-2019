@@ -1,5 +1,5 @@
 import "./index.scss";
-import "./soundbox-player";
+import { playBackgroundMusic } from "./soundbox-player";
 
 enum CssSelector {
   Scene = 'div[data-scene="*"]',
@@ -212,3 +212,12 @@ Header.speakerElement.addEventListener("click", () => {
 document.querySelector(".header .center").addEventListener("click", () => {
   location.reload();
 });
+
+const startSong = (): void => {
+  playBackgroundMusic();
+  document.removeEventListener("mousemove", startSong);
+  document.removeEventListener("touchstart", startSong);
+};
+
+document.addEventListener("mousemove", startSong);
+document.addEventListener("touchstart", startSong);
