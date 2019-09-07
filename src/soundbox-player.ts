@@ -370,170 +370,207 @@ const song = {
     {
       // Instrument 0
       i: [
-        3, // OSC1_WAVEFORM
-        192, // OSC1_VOL
-        116, // OSC1_SEMI
+        1, // OSC1_WAVEFORM
+        163, // OSC1_VOL
+        128, // OSC1_SEMI
         0, // OSC1_XENV
         3, // OSC2_WAVEFORM
-        192, // OSC2_VOL
-        128, // OSC2_SEMI
+        119, // OSC2_VOL
+        116, // OSC2_SEMI
         0, // OSC2_DETUNE
         0, // OSC2_XENV
         0, // NOISE_VOL
-        7, // ENV_ATTACK
-        12, // ENV_SUSTAIN
-        22, // ENV_RELEASE
+        0, // ENV_ATTACK
+        57, // ENV_SUSTAIN
+        25, // ENV_RELEASE
         0, // ARP_CHORD
         0, // ARP_SPEED
         0, // LFO_WAVEFORM
-        0, // LFO_AMT
-        0, // LFO_FREQ
+        195, // LFO_AMT
+        6, // LFO_FREQ
         0, // LFO_FX_FREQ
-        2, // FX_FILTER
-        255, // FX_FREQ
-        0, // FX_RESONANCE
-        0, // FX_DIST
-        32, // FX_DRIVE
-        61, // FX_PAN_AMT
-        3, // FX_PAN_FREQ
-        29, // FX_DELAY_AMT
-        4 // FX_DELAY_TIME
+        1, // FX_FILTER
+        20, // FX_FREQ
+        138, // FX_RESONANCE
+        1, // FX_DIST
+        51, // FX_DRIVE
+        171, // FX_PAN_AMT
+        6, // FX_PAN_FREQ
+        79, // FX_DELAY_AMT
+        6 // FX_DELAY_TIME
       ],
       // Patterns
-      p: [1, 2, 1, 2, , , , , 1, 2, 1, 2],
+      p: [, , 1, 1, 1, 1, 1, 1, 1, 2],
       // Columns
       c: [
         {
           n: [
-            147,
+            143,
+            ,
+            155,
+            148,
+            155,
             150,
-            154,
-            147,
+            143,
+            ,
+            155,
             150,
-            154,
-            147,
+            155,
             150,
-            154,
-            147,
+            146,
+            145,
+            141,
+            ,
+            143,
+            ,
+            155,
+            148,
+            155,
             150,
-            154,
-            142,
-            145,
-            147,
-            154,
-            142,
-            145,
-            149,
-            142,
-            145,
-            149,
-            142,
-            145,
-            149,
-            142,
-            145,
-            149,
-            137,
-            140,
-            142,
-            149,
-            135,
+            143,
             ,
+            155,
+            143,
+            155,
+            150,
+            146,
             ,
-            ,
-            147,
-            ,
-            ,
-            ,
-            135,
-            ,
-            ,
-            ,
-            147,
-            ,
-            ,
-            ,
-            130,
-            ,
-            ,
-            ,
-            142,
-            ,
-            ,
-            ,
-            130,
-            ,
-            ,
-            ,
-            142
+            148,
+            150
           ],
-          f: []
+          f: [
+            2,
+            12,
+            ,
+            13,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            48,
+            35,
+            ,
+            25
+          ]
         },
         {
           n: [
+            143,
+            ,
+            155,
+            148,
+            155,
+            150,
+            143,
+            ,
+            155,
+            150,
+            155,
+            150,
+            146,
             145,
-            149,
-            152,
-            145,
-            149,
-            152,
-            145,
-            149,
-            152,
-            145,
-            149,
-            152,
-            140,
-            142,
-            145,
-            152,
-            140,
-            144,
-            147,
-            140,
-            144,
-            147,
-            140,
-            144,
-            147,
-            140,
-            144,
-            147,
-            135,
-            140,
-            144,
-            147,
-            133,
+            141,
             ,
+            143,
             ,
+            155,
+            148,
+            155,
+            150,
+            143,
             ,
-            145,
-            ,
-            ,
-            ,
-            133,
-            ,
-            ,
-            ,
-            145,
-            ,
-            ,
-            ,
-            128,
-            ,
-            ,
-            ,
-            140,
-            ,
-            ,
-            ,
-            128,
-            ,
-            ,
-            ,
-            140
+            155
           ],
-          f: []
+          f: [
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            2,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            188
+          ]
         }
       ]
     },
@@ -541,73 +578,43 @@ const song = {
       // Instrument 1
       i: [
         2, // OSC1_WAVEFORM
-        128, // OSC1_VOL
-        116, // OSC1_SEMI
+        232, // OSC1_VOL
+        128, // OSC1_SEMI
         0, // OSC1_XENV
-        2, // OSC2_WAVEFORM
-        127, // OSC2_VOL
-        116, // OSC2_SEMI
-        15, // OSC2_DETUNE
+        3, // OSC2_WAVEFORM
+        255, // OSC2_VOL
+        128, // OSC2_SEMI
+        0, // OSC2_DETUNE
         0, // OSC2_XENV
         0, // NOISE_VOL
-        83, // ENV_ATTACK
-        35, // ENV_SUSTAIN
-        129, // ENV_RELEASE
+        0, // ENV_ATTACK
+        36, // ENV_SUSTAIN
+        0, // ENV_RELEASE
         0, // ARP_CHORD
         0, // ARP_SPEED
-        3, // LFO_WAVEFORM
-        130, // LFO_AMT
-        4, // LFO_FREQ
+        0, // LFO_WAVEFORM
+        195, // LFO_AMT
+        6, // LFO_FREQ
         1, // LFO_FX_FREQ
         2, // FX_FILTER
-        40, // FX_FREQ
-        167, // FX_RESONANCE
-        2, // FX_DIST
-        32, // FX_DRIVE
-        89, // FX_PAN_AMT
-        5, // FX_PAN_FREQ
-        91, // FX_DELAY_AMT
-        7 // FX_DELAY_TIME
+        135, // FX_FREQ
+        0, // FX_RESONANCE
+        24, // FX_DIST
+        73, // FX_DRIVE
+        81, // FX_PAN_AMT
+        6, // FX_PAN_FREQ
+        43, // FX_DELAY_AMT
+        6 // FX_DELAY_TIME
       ],
       // Patterns
-      p: [, , 1, 2, 1, 2, 1, 2, , , 1, 2, 1, 2, 3],
+      p: [1, 1, 1, 1, 1, 1, 1, 1],
       // Columns
       c: [
         {
           n: [
-            135,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            130,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            123,
+            143,
+            143,
+            131,
             ,
             ,
             ,
@@ -624,14 +631,56 @@ const song = {
             ,
             ,
             ,
-            118
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            141,
+            138,
+            138,
+            138,
+            126,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            136,
+            133
           ],
-          f: []
-        },
-        {
-          n: [
-            133,
+          f: [
+            12,
             ,
+            12,
             ,
             ,
             ,
@@ -646,7 +695,6 @@ const song = {
             ,
             ,
             ,
-            128,
             ,
             ,
             ,
@@ -660,9 +708,11 @@ const song = {
             ,
             ,
             ,
+            12,
             ,
+            28,
             ,
-            121,
+            36,
             ,
             ,
             ,
@@ -679,13 +729,6 @@ const song = {
             ,
             ,
             ,
-            116
-          ],
-          f: []
-        },
-        {
-          n: [
-            135,
             ,
             ,
             ,
@@ -697,536 +740,13 @@ const song = {
             ,
             ,
             ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            123
-          ],
-          f: []
+            28
+          ]
         }
       ]
     },
     {
       // Instrument 2
-      i: [
-        2, // OSC1_WAVEFORM
-        96, // OSC1_VOL
-        116, // OSC1_SEMI
-        0, // OSC1_XENV
-        2, // OSC2_WAVEFORM
-        96, // OSC2_VOL
-        116, // OSC2_SEMI
-        13, // OSC2_DETUNE
-        0, // OSC2_XENV
-        0, // NOISE_VOL
-        97, // ENV_ATTACK
-        50, // ENV_SUSTAIN
-        124, // ENV_RELEASE
-        0, // ARP_CHORD
-        0, // ARP_SPEED
-        1, // LFO_WAVEFORM
-        138, // LFO_AMT
-        7, // LFO_FREQ
-        1, // LFO_FX_FREQ
-        3, // FX_FILTER
-        37, // FX_FREQ
-        84, // FX_RESONANCE
-        2, // FX_DIST
-        32, // FX_DRIVE
-        135, // FX_PAN_AMT
-        4, // FX_PAN_FREQ
-        92, // FX_DELAY_AMT
-        3 // FX_DELAY_TIME
-      ],
-      // Patterns
-      p: [, , 1, 2, 1, 2, 1, 2, , , 1, 2, 1, 2, 3],
-      // Columns
-      c: [
-        {
-          n: [
-            154,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            154,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            159,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            157,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            162,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            161
-          ],
-          f: []
-        },
-        {
-          n: [
-            152,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            152,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            157,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            156,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            161,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            159
-          ],
-          f: []
-        },
-        {
-          n: [
-            154,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            159,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            162
-          ],
-          f: []
-        }
-      ]
-    },
-    {
-      // Instrument 3
-      i: [
-        3, // OSC1_WAVEFORM
-        250, // OSC1_VOL
-        140, // OSC1_SEMI
-        0, // OSC1_XENV
-        3, // OSC2_WAVEFORM
-        55, // OSC2_VOL
-        128, // OSC2_SEMI
-        3, // OSC2_DETUNE
-        0, // OSC2_XENV
-        17, // NOISE_VOL
-        3, // ENV_ATTACK
-        16, // ENV_SUSTAIN
-        41, // ENV_RELEASE
-        0, // ARP_CHORD
-        0, // ARP_SPEED
-        0, // LFO_WAVEFORM
-        83, // LFO_AMT
-        4, // LFO_FREQ
-        1, // LFO_FX_FREQ
-        2, // FX_FILTER
-        242, // FX_FREQ
-        164, // FX_RESONANCE
-        1, // FX_DIST
-        69, // FX_DRIVE
-        77, // FX_PAN_AMT
-        6, // FX_PAN_FREQ
-        25, // FX_DELAY_AMT
-        6 // FX_DELAY_TIME
-      ],
-      // Patterns
-      p: [, , , , 1, 2, 1, 2, , , 1, 2, 1, 2],
-      // Columns
-      c: [
-        {
-          n: [
-            123,
-            ,
-            ,
-            ,
-            130,
-            ,
-            ,
-            126,
-            ,
-            126,
-            125,
-            ,
-            123,
-            ,
-            126,
-            ,
-            118,
-            ,
-            ,
-            ,
-            125,
-            ,
-            ,
-            121,
-            ,
-            121,
-            120,
-            ,
-            118,
-            ,
-            121
-          ],
-          f: []
-        },
-        {
-          n: [
-            121,
-            ,
-            ,
-            ,
-            128,
-            ,
-            ,
-            125,
-            ,
-            125,
-            123,
-            ,
-            121,
-            ,
-            125,
-            ,
-            116,
-            ,
-            ,
-            ,
-            123,
-            ,
-            ,
-            120,
-            ,
-            120,
-            118,
-            ,
-            116,
-            ,
-            120
-          ],
-          f: []
-        }
-      ]
-    },
-    {
-      // Instrument 4
-      i: [
-        0, // OSC1_WAVEFORM
-        255, // OSC1_VOL
-        116, // OSC1_SEMI
-        1, // OSC1_XENV
-        0, // OSC2_WAVEFORM
-        255, // OSC2_VOL
-        116, // OSC2_SEMI
-        0, // OSC2_DETUNE
-        1, // OSC2_XENV
-        0, // NOISE_VOL
-        4, // ENV_ATTACK
-        6, // ENV_SUSTAIN
-        35, // ENV_RELEASE
-        0, // ARP_CHORD
-        0, // ARP_SPEED
-        0, // LFO_WAVEFORM
-        0, // LFO_AMT
-        0, // LFO_FREQ
-        0, // LFO_FX_FREQ
-        2, // FX_FILTER
-        14, // FX_FREQ
-        1, // FX_RESONANCE
-        1, // FX_DIST
-        32, // FX_DRIVE
-        0, // FX_PAN_AMT
-        0, // FX_PAN_FREQ
-        0, // FX_DELAY_AMT
-        0 // FX_DELAY_TIME
-      ],
-      // Patterns
-      p: [, , , , 1, 1, 1, 1, , 2, 1, 1, 1, 1],
-      // Columns
-      c: [
-        {
-          n: [
-            147,
-            ,
-            ,
-            ,
-            147,
-            ,
-            ,
-            147,
-            ,
-            ,
-            147,
-            ,
-            147,
-            ,
-            ,
-            ,
-            147,
-            ,
-            ,
-            ,
-            147,
-            ,
-            ,
-            147,
-            ,
-            ,
-            147,
-            ,
-            147,
-            ,
-            ,
-            147
-          ],
-          f: []
-        },
-        {
-          n: [
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            ,
-            147,
-            ,
-            ,
-            ,
-            147,
-            ,
-            147,
-            147
-          ],
-          f: []
-        }
-      ]
-    },
-    {
-      // Instrument 5
       i: [
         0, // OSC1_WAVEFORM
         0, // OSC1_VOL
@@ -1237,246 +757,780 @@ const song = {
         128, // OSC2_SEMI
         0, // OSC2_DETUNE
         0, // OSC2_XENV
-        60, // NOISE_VOL
-        4, // ENV_ATTACK
-        10, // ENV_SUSTAIN
-        34, // ENV_RELEASE
+        125, // NOISE_VOL
+        0, // ENV_ATTACK
+        1, // ENV_SUSTAIN
+        17, // ENV_RELEASE
         0, // ARP_CHORD
         0, // ARP_SPEED
         0, // LFO_WAVEFORM
-        187, // LFO_AMT
-        5, // LFO_FREQ
+        0, // LFO_AMT
+        0, // LFO_FREQ
         0, // LFO_FX_FREQ
         1, // FX_FILTER
-        239, // FX_FREQ
-        135, // FX_RESONANCE
+        229, // FX_FREQ
+        171, // FX_RESONANCE
         0, // FX_DIST
-        32, // FX_DRIVE
-        108, // FX_PAN_AMT
-        5, // FX_PAN_FREQ
-        16, // FX_DELAY_AMT
-        4 // FX_DELAY_TIME
+        68, // FX_DRIVE
+        39, // FX_PAN_AMT
+        3, // FX_PAN_FREQ
+        0, // FX_DELAY_AMT
+        3 // FX_DELAY_TIME
       ],
       // Patterns
-      p: [, , , , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      p: [1, 1, 1, 1, 2, 2, 2, 2, , , 2, 2, 2, 2, 2],
       // Columns
       c: [
         {
           n: [
             ,
-            147,
-            147,
             ,
             ,
-            147,
-            147,
+            ,
+            135,
             ,
             ,
-            147,
-            147,
             ,
             ,
-            147,
-            147,
-            147,
-            ,
-            147,
-            147,
             ,
             ,
-            147,
-            147,
+            ,
+            135,
             ,
             ,
-            147,
-            147,
             ,
             ,
-            147,
-            147,
-            147
+            ,
+            ,
+            ,
+            135,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            135
+          ],
+          f: [
+            24,
+            ,
+            ,
+            ,
+            13,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            13,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            13,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            13,
+            ,
+            ,
+            24,
+            32,
+            ,
+            ,
+            ,
+            67,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            67,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            72,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            67,
+            ,
+            ,
+            68
+          ]
+        },
+        {
+          n: [
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135,
+            135
+          ],
+          f: [
+            13,
+            ,
+            13,
+            13,
+            ,
+            ,
+            13,
+            13,
+            ,
+            ,
+            13,
+            13,
+            ,
+            ,
+            13,
+            13,
+            ,
+            ,
+            13,
+            13,
+            ,
+            ,
+            13,
+            13,
+            ,
+            ,
+            13,
+            13,
+            ,
+            ,
+            13,
+            13,
+            17,
+            ,
+            32,
+            17,
+            ,
+            ,
+            32,
+            17,
+            ,
+            ,
+            32,
+            17,
+            ,
+            ,
+            32,
+            17,
+            ,
+            ,
+            32,
+            17,
+            ,
+            ,
+            32,
+            17,
+            ,
+            ,
+            32,
+            17,
+            ,
+            ,
+            32,
+            17
+          ]
+        }
+      ]
+    },
+    {
+      // Instrument 3
+      i: [
+        1, // OSC1_WAVEFORM
+        255, // OSC1_VOL
+        128, // OSC1_SEMI
+        0, // OSC1_XENV
+        1, // OSC2_WAVEFORM
+        154, // OSC2_VOL
+        116, // OSC2_SEMI
+        9, // OSC2_DETUNE
+        0, // OSC2_XENV
+        0, // NOISE_VOL
+        0, // ENV_ATTACK
+        36, // ENV_SUSTAIN
+        0, // ENV_RELEASE
+        0, // ARP_CHORD
+        0, // ARP_SPEED
+        0, // LFO_WAVEFORM
+        0, // LFO_AMT
+        0, // LFO_FREQ
+        0, // LFO_FX_FREQ
+        2, // FX_FILTER
+        164, // FX_FREQ
+        0, // FX_RESONANCE
+        4, // FX_DIST
+        15, // FX_DRIVE
+        47, // FX_PAN_AMT
+        3, // FX_PAN_FREQ
+        63, // FX_DELAY_AMT
+        3 // FX_DELAY_TIME
+      ],
+      // Patterns
+      p: [, , , , 1, 2, 1, 2, 1, 4, 3, 3, 3, 3, 2, 4],
+      // Columns
+      c: [
+        {
+          n: [
+            119,
+            ,
+            131,
+            ,
+            131,
+            ,
+            131,
+            119,
+            ,
+            131,
+            ,
+            119,
+            131,
+            ,
+            131,
+            131,
+            119,
+            ,
+            131,
+            ,
+            131,
+            ,
+            131,
+            119,
+            ,
+            131,
+            ,
+            119,
+            131,
+            ,
+            131,
+            131
+          ],
+          f: []
+        },
+        {
+          n: [
+            115,
+            ,
+            127,
+            ,
+            127,
+            ,
+            127,
+            115,
+            ,
+            127,
+            ,
+            115,
+            127,
+            ,
+            127,
+            127,
+            112,
+            ,
+            124,
+            ,
+            124,
+            ,
+            124,
+            112,
+            ,
+            124,
+            ,
+            112,
+            122,
+            ,
+            122,
+            122
+          ],
+          f: []
+        },
+        {
+          n: [
+            119,
+            ,
+            131,
+            ,
+            132,
+            ,
+            132,
+            131,
+            ,
+            119,
+            131,
+            ,
+            132,
+            ,
+            132,
+            129,
+            119,
+            ,
+            131,
+            ,
+            132,
+            ,
+            132,
+            131,
+            ,
+            119,
+            131,
+            119,
+            132,
+            ,
+            132,
+            129
+          ],
+          f: []
+        },
+        {
+          n: [
+            119,
+            ,
+            131,
+            ,
+            131,
+            ,
+            131,
+            119,
+            ,
+            131,
+            ,
+            119,
+            131,
+            ,
+            131,
+            131,
+            119,
+            ,
+            131,
+            ,
+            131,
+            ,
+            131,
+            119,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            129
           ],
           f: []
         }
       ]
     },
     {
-      // Instrument 6
+      // Instrument 4
       i: [
-        2, // OSC1_WAVEFORM
-        128, // OSC1_VOL
-        116, // OSC1_SEMI
-        0, // OSC1_XENV
-        2, // OSC2_WAVEFORM
-        128, // OSC2_VOL
+        3, // OSC1_WAVEFORM
+        59, // OSC1_VOL
+        128, // OSC1_SEMI
+        1, // OSC1_XENV
+        3, // OSC2_WAVEFORM
+        100, // OSC2_VOL
         128, // OSC2_SEMI
-        15, // OSC2_DETUNE
-        0, // OSC2_XENV
-        0, // NOISE_VOL
-        7, // ENV_ATTACK
-        14, // ENV_SUSTAIN
-        39, // ENV_RELEASE
+        0, // OSC2_DETUNE
+        1, // OSC2_XENV
+        131, // NOISE_VOL
+        0, // ENV_ATTACK
+        4, // ENV_SUSTAIN
+        40, // ENV_RELEASE
         0, // ARP_CHORD
         0, // ARP_SPEED
-        0, // LFO_WAVEFORM
-        97, // LFO_AMT
+        1, // LFO_WAVEFORM
+        0, // LFO_AMT
         4, // LFO_FREQ
         1, // LFO_FX_FREQ
-        3, // FX_FILTER
-        49, // FX_FREQ
-        154, // FX_RESONANCE
-        0, // FX_DIST
-        109, // FX_DRIVE
-        107, // FX_PAN_AMT
-        4, // FX_PAN_FREQ
-        79, // FX_DELAY_AMT
-        4 // FX_DELAY_TIME
+        2, // FX_FILTER
+        55, // FX_FREQ
+        115, // FX_RESONANCE
+        124, // FX_DIST
+        121, // FX_DRIVE
+        67, // FX_PAN_AMT
+        6, // FX_PAN_FREQ
+        39, // FX_DELAY_AMT
+        1 // FX_DELAY_TIME
       ],
       // Patterns
-      p: [, , , , , , 1, 2, 1, 2, , , 1, 2],
+      p: [, , , 10, 1, 1, 1, 1, , , , 10, 1, 1, 1, 10],
       // Columns
       c: [
         {
           n: [
-            147,
-            150,
-            154,
-            147,
-            150,
-            154,
-            147,
-            150,
-            154,
-            147,
-            150,
-            154,
-            142,
-            145,
-            147,
-            154,
-            142,
-            145,
-            149,
-            142,
-            145,
-            149,
-            142,
-            145,
-            149,
-            142,
-            145,
-            149,
-            137,
-            140,
-            142,
-            149,
-            135,
+            ,
             ,
             ,
             ,
             147,
             ,
             ,
+            147,
             ,
-            135,
-            ,
+            147,
             ,
             ,
             147,
             ,
             ,
             ,
-            130,
             ,
             ,
             ,
-            142,
+            ,
+            147,
+            ,
+            ,
+            147,
+            ,
+            147,
+            ,
+            ,
+            147,
             ,
             ,
             ,
-            130,
             ,
             ,
             ,
-            142
+            ,
+            147,
+            ,
+            ,
+            147,
+            ,
+            147,
+            ,
+            ,
+            147,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            147,
+            ,
+            ,
+            147,
+            ,
+            147,
+            ,
+            ,
+            147
           ],
           f: []
         },
+        { n: [], f: [] },
+        { n: [], f: [] },
+        { n: [], f: [] },
+        { n: [], f: [] },
+        { n: [], f: [] },
+        { n: [], f: [] },
+        { n: [], f: [] },
+        { n: [], f: [] },
         {
           n: [
-            145,
-            149,
-            152,
-            145,
-            149,
-            152,
-            145,
-            149,
-            152,
-            145,
-            149,
-            152,
-            140,
-            142,
-            145,
-            152,
-            140,
-            144,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
             147,
-            140,
-            144,
             147,
-            140,
-            144,
             147,
-            140,
-            144,
             147,
-            135,
-            140,
-            144,
             147,
-            133,
+            147,
+            147,
+            147,
             ,
             ,
             ,
-            145,
             ,
             ,
             ,
-            133,
             ,
             ,
             ,
-            145,
             ,
             ,
             ,
-            128,
             ,
             ,
             ,
-            140,
             ,
             ,
             ,
-            128,
             ,
             ,
             ,
-            140
+            ,
+            ,
+            ,
+            147,
+            147,
+            147,
+            147,
+            147,
+            147,
+            147,
+            147
           ],
-          f: []
+          f: [
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            24,
+            ,
+            ,
+            ,
+            24,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            ,
+            121,
+            ,
+            ,
+            ,
+            255
+          ]
         }
       ]
+    },
+    {
+      // Instrument 5
+      i: [
+        2, // OSC1_WAVEFORM
+        100, // OSC1_VOL
+        128, // OSC1_SEMI
+        0, // OSC1_XENV
+        3, // OSC2_WAVEFORM
+        201, // OSC2_VOL
+        128, // OSC2_SEMI
+        0, // OSC2_DETUNE
+        0, // OSC2_XENV
+        0, // NOISE_VOL
+        5, // ENV_ATTACK
+        6, // ENV_SUSTAIN
+        58, // ENV_RELEASE
+        0, // ARP_CHORD
+        0, // ARP_SPEED
+        0, // LFO_WAVEFORM
+        195, // LFO_AMT
+        6, // LFO_FREQ
+        1, // LFO_FX_FREQ
+        2, // FX_FILTER
+        135, // FX_FREQ
+        0, // FX_RESONANCE
+        0, // FX_DIST
+        32, // FX_DRIVE
+        147, // FX_PAN_AMT
+        6, // FX_PAN_FREQ
+        121, // FX_DELAY_AMT
+        6 // FX_DELAY_TIME
+      ],
+      // Patterns
+      p: [],
+      // Columns
+      c: []
+    },
+    {
+      // Instrument 6
+      i: [
+        2, // OSC1_WAVEFORM
+        100, // OSC1_VOL
+        128, // OSC1_SEMI
+        0, // OSC1_XENV
+        3, // OSC2_WAVEFORM
+        201, // OSC2_VOL
+        128, // OSC2_SEMI
+        0, // OSC2_DETUNE
+        0, // OSC2_XENV
+        0, // NOISE_VOL
+        5, // ENV_ATTACK
+        6, // ENV_SUSTAIN
+        58, // ENV_RELEASE
+        0, // ARP_CHORD
+        0, // ARP_SPEED
+        0, // LFO_WAVEFORM
+        195, // LFO_AMT
+        6, // LFO_FREQ
+        1, // LFO_FX_FREQ
+        2, // FX_FILTER
+        135, // FX_FREQ
+        0, // FX_RESONANCE
+        0, // FX_DIST
+        32, // FX_DRIVE
+        147, // FX_PAN_AMT
+        6, // FX_PAN_FREQ
+        121, // FX_DELAY_AMT
+        6 // FX_DELAY_TIME
+      ],
+      // Patterns
+      p: [],
+      // Columns
+      c: []
+    },
+    {
+      // Instrument 7
+      i: [
+        2, // OSC1_WAVEFORM
+        0, // OSC1_VOL
+        101, // OSC1_SEMI
+        0, // OSC1_XENV
+        3, // OSC2_WAVEFORM
+        0, // OSC2_VOL
+        127, // OSC2_SEMI
+        0, // OSC2_DETUNE
+        1, // OSC2_XENV
+        255, // NOISE_VOL
+        72, // ENV_ATTACK
+        3, // ENV_SUSTAIN
+        72, // ENV_RELEASE
+        0, // ARP_CHORD
+        0, // ARP_SPEED
+        0, // LFO_WAVEFORM
+        0, // LFO_AMT
+        6, // LFO_FREQ
+        1, // LFO_FX_FREQ
+        2, // FX_FILTER
+        29, // FX_FREQ
+        0, // FX_RESONANCE
+        0, // FX_DIST
+        156, // FX_DRIVE
+        147, // FX_PAN_AMT
+        3, // FX_PAN_FREQ
+        8, // FX_DELAY_AMT
+        6 // FX_DELAY_TIME
+      ],
+      // Patterns
+      p: [, 1, , , , , , , , 1, , , , , , 1],
+      // Columns
+      c: [{ n: [, , , , , , , , , , , , , , , , , , , , , , , 135], f: [] }]
     }
   ],
-  rowLen: 6014, // In sample lengths
+  rowLen: 5050, // In sample lengths
   patternLen: 32, // Rows per pattern
-  endPattern: 14, // End pattern
-  numChannels: 7 // Number of channels
+  endPattern: 15, // End pattern
+  numChannels: 8 // Number of channels
 };
 
-export const playBackgroundMusic = () => {
+export const playBackgroundMusic = (): void => {
   GameAudio.create(song, true, true);
 };
