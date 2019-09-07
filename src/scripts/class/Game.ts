@@ -4,24 +4,18 @@ import { Menu } from "./Menu";
 import { Header } from "./Header";
 import { GameAudio } from "./GameAudio";
 import { backgroundMusic } from "../const/backgroundMusic";
+import { GamePlayStateManager } from "./GamePlayStateManager";
 
 export class Game {
-  static countDownTimer: CountDownTimer;
-  static sceneManager: SceneManager;
-  static menu: Menu;
-  static header: Header;
+  static countDownTimer = new CountDownTimer(10, (): void => {});
+  static sceneManager = new SceneManager();
+  static menu = new Menu();
+  static header = new Header();
+  static gamePlayStateManager = new GamePlayStateManager();
 
   public static start(): void {
-    this.initializeStaticFields();
     this.header.displayNotification("<em>Welcome!</em>");
     this.startBackgroundMusicOnFirstInteraction();
-  }
-
-  private static initializeStaticFields(): void {
-    this.countDownTimer = new CountDownTimer(10, (): void => {});
-    this.sceneManager = new SceneManager();
-    this.menu = new Menu();
-    this.header = new Header();
   }
 
   private static startBackgroundMusicOnFirstInteraction(): void {

@@ -1,5 +1,7 @@
 import { CssSelector } from "../enum/CssSelector";
 import { gameName } from "../const/gameName";
+import { GameEmitter } from "./GameEmitter";
+import { GameEvent } from "../enum/GameEvent";
 
 export class Header {
   headerTextElement: HTMLDivElement = document.querySelector(
@@ -48,6 +50,10 @@ export class Header {
   toggleSound(): void {
     this.speakerElement.classList.toggle("on");
     this.speakerElement.classList.toggle("off");
+
+    GameEmitter.emit(
+      this.isSoundEnabled ? GameEvent.AudioEnabled : GameEvent.AudioDisabled
+    );
   }
 
   public displayNotification(innerHtml: string): void {
