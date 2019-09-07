@@ -1,5 +1,9 @@
 export enum GameEvent {
-  AudioEnabled,
-  AudioDisabled,
+  SceneDisplayed,
+  AudioMuteChanged,
+  GamePlayCountDownStarted,
+  GamePlayCountDownUpdated,
+  GamePlayCountDownStopped,
+  GamePlayCountDownTimeOver,
   ButtonPressed
 }

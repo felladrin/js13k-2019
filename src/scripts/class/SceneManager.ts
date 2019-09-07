@@ -1,5 +1,7 @@
 import { Scene } from "../enum/Scene";
 import { CssSelector } from "../enum/CssSelector";
+import { GameEmitter } from "./GameEmitter";
+import { GameEvent } from "../enum/GameEvent";
 
 export class SceneManager {
   public currentScene: Scene = Scene.Menu;
@@ -17,6 +19,8 @@ export class SceneManager {
         sceneElement.classList.add("inactive");
       }
     }
+
+    GameEmitter.emit(GameEvent.SceneDisplayed, scene);
   }
 
   static getSceneElement(scene: string): HTMLDivElement {

@@ -3,7 +3,7 @@ import Mitt from "mitt";
 import { GameEvent } from "../enum/GameEvent";
 
 export class GameEmitter {
-  static emitter = new Mitt();
+  private static emitter = new Mitt();
 
   public static on(type: GameEvent, handler: (data?) => void): void {
     this.emitter.on(type.toString(), handler);

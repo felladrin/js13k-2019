@@ -4,16 +4,28 @@ import { GameEmitter } from "./GameEmitter";
 import { GameEvent } from "../enum/GameEvent";
 
 export class Header {
-  headerTextElement: HTMLDivElement = document.querySelector(
-    CssSelector.HeaderText
+  static headerCenterElement: HTMLDivElement = document.querySelector(
+    CssSelector.HeaderCenter
   );
 
-  speakerElement: HTMLDivElement = document.querySelector(CssSelector.Speaker);
+  static headerRightElement: HTMLDivElement = document.querySelector(
+    CssSelector.HeaderRight
+  );
+
+  static speakerElement: HTMLDivElement = document.querySelector(
+    CssSelector.Speaker
+  );
+
+  static clockIcon = Header.headerRightElement.innerHTML;
 
   constructor() {
-    this.speakerElement.addEventListener("click", () => {
-      this.toggleSound();
+    Header.speakerElement.addEventListener("click", () => {
+      Header.toggleSound();
     });
+
+    GameEmitter.on(GameEvent.GamePlayCountDownStarted, Header.displayCountDown);
+    GameEmitter.on(GameEvent.GamePlayCountDownUpdated, Header.displayCountDown);
+    GameEmitter.on(GameEvent.GamePlayCountDownStopped, Header.displayClockIcon);
   }
 
   public changeInnerHTML(innerHTML: string): Promise<void> {
@@ -21,39 +33,43 @@ export class Header {
       const resolvePromise = (): void => resolve();
 
       const updateInnerHTML = (): void => {
-        this.headerTextElement.innerHTML = innerHTML;
-        this.headerTextElement.addEventListener(
+        Header.headerCenterElement.innerHTML = innerHTML;
+        Header.headerCenterElement.addEventListener(
           "transitionend",
           resolvePromise,
           {
             once: true
           }
         );
-        this.headerTextElement.classList.remove("being-updated");
+        Header.headerCenterElement.classList.remove("being-updated");
       };
 
-      this.headerTextElement.addEventListener(
+      Header.headerCenterElement.addEventListener(
         "transitionend",
         updateInnerHTML,
         {
           once: true
         }
       );
-      this.headerTextElement.classList.add("being-updated");
+      Header.headerCenterElement.classList.add("being-updated");
     });
   }
 
-  toggleSound(): void {
-    const classList = this.speakerElement.classList;
+  static displayCountDown(count): void {
+    Header.headerRightElement.innerHTML = count;
+  }
+
+  static displayClockIcon(): void {
+    Header.headerRightElement.innerHTML = Header.clockIcon;
+  }
+
+  static toggleSound(): void {
+    const classList = Header.speakerElement.classList;
 
     classList.toggle("on");
     classList.toggle("off");
 
-    if (classList.contains("on")) {
-      GameEmitter.emit(GameEvent.AudioEnabled);
-    } else {
-      GameEmitter.emit(GameEvent.AudioDisabled);
-    }
+    GameEmitter.emit(GameEvent.AudioMuteChanged, classList.contains("off"));
   }
 
   public displayNotification(innerHtml: string): void {

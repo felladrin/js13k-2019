@@ -3,6 +3,7 @@ export enum CssSelector {
   MenuCarousel = ".menu-carousel",
   PreviousButton = ".previous.button",
   NextButton = ".next.button",
-  HeaderText = ".header .center",
+  HeaderCenter = ".header .center",
+  HeaderRight = ".header .right",
   Speaker = ".speaker"
 }
