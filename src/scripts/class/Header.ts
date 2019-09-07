@@ -43,17 +43,17 @@ export class Header {
     });
   }
 
-  public get isSoundEnabled(): boolean {
-    return this.speakerElement.classList.contains("on");
-  }
-
   toggleSound(): void {
-    this.speakerElement.classList.toggle("on");
-    this.speakerElement.classList.toggle("off");
+    const classList = this.speakerElement.classList;
 
-    GameEmitter.emit(
-      this.isSoundEnabled ? GameEvent.AudioEnabled : GameEvent.AudioDisabled
-    );
+    classList.toggle("on");
+    classList.toggle("off");
+
+    if (classList.contains("on")) {
+      GameEmitter.emit(GameEvent.AudioEnabled);
+    } else {
+      GameEmitter.emit(GameEvent.AudioDisabled);
+    }
   }
 
   public displayNotification(innerHtml: string): void {
