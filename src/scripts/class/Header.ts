@@ -1,47 +1,58 @@
 import { CssSelector } from "../enum/CssSelector";
+import { gameName } from "../const/gameName";
 
 export class Header {
-  static headerTextElement: HTMLDivElement = document.querySelector(
+  headerTextElement: HTMLDivElement = document.querySelector(
     CssSelector.HeaderText
   );
 
-  static speakerElement: HTMLDivElement = document.querySelector(
-    CssSelector.Speaker
-  );
+  speakerElement: HTMLDivElement = document.querySelector(CssSelector.Speaker);
 
-  public static changeInnerHTML(innerHTML: string): Promise<void> {
+  constructor() {
+    this.speakerElement.addEventListener("click", () => {
+      this.toggleSound();
+    });
+  }
+
+  public changeInnerHTML(innerHTML: string): Promise<void> {
     return new Promise((resolve): void => {
       const resolvePromise = (): void => resolve();
 
       const updateInnerHTML = (): void => {
-        Header.headerTextElement.innerHTML = innerHTML;
-        Header.headerTextElement.addEventListener(
+        this.headerTextElement.innerHTML = innerHTML;
+        this.headerTextElement.addEventListener(
           "transitionend",
           resolvePromise,
           {
             once: true
           }
         );
-        Header.headerTextElement.classList.remove("being-updated");
+        this.headerTextElement.classList.remove("being-updated");
       };
 
-      Header.headerTextElement.addEventListener(
+      this.headerTextElement.addEventListener(
         "transitionend",
         updateInnerHTML,
         {
           once: true
         }
       );
-      Header.headerTextElement.classList.add("being-updated");
+      this.headerTextElement.classList.add("being-updated");
     });
   }
 
   public get isSoundEnabled(): boolean {
-    return Header.speakerElement.classList.contains("on");
+    return this.speakerElement.classList.contains("on");
   }
 
-  public static toggleSound(): void {
-    Header.speakerElement.classList.toggle("on");
-    Header.speakerElement.classList.toggle("off");
+  toggleSound(): void {
+    this.speakerElement.classList.toggle("on");
+    this.speakerElement.classList.toggle("off");
+  }
+
+  public displayNotification(innerHtml: string): void {
+    this.changeInnerHTML(innerHtml).then(() => {
+      this.changeInnerHTML(gameName).then();
+    });
   }
 }

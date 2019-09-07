@@ -6,27 +6,25 @@ import { GameAudio } from "./GameAudio";
 import { backgroundMusic } from "../const/backgroundMusic";
 
 export class Game {
-  static menu: Menu;
   static countDownTimer: CountDownTimer;
   static sceneManager: SceneManager;
+  static menu: Menu;
+  static header: Header;
 
   public static start(): void {
+    this.initializeStaticFields();
+    this.header.displayNotification("<em>Welcome!</em>");
+    this.startBackgroundMusicOnFirstInteraction();
+  }
+
+  private static initializeStaticFields(): void {
     this.countDownTimer = new CountDownTimer(10, (): void => {});
     this.sceneManager = new SceneManager();
     this.menu = new Menu();
+    this.header = new Header();
+  }
 
-    Header.changeInnerHTML("<strong>It</strong> <em>Works</em>!").then(() => {
-      Header.changeInnerHTML("Back Read").then();
-    });
-
-    Header.speakerElement.addEventListener("click", () => {
-      Header.toggleSound();
-    });
-
-    document.querySelector(".header .center").addEventListener("click", () => {
-      location.reload();
-    });
-
+  private static startBackgroundMusicOnFirstInteraction(): void {
     const startSong = (): void => {
       GameAudio.create(backgroundMusic, true, true);
       document.removeEventListener("mousemove", startSong);
