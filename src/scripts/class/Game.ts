@@ -4,7 +4,6 @@ import { Menu } from "./Menu";
 import { Header } from "./Header";
 import { GameAudio } from "./GameAudio";
 import { backgroundMusic } from "../const/backgroundMusic";
-import { GamePlayStateManager } from "./GamePlayStateManager";
 import { GameSignal } from "./GameSignal";
 import { Scene } from "../enum/Scene";
 import { GamePlayScene } from "./GamePlayScene";
@@ -14,7 +13,6 @@ export class Game {
   static sceneManager = new SceneManager();
   static menu = new Menu();
   static header = new Header();
-  static gamePlayStateManager = new GamePlayStateManager();
 
   public static start(): void {
     this.header.displayNotification("<em>Welcome!</em>");
