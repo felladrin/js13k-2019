@@ -1,7 +1,7 @@
-import { CountDownTimer } from "./CountDownTimer";
-import { SceneManager } from "./SceneManager";
-import { Menu } from "./Menu";
-import { Header } from "./Header";
+import { GameCountDownTimer } from "./GameCountDownTimer";
+import { GameSceneManager } from "./GameSceneManager";
+import { GameMenu } from "./GameMenu";
+import { GameHeader } from "./GameHeader";
 import { GameAudio } from "./GameAudio";
 import { backgroundMusic } from "../const/backgroundMusic";
 import { GameSignal } from "./GameSignal";
@@ -9,10 +9,10 @@ import { Scene } from "../enum/Scene";
 import { GamePlayScene } from "./GamePlayScene";
 
 export class Game {
-  static countDownTimer = new CountDownTimer(10);
-  static sceneManager = new SceneManager();
-  static menu = new Menu();
-  static header = new Header();
+  static countDownTimer = new GameCountDownTimer(10);
+  static sceneManager = new GameSceneManager();
+  static menu = new GameMenu();
+  static header = new GameHeader();
 
   public static start(): void {
     this.header.displayNotification("<em>Welcome!</em>");

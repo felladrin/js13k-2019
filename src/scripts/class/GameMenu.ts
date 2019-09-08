@@ -1,8 +1,8 @@
-import { SceneManager } from "./SceneManager";
+import { GameSceneManager } from "./GameSceneManager";
 import { Scene } from "../enum/Scene";
 import { GameHtmlElement } from "./GameHtmlElement";
 
-export class Menu {
+export class GameMenu {
   cellCount = GameHtmlElement.menuCarousel.children.length;
   selectedIndex = 0;
 
@@ -25,7 +25,7 @@ export class Menu {
     for (let i = 0; i < menuOptions.length; i++) {
       const menuOption = menuOptions[i] as HTMLDivElement;
       menuOption.addEventListener("click", () => {
-        SceneManager.displayScene(menuOption.dataset["option"] as Scene);
+        GameSceneManager.displayScene(menuOption.dataset["option"] as Scene);
       });
     }
   }

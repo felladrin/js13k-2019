@@ -1,6 +1,6 @@
 import { GameSignal } from "./GameSignal";
 
-export class CountDownTimer {
+export class GameCountDownTimer {
   private count = 0;
   private intervalTimerId = 0;
 
@@ -17,7 +17,7 @@ export class CountDownTimer {
   public start(): void {
     this.intervalTimerId = setInterval(() => {
       this.handleTimeout();
-    }, CountDownTimer.ONE_SECOND);
+    }, GameCountDownTimer.ONE_SECOND);
     GameSignal.gamePlayCountDownStarted.emit(this.count);
   }
 

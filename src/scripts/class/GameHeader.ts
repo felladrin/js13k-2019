@@ -2,17 +2,17 @@ import { gameName } from "../const/gameName";
 import { GameSignal } from "./GameSignal";
 import { GameHtmlElement } from "./GameHtmlElement";
 
-export class Header {
+export class GameHeader {
   static clockIcon = GameHtmlElement.headerRight.innerHTML;
 
   constructor() {
     GameHtmlElement.speaker.addEventListener("click", () => {
-      Header.toggleSound();
+      GameHeader.toggleSound();
     });
 
-    GameSignal.gamePlayCountDownStarted.add(Header.displayCountDown);
-    GameSignal.gamePlayCountDownUpdated.add(Header.displayCountDown);
-    GameSignal.gamePlayCountDownStopped.add(Header.displayClockIcon);
+    GameSignal.gamePlayCountDownStarted.add(GameHeader.displayCountDown);
+    GameSignal.gamePlayCountDownUpdated.add(GameHeader.displayCountDown);
+    GameSignal.gamePlayCountDownStopped.add(GameHeader.displayClockIcon);
   }
 
   public changeInnerHTML(innerHTML: string): Promise<void> {
@@ -47,7 +47,7 @@ export class Header {
   }
 
   static displayClockIcon(): void {
-    GameHtmlElement.headerRight.innerHTML = Header.clockIcon;
+    GameHtmlElement.headerRight.innerHTML = GameHeader.clockIcon;
   }
 
   static toggleSound(): void {

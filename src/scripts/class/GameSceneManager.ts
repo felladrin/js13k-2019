@@ -2,11 +2,11 @@ import { Scene } from "../enum/Scene";
 import { GameSignal } from "./GameSignal";
 import { GameHtmlElement } from "./GameHtmlElement";
 
-export class SceneManager {
+export class GameSceneManager {
   public currentScene: Scene = Scene.Menu;
 
   constructor() {
-    SceneManager.displayScene(this.currentScene);
+    GameSceneManager.displayScene(this.currentScene);
   }
 
   static displayScene(scene: Scene): void {
