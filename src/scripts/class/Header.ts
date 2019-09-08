@@ -1,24 +1,12 @@
-import { CssSelector } from "../enum/CssSelector";
 import { gameName } from "../const/gameName";
 import { GameSignal } from "./GameSignal";
+import { GameHtmlElement } from "./GameHtmlElement";
 
 export class Header {
-  static headerCenterElement: HTMLDivElement = document.querySelector(
-    CssSelector.HeaderCenter
-  );
-
-  static headerRightElement: HTMLDivElement = document.querySelector(
-    CssSelector.HeaderRight
-  );
-
-  static speakerElement: HTMLDivElement = document.querySelector(
-    CssSelector.Speaker
-  );
-
-  static clockIcon = Header.headerRightElement.innerHTML;
+  static clockIcon = GameHtmlElement.headerRight.innerHTML;
 
   constructor() {
-    Header.speakerElement.addEventListener("click", () => {
+    GameHtmlElement.speaker.addEventListener("click", () => {
       Header.toggleSound();
     });
 
@@ -32,38 +20,38 @@ export class Header {
       const resolvePromise = (): void => resolve();
 
       const updateInnerHTML = (): void => {
-        Header.headerCenterElement.innerHTML = innerHTML;
-        Header.headerCenterElement.addEventListener(
+        GameHtmlElement.headerCenter.innerHTML = innerHTML;
+        GameHtmlElement.headerCenter.addEventListener(
           "transitionend",
           resolvePromise,
           {
             once: true
           }
         );
-        Header.headerCenterElement.classList.remove("being-updated");
+        GameHtmlElement.headerCenter.classList.remove("being-updated");
       };
 
-      Header.headerCenterElement.addEventListener(
+      GameHtmlElement.headerCenter.addEventListener(
         "transitionend",
         updateInnerHTML,
         {
           once: true
         }
       );
-      Header.headerCenterElement.classList.add("being-updated");
+      GameHtmlElement.headerCenter.classList.add("being-updated");
     });
   }
 
   static displayCountDown(count): void {
-    Header.headerRightElement.innerHTML = count;
+    GameHtmlElement.headerRight.innerHTML = count;
   }
 
   static displayClockIcon(): void {
-    Header.headerRightElement.innerHTML = Header.clockIcon;
+    GameHtmlElement.headerRight.innerHTML = Header.clockIcon;
   }
 
   static toggleSound(): void {
-    const classList = Header.speakerElement.classList;
+    const classList = GameHtmlElement.speaker.classList;
 
     classList.toggle("on");
     classList.toggle("off");

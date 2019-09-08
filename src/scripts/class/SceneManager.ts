@@ -1,6 +1,6 @@
 import { Scene } from "../enum/Scene";
-import { CssSelector } from "../enum/CssSelector";
 import { GameSignal } from "./GameSignal";
+import { GameHtmlElement } from "./GameHtmlElement";
 
 export class SceneManager {
   public currentScene: Scene = Scene.Menu;
@@ -11,7 +11,7 @@ export class SceneManager {
 
   static displayScene(scene: Scene): void {
     for (const sceneKey in Scene) {
-      const sceneElement = SceneManager.getSceneElement(Scene[sceneKey]);
+      const sceneElement = GameHtmlElement.getScene(Scene[sceneKey]);
       if (scene == sceneKey) {
         sceneElement.classList.remove("inactive");
       } else {
@@ -20,9 +20,5 @@ export class SceneManager {
     }
 
     GameSignal.sceneDisplayed.emit(scene);
-  }
-
-  static getSceneElement(scene: string): HTMLDivElement {
-    return document.querySelector(CssSelector.Scene.replace("*", scene));
   }
 }
