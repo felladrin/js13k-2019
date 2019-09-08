@@ -1,7 +1,7 @@
 import { GameCountDownTimer } from "./GameCountDownTimer";
 import { GameSceneManager } from "./GameSceneManager";
 import { GameMenu } from "./GameMenu";
-import { GameHeader } from "./GameHeader";
+import { GameTopBar } from "./GameTopBar";
 import { GameAudio } from "./GameAudio";
 import { backgroundMusic } from "../const/backgroundMusic";
 import { GameSignal } from "./GameSignal";
@@ -12,7 +12,7 @@ export class Game {
   static countDownTimer = new GameCountDownTimer(10);
   static sceneManager = new GameSceneManager();
   static menu = new GameMenu();
-  static header = new GameHeader();
+  static header = new GameTopBar();
 
   public static start(): void {
     this.header.displayNotification("<em>Welcome!</em>");
