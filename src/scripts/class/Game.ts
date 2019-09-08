@@ -8,6 +8,7 @@ import { GamePlayStateManager } from "./GamePlayStateManager";
 import { GameEmitter } from "./GameEmitter";
 import { GameEvent } from "../enum/GameEvent";
 import { Scene } from "../enum/Scene";
+import { GamePlayScene } from "./GamePlayScene";
 
 export class Game {
   static countDownTimer = new CountDownTimer(10);
@@ -43,9 +44,7 @@ export class Game {
 
   private static executeGamePlayLoop(): void {
     this.countDownTimer.reset();
-    // fadeInSentence();
-    // fadeInQuestion();
-    // fadeInOptions();
+    GamePlayScene.preparePhase();
     this.countDownTimer.start();
     // awaitUserResponse();
   }

@@ -1,3 +1,8 @@
+import { QuestionType } from "../enum/QuestionType";
+import { similarWords } from "../const/similarWords";
+import { pickRandomElementFromArray } from "../function/pickRandomElementFromArray";
+import { pickRandomElementFromEnum } from "../function/pickRandomElementFromEnum";
+
 export class GamePlayScene {
   private static sentenceElement: HTMLDivElement = document.querySelector(
     ".sentence"
@@ -33,5 +38,34 @@ export class GamePlayScene {
   public static setAnswer(answerId: 1 | 2 | 3 | 4, text: string): void {
     const element: HTMLDivElement = GamePlayScene[`answer${answerId}Element`];
     element.innerText = text;
+  }
+
+  public static preparePhase(): void {
+    switch (pickRandomElementFromEnum(QuestionType)) {
+      case QuestionType.CompleteTheSentence: // FIXME
+      case QuestionType.FindTheMissingLetter: // FIXME
+      case QuestionType.WhatIsTheResult: // FIXME
+      case QuestionType.WhatIsTheWord:
+        const randomSet = pickRandomElementFromArray(similarWords);
+        this.setSentence(randomSet[2]);
+        this.setQuestion("What is the word?");
+        this.setAnswer(1, randomSet[0]);
+        this.setAnswer(2, randomSet[1]);
+        this.setAnswer(3, randomSet[2]);
+        this.setAnswer(4, randomSet[3]);
+        break;
+    }
+  }
+
+  public static fadeInSentence(): void {
+    // TODO
+  }
+
+  public static fadeInQuestion(): void {
+    // TODO
+  }
+
+  public static fadeInAnswers(): void {
+    // TODO
   }
 }
