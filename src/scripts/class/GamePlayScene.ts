@@ -1,7 +1,6 @@
 import { QuestionType } from "../enum/QuestionType";
 import { similarWords } from "../const/similarWords";
-import { pickRandomElementFromArray } from "../function/pickRandomElementFromArray";
-import { pickRandomElementFromEnum } from "../function/pickRandomElementFromEnum";
+import { Random } from "./Random";
 
 export class GamePlayScene {
   private static sentenceElement: HTMLDivElement = document.querySelector(
@@ -41,12 +40,12 @@ export class GamePlayScene {
   }
 
   public static preparePhase(): void {
-    switch (pickRandomElementFromEnum(QuestionType)) {
+    switch (Random.pickElementFromEnum(QuestionType)) {
       case QuestionType.CompleteTheSentence: // FIXME
       case QuestionType.FindTheMissingLetter: // FIXME
       case QuestionType.WhatIsTheResult: // FIXME
       case QuestionType.WhatIsTheWord:
-        const randomSet = pickRandomElementFromArray(similarWords);
+        const randomSet = Random.pickElementFromArray(similarWords);
         this.setSentence(randomSet[2]);
         this.setQuestion("What is the word?");
         this.setAnswer(1, randomSet[0]);
