@@ -1,7 +1,6 @@
 import { CssSelector } from "../enum/CssSelector";
 import { gameName } from "../const/gameName";
-import { GameEmitter } from "./GameEmitter";
-import { GameEvent } from "../enum/GameEvent";
+import { GameSignal } from "./GameSignal";
 
 export class Header {
   static headerCenterElement: HTMLDivElement = document.querySelector(
@@ -23,9 +22,9 @@ export class Header {
       Header.toggleSound();
     });
 
-    GameEmitter.on(GameEvent.GamePlayCountDownStarted, Header.displayCountDown);
-    GameEmitter.on(GameEvent.GamePlayCountDownUpdated, Header.displayCountDown);
-    GameEmitter.on(GameEvent.GamePlayCountDownStopped, Header.displayClockIcon);
+    GameSignal.gamePlayCountDownStarted.add(Header.displayCountDown);
+    GameSignal.gamePlayCountDownUpdated.add(Header.displayCountDown);
+    GameSignal.gamePlayCountDownStopped.add(Header.displayClockIcon);
   }
 
   public changeInnerHTML(innerHTML: string): Promise<void> {
@@ -69,7 +68,7 @@ export class Header {
     classList.toggle("on");
     classList.toggle("off");
 
-    GameEmitter.emit(GameEvent.AudioMuteChanged, classList.contains("off"));
+    GameSignal.audioMuteChanged.emit(classList.contains("off"));
   }
 
   public displayNotification(innerHtml: string): void {

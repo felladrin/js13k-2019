@@ -1,5 +1,4 @@
-import { GameEmitter } from "./GameEmitter";
-import { GameEvent } from "../enum/GameEvent";
+import { GameSignal } from "./GameSignal";
 
 export class CountDownTimer {
   private count = 0;
@@ -19,21 +18,21 @@ export class CountDownTimer {
     this.intervalTimerId = setInterval(() => {
       this.handleTimeout();
     }, CountDownTimer.ONE_SECOND);
-    GameEmitter.emit(GameEvent.GamePlayCountDownStarted, this.count);
+    GameSignal.gamePlayCountDownStarted.emit(this.count);
   }
 
   public stop(): void {
     clearInterval(this.intervalTimerId);
-    GameEmitter.emit(GameEvent.GamePlayCountDownStopped, this.count);
+    GameSignal.gamePlayCountDownStopped.emit(this.count);
   }
 
   private handleTimeout(): void {
     this.count--;
-    GameEmitter.emit(GameEvent.GamePlayCountDownUpdated, this.count);
+    GameSignal.gamePlayCountDownUpdated.emit(this.count);
 
     if (this.count == 0) {
       this.stop();
-      GameEmitter.emit(GameEvent.GamePlayCountDownTimeOver);
+      GameSignal.gamePlayCountDownTimeOver.emit();
     }
   }
 }

@@ -1,7 +1,6 @@
 import { Scene } from "../enum/Scene";
 import { CssSelector } from "../enum/CssSelector";
-import { GameEmitter } from "./GameEmitter";
-import { GameEvent } from "../enum/GameEvent";
+import { GameSignal } from "./GameSignal";
 
 export class SceneManager {
   public currentScene: Scene = Scene.Menu;
@@ -20,7 +19,7 @@ export class SceneManager {
       }
     }
 
-    GameEmitter.emit(GameEvent.SceneDisplayed, scene);
+    GameSignal.sceneDisplayed.emit(scene);
   }
 
   static getSceneElement(scene: string): HTMLDivElement {

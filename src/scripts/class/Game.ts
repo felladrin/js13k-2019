@@ -5,8 +5,7 @@ import { Header } from "./Header";
 import { GameAudio } from "./GameAudio";
 import { backgroundMusic } from "../const/backgroundMusic";
 import { GamePlayStateManager } from "./GamePlayStateManager";
-import { GameEmitter } from "./GameEmitter";
-import { GameEvent } from "../enum/GameEvent";
+import { GameSignal } from "./GameSignal";
 import { Scene } from "../enum/Scene";
 import { GamePlayScene } from "./GamePlayScene";
 
@@ -24,7 +23,7 @@ export class Game {
   }
 
   private static listenToSceneChanges(): void {
-    GameEmitter.on(GameEvent.SceneDisplayed, (scene: Scene) => {
+    GameSignal.sceneDisplayed.add((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
           break;

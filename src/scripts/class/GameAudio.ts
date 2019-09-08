@@ -1,6 +1,5 @@
 import { SoundBoxPlayer } from "./SoundBoxPlayer";
-import { GameEmitter } from "./GameEmitter";
-import { GameEvent } from "../enum/GameEvent";
+import { GameSignal } from "./GameSignal";
 
 export class GameAudio {
   public static create(
@@ -26,7 +25,7 @@ export class GameAudio {
       }
     }, 300);
 
-    GameEmitter.on(GameEvent.AudioMuteChanged, (muted: boolean) => {
+    GameSignal.audioMuteChanged.add((muted: boolean) => {
       audio.muted = muted;
     });
 
