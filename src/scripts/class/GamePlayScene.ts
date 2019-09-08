@@ -12,23 +12,34 @@ export class GamePlayScene {
     GameHtmlElement.questionElement.innerText = text;
   }
 
-  public static setAnswer(answerId: 1 | 2 | 3 | 4, text: string): void {
-    GameHtmlElement.getAnswerButton(answerId).innerText = text;
+  public static setAnswers<T>(answers: Array<T>): void {
+    Random.shuffle(answers);
+    for (let i = 0; i < 4; i++) {
+      GameHtmlElement.getAnswerButton(i).innerText = answers[i].toString();
+    }
   }
 
   public static preparePhase(): void {
     switch (Random.pickElementFromEnum(QuestionType)) {
-      case QuestionType.CompleteTheSentence: // FIXME
-      case QuestionType.FindTheMissingLetter: // FIXME
-      case QuestionType.WhatIsTheResult: // FIXME
       case QuestionType.WhatIsTheWord:
-        const randomSet = Random.pickElementFromArray(similarWords);
-        this.setSentence(randomSet[2]);
-        this.setQuestion("What is the word?");
-        this.setAnswer(1, randomSet[0]);
-        this.setAnswer(2, randomSet[1]);
-        this.setAnswer(3, randomSet[2]);
-        this.setAnswer(4, randomSet[3]);
+        const randomSet = [...Random.pickElementFromArray(similarWords)];
+        const answers = [];
+        for (let i = 0; i < 4; i++) {
+          const randomWordIndex = Random.pickIndexFromLength(randomSet.length);
+          answers.push(randomSet.splice(randomWordIndex, 1));
+        }
+        this.setSentence(Random.pickElementFromArray(answers));
+        this.setQuestion("Which word is that?");
+        this.setAnswers(answers);
+        break;
+      case QuestionType.FindTheMissingLetter:
+        const randomWordSet = Random.pickElementFromArray(similarWords);
+        const randomWord = Random.pickElementFromArray(randomWordSet);
+        const randomCharIndex = Random.pickIndexFromLength(randomWord.length);
+        this.setQuestion("Which letter is missing?");
+        break;
+      case QuestionType.WhatIsTheResult:
+        this.setQuestion("What is the result of this equation?");
         break;
     }
   }
