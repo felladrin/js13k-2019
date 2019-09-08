@@ -3,14 +3,10 @@ import { Scene } from "../enum/Scene";
 import { GameHtmlElement } from "./GameHtmlElement";
 
 export class GameMenu {
-  cellCount = GameHtmlElement.menuCarousel.children.length;
-  selectedIndex = 0;
+  private static cellCount = GameHtmlElement.menuCarousel.children.length;
+  private static selectedIndex = 0;
 
-  constructor() {
-    this.addEventListeners();
-  }
-
-  addEventListeners(): void {
+  static initialize(): void {
     GameHtmlElement.previousButton.addEventListener("click", () => {
       this.selectedIndex--;
       this.rotate();
@@ -30,7 +26,7 @@ export class GameMenu {
     }
   }
 
-  private rotate(): void {
+  private static rotate(): void {
     const angle = (this.selectedIndex / this.cellCount) * -360;
     GameHtmlElement.menuCarousel.style.transform = "rotateY(" + angle + "deg)";
   }

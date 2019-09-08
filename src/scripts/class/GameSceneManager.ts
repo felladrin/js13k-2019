@@ -3,9 +3,9 @@ import { GameSignal } from "./GameSignal";
 import { GameHtmlElement } from "./GameHtmlElement";
 
 export class GameSceneManager {
-  public currentScene: Scene = Scene.Menu;
+  public static currentScene: Scene = Scene.Menu;
 
-  constructor() {
+  static initialize(): void {
     GameSceneManager.displayScene(this.currentScene);
   }
 
