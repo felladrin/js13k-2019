@@ -1,1 +1,1 @@
-export const gameName = "Back-Read";
+export const gameName = "Back Read";
