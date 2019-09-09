@@ -3,8 +3,11 @@ export class Random {
     return Math.floor(Math.random() * length);
   }
 
-  public static pickCharFromString(str: string): string {
-    return str[this.pickIndexFromLength(str.length)];
+  /** @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random */
+  public static pickIntInclusive(min, max): number {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   public static pickElementFromArray<T>(arr: Array<T>): T {
