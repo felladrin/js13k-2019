@@ -7,6 +7,7 @@ import { backgroundMusic } from "../const/backgroundMusic";
 import { GameSignal } from "./GameSignal";
 import { Scene } from "../enum/Scene";
 import { GamePlayScene } from "./GamePlayScene";
+import { GameHtmlElement } from "./GameHtmlElement";
 
 export class Game {
   static countDownTimer = new GameCountDownTimer(10);
@@ -18,6 +19,15 @@ export class Game {
     this.header.displayNotification("<em>Welcome!</em>");
     this.startBackgroundMusicOnFirstInteraction();
     this.listenToSceneChanges();
+    this.listenToAnswersSelected();
+  }
+
+  private static listenToAnswersSelected(): void {
+    Array.from(GameHtmlElement.answerButtons).forEach(answerButton => {
+      answerButton.addEventListener("click", () => {
+        GameSignal.answerSelected.emit(answerButton.innerText);
+      });
+    });
   }
 
   private static listenToSceneChanges(): void {
@@ -43,7 +53,6 @@ export class Game {
     this.countDownTimer.reset();
     GamePlayScene.preparePhase();
     this.countDownTimer.start();
-    // awaitUserResponse();
   }
 
   private static startBackgroundMusicOnFirstInteraction(): void {

@@ -26,9 +26,14 @@ export class GameHtmlElement {
   public static sentenceElement: HTMLDivElement = document.querySelector(
     ".sentence"
   );
+
   public static questionElement: HTMLDivElement = document.querySelector(
     ".question"
   );
+
+  public static answerButtons: NodeListOf<
+    HTMLDivElement
+  > = document.querySelectorAll(".answer");
 
   public static getScene(scene: Scene): HTMLDivElement {
     return document.querySelector(`div[data-scene="${scene}"]`);

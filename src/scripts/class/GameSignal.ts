@@ -8,5 +8,6 @@ export class GameSignal {
   public static gamePlayCountDownUpdated: Signal<number> = new Signal();
   public static gamePlayCountDownStopped: Signal<number> = new Signal();
   public static gamePlayCountDownTimeOver: Signal<void> = new Signal();
+  public static answerSelected: Signal<string> = new Signal();
   // public static buttonPressed: Signal<void> = new Signal();
 }
