@@ -43,19 +43,24 @@ export class Game {
     GameSignal.sceneDisplayed.add((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
+          GameHtmlElement.setBackgroundId(1);
           this.header.displayNotification("Ready to start!?");
           break;
         case Scene.Tutorial:
+          GameHtmlElement.setBackgroundId(4);
           this.header.displayNotification("Ah, finally someone here!");
           break;
         case Scene.About:
+          GameHtmlElement.setBackgroundId(3);
           this.header.displayNotification("Curious, huh!?");
           break;
         case Scene.GamePlay:
+          GameHtmlElement.setBackgroundId(2);
           this.header.displayNotification("Good Luck!");
           this.executeGamePlayLoop();
           break;
         case Scene.GameOver:
+          GameHtmlElement.setBackgroundId(1);
           this.header.displayNotification("Oh no!!! =(");
           break;
       }

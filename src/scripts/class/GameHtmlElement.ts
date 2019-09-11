@@ -46,4 +46,12 @@ export class GameHtmlElement {
   public static getAnswerButton(id: number): HTMLDivElement {
     return document.querySelector(`.answer[data-id="${id}"]`);
   }
+
+  public static setBackgroundId(id: number): void {
+    const containerClassList = document.querySelector(`.container`).classList;
+    for (let i = 1; i < 5; i++) {
+      containerClassList.remove(`background${i}`);
+    }
+    containerClassList.add(`background${id}`);
+  }
 }
