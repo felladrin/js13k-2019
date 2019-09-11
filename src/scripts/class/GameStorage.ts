@@ -9,13 +9,18 @@ export class GameStorage {
     const gameDataAsString = JSON.stringify(data);
     const cipher = this.getCipher(gameName);
     const cipheredGameData = cipher(gameDataAsString);
+
     localStorage.setItem(gameName, cipheredGameData);
   }
 
   public static load(): GameData {
     const cipheredGameData = localStorage.getItem(gameName);
+
+    if (!cipheredGameData) return null;
+
     const decipher = this.getDecipher(gameName);
     const gameDataAsString = decipher(cipheredGameData);
+
     return JSON.parse(gameDataAsString);
   }
 

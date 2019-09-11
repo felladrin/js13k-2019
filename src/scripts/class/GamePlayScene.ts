@@ -3,9 +3,31 @@ import { similarWords } from "../const/similarWords";
 import { Random } from "./Random";
 import { GameHtmlElement } from "./GameHtmlElement";
 import { ArithmeticOperation } from "../enum/ArithmeticOperation";
+import { answersPerQuestion } from "../const/answersPerQuestion";
+import { GameSignal } from "./GameSignal";
 
 export class GamePlayScene {
-  public static answersPerQuestion = 4;
+  private static expectedAnswer: string;
+
+  public static initialize(): void {
+    this.listenToAnswersSelected();
+  }
+
+  private static listenToAnswersSelected(): void {
+    Array.from(GameHtmlElement.answerButtons).forEach(answerButton => {
+      answerButton.addEventListener("click", () => {
+        this.processAnswer(answerButton.innerText);
+      });
+    });
+  }
+
+  private static processAnswer(answer: string): void {
+    if (answer == this.expectedAnswer) {
+      GameSignal.answeredCorrectly.emit();
+    } else {
+      GameSignal.answeredWrongly.emit();
+    }
+  }
 
   public static setSentence(text: string): void {
     GameHtmlElement.sentenceElement.innerText = text;
@@ -17,7 +39,7 @@ export class GamePlayScene {
 
   public static setAnswers<T>(answers: Array<T>): void {
     Random.shuffle(answers);
-    for (let i = 0; i < this.answersPerQuestion; i++) {
+    for (let i = 0; i < answersPerQuestion; i++) {
       GameHtmlElement.getAnswerButton(i).innerText = answers[i].toString();
     }
   }
@@ -39,11 +61,12 @@ export class GamePlayScene {
   private static prepareWhatIsTheWord(): void {
     const randomSet = [...Random.pickElementFromArray(similarWords)];
     const answers = [];
-    for (let i = 0; i < this.answersPerQuestion; i++) {
+    for (let i = 0; i < answersPerQuestion; i++) {
       const randomWordIndex = Random.pickIndexFromLength(randomSet.length);
       answers.push(randomSet.splice(randomWordIndex, 1));
     }
-    this.setSentence(Random.pickElementFromArray(answers));
+    this.expectedAnswer = Random.pickElementFromArray(answers);
+    this.setSentence(this.expectedAnswer);
     this.setQuestion("Which word is that?");
     this.setAnswers(answers);
   }
@@ -84,16 +107,40 @@ export class GamePlayScene {
     const answers = [];
 
     if (selectedCharIsAVowel) {
-      for (let i = 0; i < this.answersPerQuestion; i++) {
+      for (let i = 0; i < answersPerQuestion; i++) {
         const randomVowelIndex = Random.pickIndexFromLength(vowels.length);
-        answers.push(vowels.splice(randomVowelIndex, 1)[0]);
+
+        const selectedVowel = vowels.splice(randomVowelIndex, 1)[0];
+
+        const mutatedWord =
+          selectedWord.substr(0, selectedCharIndex) +
+          selectedVowel +
+          selectedWord.substr(selectedCharIndex + 1);
+
+        if (this.wordExists(mutatedWord)) {
+          i--;
+        } else {
+          answers.push(selectedVowel);
+        }
       }
     } else {
-      for (let i = 0; i < this.answersPerQuestion; i++) {
+      for (let i = 0; i < answersPerQuestion; i++) {
         const randomConsonantIndex = Random.pickIndexFromLength(
           consonants.length
         );
-        answers.push(consonants.splice(randomConsonantIndex, 1)[0]);
+
+        const selectedConsonant = consonants.splice(randomConsonantIndex, 1)[0];
+
+        const mutatedWord =
+          selectedWord.substr(0, selectedCharIndex) +
+          selectedConsonant +
+          selectedWord.substr(selectedCharIndex + 1);
+
+        if (this.wordExists(mutatedWord)) {
+          i--;
+        } else {
+          answers.push(selectedConsonant);
+        }
       }
     }
 
@@ -111,6 +158,7 @@ export class GamePlayScene {
       "_" +
       selectedWord.substr(selectedCharIndex + 1);
 
+    this.expectedAnswer = selectedChar.toUpperCase();
     this.setSentence(sentence);
     this.setQuestion("Which letter is missing?");
     this.setAnswers(answers);
@@ -151,7 +199,7 @@ export class GamePlayScene {
 
     const answers = [];
 
-    for (let i = 0; i < this.answersPerQuestion; i++) {
+    for (let i = 0; i < answersPerQuestion; i++) {
       answers.push(Random.pickIntInclusive(result - 20, result + 20));
     }
 
@@ -161,9 +209,22 @@ export class GamePlayScene {
       answers[Random.pickIndexFromLength(answers.length)] = result;
     }
 
+    this.expectedAnswer = result.toString();
     this.setSentence(`${numberOne} ${symbol} ${numberTwo}`);
     this.setQuestion("What is the result of this equation?");
     this.setAnswers(answers);
+  }
+
+  public static wordExists(word: string): boolean {
+    for (let i = 0; i < similarWords.length; i++) {
+      const similarWordsSet = similarWords[i];
+      for (let j = 0; j < similarWordsSet.length; j++) {
+        const similarWord = similarWordsSet[j];
+        if (word.toLowerCase() == similarWord.toLowerCase()) return true;
+      }
+    }
+
+    return false;
   }
 
   public static fadeInSentence(): void {

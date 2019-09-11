@@ -8,33 +8,40 @@ import { GameSignal } from "./GameSignal";
 import { Scene } from "../enum/Scene";
 import { GamePlayScene } from "./GamePlayScene";
 import { GameHtmlElement } from "./GameHtmlElement";
+import { GameStreakManager } from "./GameStreakManager";
 
 export class Game {
   static countDownTimer = new GameCountDownTimer(10);
   static header = new GameTopBar();
 
   public static initialize(): void {
+    this.header.displayNotification("<em>Welcome!</em>");
+    GameStreakManager.initialize();
     GameMenu.initialize();
     GameSceneManager.initialize();
-    this.header.displayNotification("<em>Welcome!</em>");
+    GamePlayScene.initialize();
     this.startBackgroundMusicOnFirstInteraction();
     this.listenToSceneChanges();
-    this.listenToAnswersSelected();
     this.listenToBackToMenuClicks();
-  }
-
-  private static listenToAnswersSelected(): void {
-    Array.from(GameHtmlElement.answerButtons).forEach(answerButton => {
-      answerButton.addEventListener("click", () => {
-        GameSignal.answerSelected.emit(answerButton.innerText);
-      });
-    });
+    this.listenToButtonsHoversAndClicks();
   }
 
   private static listenToBackToMenuClicks(): void {
     Array.from(GameHtmlElement.backToMenuButtons).forEach(backToStartButton => {
       backToStartButton.addEventListener("click", () => {
         GameSceneManager.displayScene(Scene.Menu);
+      });
+    });
+  }
+
+  private static listenToButtonsHoversAndClicks(): void {
+    Array.from(GameHtmlElement.allButtons).forEach(button => {
+      button.addEventListener("click", () => {
+        GameSignal.buttonPressed.emit();
+      });
+
+      button.addEventListener("mouseenter", () => {
+        GameSignal.buttonHovered.emit();
       });
     });
   }
@@ -57,7 +64,9 @@ export class Game {
         case Scene.GamePlay:
           GameHtmlElement.setBackgroundId(2);
           this.header.displayNotification("Good Luck!");
-          this.executeGamePlayLoop();
+          this.countDownTimer.reset();
+          GamePlayScene.preparePhase();
+          this.countDownTimer.start();
           break;
         case Scene.GameOver:
           GameHtmlElement.setBackgroundId(1);
@@ -65,12 +74,6 @@ export class Game {
           break;
       }
     });
-  }
-
-  private static executeGamePlayLoop(): void {
-    this.countDownTimer.reset();
-    GamePlayScene.preparePhase();
-    this.countDownTimer.start();
   }
 
   private static startBackgroundMusicOnFirstInteraction(): void {
