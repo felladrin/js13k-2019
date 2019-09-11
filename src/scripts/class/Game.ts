@@ -13,7 +13,7 @@ export class Game {
   static countDownTimer = new GameCountDownTimer(10);
   static header = new GameTopBar();
 
-  public static start(): void {
+  public static initialize(): void {
     GameMenu.initialize();
     GameSceneManager.initialize();
     this.header.displayNotification("<em>Welcome!</em>");
