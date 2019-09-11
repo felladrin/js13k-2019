@@ -33,7 +33,6 @@
     "pretty-quick": "^1.11.1",
     "rimraf": "^3.0.0",
     "sass": "^1.22.10",
-    "signal-ts": "^1.2.4",
     "typescript": "^3.6.2"
   },
   "husky": {

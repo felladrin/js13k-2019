@@ -1,4 +1,4 @@
-import { Signal } from "signal-ts";
+import { Signal } from "./Signal";
 import { Scene } from "../enum/Scene";
 
 export class GameSignal {
