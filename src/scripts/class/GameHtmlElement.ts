@@ -35,6 +35,10 @@ export class GameHtmlElement {
     HTMLDivElement
   > = document.querySelectorAll(".answer");
 
+  public static backToMenuButtons: NodeListOf<
+    HTMLDivElement
+  > = document.querySelectorAll(".back-to-menu.button");
+
   public static getScene(scene: Scene): HTMLDivElement {
     return document.querySelector(`div[data-scene="${scene}"]`);
   }

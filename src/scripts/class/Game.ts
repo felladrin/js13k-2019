@@ -20,6 +20,7 @@ export class Game {
     this.startBackgroundMusicOnFirstInteraction();
     this.listenToSceneChanges();
     this.listenToAnswersSelected();
+    this.listenToBackToMenuClicks();
   }
 
   private static listenToAnswersSelected(): void {
@@ -30,20 +31,32 @@ export class Game {
     });
   }
 
+  private static listenToBackToMenuClicks(): void {
+    Array.from(GameHtmlElement.backToMenuButtons).forEach(backToStartButton => {
+      backToStartButton.addEventListener("click", () => {
+        GameSceneManager.displayScene(Scene.Menu);
+      });
+    });
+  }
+
   private static listenToSceneChanges(): void {
     GameSignal.sceneDisplayed.add((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
+          this.header.displayNotification("Ready to start!?");
           break;
         case Scene.Tutorial:
+          this.header.displayNotification("Ah, finally someone here!");
           break;
-        case Scene.Credits:
+        case Scene.About:
+          this.header.displayNotification("Curious, huh!?");
           break;
         case Scene.GamePlay:
-          this.header.displayNotification("<em>Good Luck!</em>");
+          this.header.displayNotification("Good Luck!");
           this.executeGamePlayLoop();
           break;
         case Scene.GameOver:
+          this.header.displayNotification("Oh no!!! =(");
           break;
       }
     });

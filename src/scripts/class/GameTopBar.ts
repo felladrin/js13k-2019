@@ -60,7 +60,7 @@ export class GameTopBar {
   }
 
   public displayNotification(innerHtml: string): void {
-    this.changeInnerHTML(innerHtml).then(() => {
+    this.changeInnerHTML(`<em>${innerHtml}</em>`).then(() => {
       this.changeInnerHTML(gameName).then();
     });
   }

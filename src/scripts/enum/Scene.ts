@@ -2,7 +2,7 @@ export enum Scene {
   // noinspection JSUnusedGlobalSymbols
   Menu = "Menu",
   Tutorial = "Tutorial",
-  Credits = "Credits",
+  About = "About",
   GamePlay = "GamePlay",
   GameOver = "GameOver"
 }
