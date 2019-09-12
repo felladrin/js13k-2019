@@ -27,6 +27,8 @@ export class GamePlayScene {
     } else {
       GameSignal.answeredWrongly.emit();
     }
+
+    this.preparePhase();
   }
 
   public static setSentence(text: string): void {
@@ -225,17 +227,5 @@ export class GamePlayScene {
     }
 
     return false;
-  }
-
-  public static fadeInSentence(): void {
-    // TODO
-  }
-
-  public static fadeInQuestion(): void {
-    // TODO
-  }
-
-  public static fadeInAnswers(): void {
-    // TODO
   }
 }

@@ -11,15 +11,16 @@ import { GameHtmlElement } from "./GameHtmlElement";
 import { GameStreakManager } from "./GameStreakManager";
 
 export class Game {
-  static countDownTimer = new GameCountDownTimer(10);
-  static header = new GameTopBar();
-
   public static initialize(): void {
-    this.header.displayNotification("<em>Welcome!</em>");
+    GameTopBar.initialize();
     GameStreakManager.initialize();
     GameMenu.initialize();
     GameSceneManager.initialize();
     GamePlayScene.initialize();
+    GameCountDownTimer.initialize();
+
+    GameTopBar.displayNotification("<em>Welcome!</em>");
+
     this.startBackgroundMusicOnFirstInteraction();
     this.listenToSceneChanges();
     this.listenToBackToMenuClicks();
@@ -51,26 +52,25 @@ export class Game {
       switch (scene) {
         case Scene.Menu:
           GameHtmlElement.setBackgroundId(1);
-          this.header.displayNotification("Ready to start!?");
+          GameTopBar.displayNotification("Ready to start!?");
           break;
         case Scene.Tutorial:
           GameHtmlElement.setBackgroundId(4);
-          this.header.displayNotification("Ah, finally someone here!");
+          GameTopBar.displayNotification("Ah, finally someone here!");
           break;
         case Scene.About:
           GameHtmlElement.setBackgroundId(3);
-          this.header.displayNotification("Curious, huh!?");
+          GameTopBar.displayNotification("Curious, huh!?");
           break;
         case Scene.GamePlay:
           GameHtmlElement.setBackgroundId(2);
-          this.header.displayNotification("Good Luck!");
-          this.countDownTimer.reset();
+          GameTopBar.displayNotification("Good Luck!");
           GamePlayScene.preparePhase();
-          this.countDownTimer.start();
+          GameCountDownTimer.start(10);
           break;
         case Scene.GameOver:
           GameHtmlElement.setBackgroundId(1);
-          this.header.displayNotification("Oh no!!! =(");
+          GameTopBar.displayNotification("Oh no!!! =(");
           break;
       }
     });

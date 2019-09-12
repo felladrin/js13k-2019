@@ -31,6 +31,14 @@ export class GameHtmlElement {
     ".question"
   );
 
+  public static currentStreakElement: HTMLDivElement = document.querySelector(
+    ".current-streak"
+  );
+
+  public static longestStreakElement: HTMLDivElement = document.querySelector(
+    ".longest-streak"
+  );
+
   public static answerButtons: NodeListOf<
     HTMLDivElement
   > = document.querySelectorAll(".answer");

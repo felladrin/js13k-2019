@@ -1,44 +1,47 @@
 import { gameName } from "../const/gameName";
 import { GameSignal } from "./GameSignal";
 import { GameHtmlElement } from "./GameHtmlElement";
+import Tweezer from "tweezer.js";
 
 export class GameTopBar {
   static clockIcon = GameHtmlElement.headerRight.innerHTML;
 
-  constructor() {
-    GameHtmlElement.speaker.addEventListener("click", () => {
-      GameTopBar.toggleSound();
-    });
+  public static initialize(): void {
+    GameHtmlElement.speaker.addEventListener("click", () => this.toggleSound());
 
-    GameSignal.gamePlayCountDownStarted.add(GameTopBar.displayCountDown);
-    GameSignal.gamePlayCountDownUpdated.add(GameTopBar.displayCountDown);
-    GameSignal.gamePlayCountDownStopped.add(GameTopBar.displayClockIcon);
+    GameSignal.gamePlayCountDownStarted.add(this.displayCountDown);
+    GameSignal.gamePlayCountDownUpdated.add(this.displayCountDown);
+    GameSignal.gamePlayCountDownStopped.add(this.displayClockIcon);
+    GameSignal.gamePlayCountDownTimeOver.add(this.displayClockIcon);
   }
 
-  public changeInnerHTML(innerHTML: string): Promise<void> {
+  public static changeInnerHTML(innerHTML: string): Promise<void> {
     return new Promise((resolve): void => {
-      const resolvePromise = (): void => resolve();
+      new Tweezer({
+        start: 100,
+        end: 0,
+        duration: 500
+      })
+        .on("tick", value => {
+          GameHtmlElement.headerCenter.style.opacity = (value / 100).toString();
+        })
+        .on("done", () => {
+          GameHtmlElement.headerCenter.innerHTML = innerHTML;
 
-      const updateInnerHTML = (): void => {
-        GameHtmlElement.headerCenter.innerHTML = innerHTML;
-        GameHtmlElement.headerCenter.addEventListener(
-          "transitionend",
-          resolvePromise,
-          {
-            once: true
-          }
-        );
-        GameHtmlElement.headerCenter.classList.remove("being-updated");
-      };
-
-      GameHtmlElement.headerCenter.addEventListener(
-        "transitionend",
-        updateInnerHTML,
-        {
-          once: true
-        }
-      );
-      GameHtmlElement.headerCenter.classList.add("being-updated");
+          new Tweezer({
+            start: 0,
+            end: 100,
+            duration: 500
+          })
+            .on("tick", value => {
+              GameHtmlElement.headerCenter.style.opacity = (
+                value / 100
+              ).toString();
+            })
+            .on("done", resolve)
+            .begin();
+        })
+        .begin();
     });
   }
 
@@ -59,7 +62,7 @@ export class GameTopBar {
     GameSignal.audioMuteChanged.emit(classList.contains("off"));
   }
 
-  public displayNotification(innerHtml: string): void {
+  public static displayNotification(innerHtml: string): void {
     this.changeInnerHTML(`<em>${innerHtml}</em>`).then(() => {
       this.changeInnerHTML(gameName).then();
     });
