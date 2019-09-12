@@ -45,7 +45,7 @@ export class Game {
     const channelData = buffer.getChannelData(0);
     const t: (i, n) => number = (i, n) => (n - i) / n;
     const gainNode = audioContext.createGain();
-    gainNode.gain.value = 0.3;
+    gainNode.gain.value = 0.1;
     gainNode.connect(audioContext.destination);
 
     const clickSound: (i) => null | number = function(i) {
