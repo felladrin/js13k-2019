@@ -7,7 +7,7 @@ export class GameCountDownTimer {
   private static readonly ONE_SECOND = 1000;
 
   public static initialize(): void {
-    GameSignal.answeredCorrectly.add(() => this.addBonusTime(5));
+    GameSignal.answeredCorrectly.add(() => this.addBonusTime(3));
   }
 
   public static addBonusTime(bonus: number): void {
