@@ -213,7 +213,7 @@ export class GamePlayScene {
 
     this.expectedAnswer = result.toString();
     this.setSentence(`${numberOne} ${symbol} ${numberTwo}`);
-    this.setQuestion("What is the result of this equation?");
+    this.setQuestion("What is the result?");
     this.setAnswers(answers);
   }
 

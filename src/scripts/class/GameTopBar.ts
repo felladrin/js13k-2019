@@ -53,13 +53,17 @@ export class GameTopBar {
     GameHtmlElement.headerRight.innerHTML = GameTopBar.clockIcon;
   }
 
+  public static isAudioDisabled(): boolean {
+    return GameHtmlElement.speaker.classList.contains("off");
+  }
+
   static toggleSound(): void {
     const classList = GameHtmlElement.speaker.classList;
 
     classList.toggle("on");
     classList.toggle("off");
 
-    GameSignal.audioMuteChanged.emit(classList.contains("off"));
+    GameSignal.audioMuteChanged.emit(this.isAudioDisabled());
   }
 
   public static displayNotification(innerHtml: string): void {

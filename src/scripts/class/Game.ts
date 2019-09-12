@@ -40,13 +40,43 @@ export class Game {
   }
 
   private static listenToButtonsHoversAndClicks(): void {
+    const audioContext = new AudioContext();
+    const buffer = audioContext.createBuffer(1, 96e3, 48e3);
+    const channelData = buffer.getChannelData(0);
+    const t: (i, n) => number = (i, n) => (n - i) / n;
+    const gainNode = audioContext.createGain();
+    gainNode.gain.value = 0.3;
+    gainNode.connect(audioContext.destination);
+
+    const clickSound: (i) => null | number = function(i) {
+      const n = 4e4;
+      if (i > n) return null;
+      return Math.sin(i / 8000 - Math.sin(i / 60) * Math.sin(i / 61)) * t(i, n);
+    };
+
+    const hoverSound: (i) => null | number = function(i) {
+      const n = 4e4;
+      if (i > n) return null;
+      return Math.sin(i / 6000 - Math.sin(i / 90) * Math.sin(i / 91)) * t(i, n);
+    };
+
     Array.from(GameHtmlElement.allButtons).forEach(button => {
       button.addEventListener("click", () => {
-        GameSignal.buttonPressed.emit();
+        if (GameTopBar.isAudioDisabled()) return;
+        for (let i = 96e3; i--; ) channelData[i] = clickSound(i);
+        const source = audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.connect(gainNode);
+        source.start();
       });
 
       button.addEventListener("mouseenter", () => {
-        GameSignal.buttonHovered.emit();
+        if (GameTopBar.isAudioDisabled()) return;
+        for (let i = 96e3; i--; ) channelData[i] = hoverSound(i);
+        const s = audioContext.createBufferSource();
+        s.buffer = buffer;
+        s.connect(gainNode);
+        s.start();
       });
     });
   }

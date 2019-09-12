@@ -222,8 +222,6 @@ body {
 a,
 button,
 .button,
-.menu-option:hover,
-.answer:hover,
 .speaker {
   cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAolBMVEUAAABAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB77zEsqgBu7RFf3QNU2QBGuwAopgAfngCH9UeF+zh/9DNs6g9k4QZf3gQ7sQCK/j6H/DxKwgAinwCV/1Z49hpQvhRp5wto5wti5QIipACK+k2R/0By8BRZ3ABRyAA/tQBDtAAbnwC9d09BAAAAFHRSTlMABTMCFn0QHgqbgGZbLiCOjHRDHCnm7AYAAACqSURBVDjL7dLJEoIwDIBhFltkdaOtUBWUHcHd938149k2d2f4r/kOmUmMB6WmbSBVVThDRXV9WqhIiv0JFUl5QAWAGBdJEeMCAIjypRVds4MuTacT47D9dh/eGsG4OEIiz0a1ACDyPuP81jIQvyDNRH6WUtZ1ynxHCWDuLjxCyCpQAt5L11tbUBhRBWBt7RJrQ+eQqVwyXRL0WFHg4+emjoM/jAnZxtQ/9AFcVA7F82ZJgQAAAABJRU5ErkJggg=="),
     auto;
@@ -334,6 +332,7 @@ div[data-scene="Menu"] {
         height: 120px;
         left: 10px;
         top: 10px;
+        border-radius: 0.2em;
         border: 2px solid black;
         line-height: 116px;
         font-size: 30px;
@@ -391,6 +390,7 @@ div[data-scene="GamePlay"] {
   grid-template-rows: repeat(6, 1fr);
   align-items: center;
   text-align: center;
+  margin: 0 10px;
 }
 
 .answer {
@@ -432,4 +432,19 @@ div[data-scene="GamePlay"] {
   font-size: 25px;
   transform: rotateY(180deg);
   text-transform: uppercase;
+  border-radius: 0.2em;
+  border: 2px solid black;
+  line-height: 40px;
+  font-weight: bold;
+  color: white;
+  background: rgba(82, 156, 79, 0.9);
+}
+
+.question {
+  font-size: 20px;
+  border-radius: 0.2em;
+  border: 2px solid black;
+  line-height: 40px;
+  color: white;
+  background: rgba(79, 156, 150, 0.9);
 }
