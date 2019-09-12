@@ -25,6 +25,7 @@ export class Game {
     this.listenToSceneChanges();
     this.listenToBackToMenuClicks();
     this.listenToButtonsHoversAndClicks();
+    this.listenToCountDownTimerOver();
   }
 
   private static listenToBackToMenuClicks(): void {
@@ -73,6 +74,12 @@ export class Game {
           GameTopBar.displayNotification("Oh no!!! =(");
           break;
       }
+    });
+  }
+
+  private static listenToCountDownTimerOver(): void {
+    GameSignal.gamePlayCountDownTimeOver.add(() => {
+      GameSceneManager.displayScene(Scene.GameOver);
     });
   }
 
