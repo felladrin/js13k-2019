@@ -204,6 +204,7 @@ $color-blue: #0d74b6;
 
 * {
   box-sizing: border-box;
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -372,7 +373,6 @@ div[data-scene="Menu"] {
   .previous,
   .next {
     display: inline-block;
-    border: 0;
     padding: 6px 17px;
     margin: 0 10px;
     background-color: #ffffff5c;
