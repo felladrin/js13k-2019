@@ -391,60 +391,80 @@ div[data-scene="GamePlay"] {
   align-items: center;
   text-align: center;
   margin: 0 10px;
-}
 
-.answer {
-  display: inline-block;
-  box-sizing: content-box;
-  margin: 0.5em;
-  padding: 0 1.5em;
-  border: 1px solid rgba(211, 211, 211, 1);
-  border-radius: 0.2em;
-  font: normal normal bold 1em/2em Arial, Helvetica, sans-serif;
-  color: rgba(114, 114, 114, 1);
-  text-overflow: clip;
-  white-space: nowrap;
-  background: rgba(234, 234, 234, 1);
-  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8), 0 1px 0 0 rgba(0, 0, 0, 0.3);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-  transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
-
-  &:hover {
-    border: 1px solid rgba(178, 178, 178, 1);
-    color: rgba(76, 76, 76, 1);
-    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8) inset,
+  .answer {
+    display: inline-block;
+    box-sizing: content-box;
+    margin: 0.5em;
+    padding: 0 1.5em;
+    border: 1px solid rgba(8, 19, 19, 0.8);
+    border-radius: 0.2em;
+    font: normal normal bold 1em/2em Arial, Helvetica, sans-serif;
+    color: white;
+    text-overflow: clip;
+    white-space: nowrap;
+    background: rgba(103, 192, 185, 0.9);
+    box-shadow: 0 0 1px 1px rgba(50, 126, 129, 0.8),
       0 1px 0 0 rgba(0, 0, 0, 0.3);
+    transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1) 10ms;
+
+    &:hover {
+      border: 2px solid rgba(11, 10, 22, 0.9);
+      box-shadow: 0 0 1px 1px rgba(10, 11, 14, 0.8) inset,
+        0 1px 0 0 rgba(0, 0, 0, 0.3);
+    }
+
+    &:active {
+      position: relative;
+      top: 1px;
+      border: 2px solid rgb(3, 7, 7);
+      color: rgb(233, 233, 233);
+      background: rgb(82, 161, 154);
+      box-shadow: 0 0 1px 1px rgba(56, 56, 56, 0.8) inset,
+        0 1px 0 0 rgba(0, 0, 0, 0.3) inset;
+      transition: none;
+    }
   }
 
-  &:active {
-    position: relative;
-    top: 1px;
-    border: 1px solid rgba(211, 211, 211, 1);
-    color: rgba(114, 114, 114, 1);
-    background: rgba(247, 247, 247, 1);
-    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8) inset,
-      0 1px 0 0 rgba(0, 0, 0, 0.3) inset;
-    transition: none;
+  .sentence {
+    font-size: 25px;
+    transform: rotateY(180deg);
+    text-transform: uppercase;
+    border-radius: 0.2em;
+    border: 2px solid black;
+    line-height: 40px;
+    font-weight: bold;
+    color: white;
+    background: rgba(82, 156, 79, 0.9);
   }
-}
 
-.sentence {
-  font-size: 25px;
-  transform: rotateY(180deg);
-  text-transform: uppercase;
-  border-radius: 0.2em;
-  border: 2px solid black;
-  line-height: 40px;
-  font-weight: bold;
-  color: white;
-  background: rgba(82, 156, 79, 0.9);
-}
+  .question {
+    font-size: 20px;
+    border-radius: 0.2em;
+    border: 2px solid black;
+    line-height: 40px;
+    color: white;
+    background: rgba(167, 83, 113, 0.8);
+  }
 
-.question {
-  font-size: 20px;
-  border-radius: 0.2em;
-  border: 2px solid black;
-  line-height: 40px;
-  color: white;
-  background: rgba(79, 156, 150, 0.9);
+  .status {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+
+    > div {
+      padding: 5px;
+      border-radius: 0.2em;
+      border: 2px solid black;
+      color: white;
+      background: rgba(113, 65, 173, 0.75);
+      margin: 0 10px;
+    }
+  }
+
+  .current-streak,
+  .longest-streak {
+    font-size: larger;
+    font-weight: bolder;
+  }
 }
