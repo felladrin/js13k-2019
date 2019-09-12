@@ -28,16 +28,16 @@ export class Signal<T> {
     return this;
   }
 
-  public once(slot: Function): Signal<T> {
-    typeof slot === "function" && this.onces.push(slot);
-    return this;
-  }
-
-  public remove(slot: Function): Signal<T> {
-    this.slots = this.slots.filter(item => item !== slot);
-    this.onces = this.onces.filter(item => item !== slot);
-    return this;
-  }
+  // public once(slot: Function): Signal<T> {
+  //   typeof slot === "function" && this.onces.push(slot);
+  //   return this;
+  // }
+  //
+  // public remove(slot: Function): Signal<T> {
+  //   this.slots = this.slots.filter(item => item !== slot);
+  //   this.onces = this.onces.filter(item => item !== slot);
+  //   return this;
+  // }
 
   public emit(payload: T): void {
     this.notify(this.slots, payload);
