@@ -5,6 +5,7 @@ import { GameHtmlElement } from "./GameHtmlElement";
 import { ArithmeticOperation } from "../enum/ArithmeticOperation";
 import { answersPerQuestion } from "../const/answersPerQuestion";
 import { GameSignal } from "./GameSignal";
+import { GameStreakManager } from "./GameStreakManager";
 
 export class GamePlayScene {
   private static expectedAnswer: string;
@@ -47,6 +48,18 @@ export class GamePlayScene {
   }
 
   public static preparePhase(): void {
+    if (GameStreakManager.currentStreak < 10) {
+      this.prepareWhatIsTheWord();
+      return;
+    } else if (GameStreakManager.currentStreak < 20) {
+      if (Random.pickIntInclusive(0, 1)) {
+        this.prepareWhatIsTheWord();
+      } else {
+        this.prepareFindTheMissingLetter();
+      }
+      return;
+    }
+
     switch (Random.pickElementFromEnum(QuestionType)) {
       case QuestionType.WhatIsTheWord:
         this.prepareWhatIsTheWord();
