@@ -9,6 +9,7 @@ import { Scene } from "../enum/Scene";
 import { GamePlayScene } from "./GamePlayScene";
 import { GameHtmlElement } from "./GameHtmlElement";
 import { GameStreakManager } from "./GameStreakManager";
+import { Random } from "./Random";
 
 export class Game {
   public static initialize(): void {
@@ -20,6 +21,8 @@ export class Game {
     GameCountDownTimer.initialize();
 
     GameTopBar.displayNotification("<em>Welcome!</em>");
+
+    GameHtmlElement.setBackgroundId(Random.pickIntInclusive(1, 4));
 
     this.startBackgroundMusicOnFirstInteraction();
     this.listenToSceneChanges();
@@ -52,25 +55,20 @@ export class Game {
     GameSignal.sceneDisplayed.add((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
-          GameHtmlElement.setBackgroundId(1);
           GameTopBar.displayNotification("Ready to start!?");
           break;
         case Scene.Tutorial:
-          GameHtmlElement.setBackgroundId(4);
           GameTopBar.displayNotification("Ah, finally someone here!");
           break;
         case Scene.About:
-          GameHtmlElement.setBackgroundId(3);
           GameTopBar.displayNotification("Curious, huh!?");
           break;
         case Scene.GamePlay:
-          GameHtmlElement.setBackgroundId(2);
           GameTopBar.displayNotification("Good Luck!");
           GamePlayScene.preparePhase();
           GameCountDownTimer.start(10);
           break;
         case Scene.GameOver:
-          GameHtmlElement.setBackgroundId(1);
           GameTopBar.displayNotification("Oh no!!! =(");
           break;
       }
