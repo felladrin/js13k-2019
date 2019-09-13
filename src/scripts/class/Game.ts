@@ -19,13 +19,13 @@ export class Game {
     GameSceneManager.initialize();
     GamePlayScene.initialize();
     GameCountDownTimer.initialize();
-    GameTopBar.displayNotification("<em>Welcome!</em>");
-    GameHtmlElement.setBackgroundId(Random.pickIntInclusive(1, 4));
     this.listenToCountDownTimerOver();
     this.startBackgroundMusicOnFirstInteraction();
     this.listenToSceneChanges();
     this.listenToBackToMenuClicks();
     this.listenToButtonsHoversAndClicks();
+    this.listenToCorrectlyAnsweredQuestions();
+    this.setRandomBackground();
   }
 
   private static listenToBackToMenuClicks(): void {
@@ -82,7 +82,7 @@ export class Game {
     GameSignal.sceneDisplayed.add((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
-          GameTopBar.displayNotification("So, ready to start?");
+          GameTopBar.displayNotification("Welcome! Ready to start?");
           break;
         case Scene.Tutorial:
           GameTopBar.displayNotification("Ah, finally someone here!");
@@ -117,5 +117,29 @@ export class Game {
 
     document.addEventListener("mousemove", startSong);
     document.addEventListener("touchstart", startSong);
+  }
+
+  private static setRandomBackground(): void {
+    GameHtmlElement.setBackgroundId(Random.pickIntInclusive(1, 4));
+  }
+
+  private static listenToCorrectlyAnsweredQuestions(): void {
+    GameSignal.answeredCorrectly.add(() => {
+      GameTopBar.displayNotification(
+        Random.pickElementFromArray([
+          "Awesome!",
+          "Perfect!",
+          "Amazing!",
+          "Outstanding!",
+          "Splendid!",
+          "Marvelous!",
+          "Superb!",
+          "Fabulous!",
+          "Fantastic!",
+          "Phenomenal!",
+          "Wonderful!"
+        ])
+      );
+    });
   }
 }
