@@ -92,6 +92,7 @@ export class Game {
           break;
         case Scene.GamePlay:
           GameTopBar.displayNotification("Good Luck!");
+          GameStreakManager.currentStreak = 0;
           GamePlayScene.preparePhase();
           GameCountDownTimer.start(10);
           break;

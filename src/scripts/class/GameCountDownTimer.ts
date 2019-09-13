@@ -19,6 +19,11 @@ export class GameCountDownTimer {
   public static deductTime(deduction: number): void {
     this.count -= deduction;
     GameSignal.gamePlayCountDownUpdated.emit(this.count);
+
+    if (this.count <= 0) {
+      this.stop();
+      GameSignal.gamePlayCountDownTimeOver.emit();
+    }
   }
 
   public static start(initialCount: number): void {

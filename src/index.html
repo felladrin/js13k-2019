@@ -44,7 +44,7 @@
           Read the reverse-text on the board and answer the question.
         </div>
         <div class="colored">
-          Keep an eye on the clock, the game is over when timer reaches 0.
+          Keep an eye on the clock, the game is over when timer reaches zero.
         </div>
         <div class="colored">
           Answering a question correctly gives you 5 seconds more.
@@ -58,17 +58,24 @@
         <div class="back-to-menu button">&#8249; Back To Menu</div>
       </div>
       <div data-scene="About" class="scene inactive">
-        <p>
+        <div class="colored">
           Game developed for
-          <a href="https://js13kgames.com" target="_blank">js13kGames 2019</a>
-        </p>
-        <p>Author: Felladrin</p>
-        <p>
-          Source Code:
-          <a href="https://github.com/felladrin/js13k-2019" target="_blank">
-            github.com/felladrin/js13k-2019
-          </a>
-        </p>
+          <a href="https://js13kgames.com" target="_blank">Js13kGames 2019</a>
+        </div>
+        <div class="colored">
+          Author: Felladrin &middot;
+          <a href="https://github.com/felladrin" target="_blank">GitHub</a>
+          &middot;
+          <a href="https://www.linkedin.com/in/victornogueira" target="_blank"
+            >LinkedIn</a
+          >
+        </div>
+        <div class="colored">
+          Source code available
+          <a href="https://github.com/felladrin/js13k-2019" target="_blank"
+            >here</a
+          >
+        </div>
         <div class="back-to-menu button">&#8249; Back To Menu</div>
       </div>
       <div data-scene="GamePlay" class="scene inactive">
@@ -90,7 +97,18 @@
         </div>
       </div>
       <div data-scene="GameOver" class="scene inactive">
-        <div class="back-to-menu button">Go To Menu &#8250;</div>
+        <div class="colored"><strong>Time's Over!</strong></div>
+        <div class="colored">That was great! Check the stats!</div>
+        <div class="colored">
+          Your streak in this round: <span class="current-streak">0</span>
+        </div>
+        <div class="colored">
+          Your longest streak: <span class="longest-streak">0</span>
+        </div>
+        <div class="colored">
+          Challenge your family and friends to see if they can do better!
+        </div>
+        <div class="back-to-menu button">&#8249; Back To Menu</div>
       </div>
     </div>
     <script src="scripts/index.ts"></script>

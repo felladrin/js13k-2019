@@ -9,7 +9,11 @@ export class GameStreakManager {
 
   static set currentStreak(value: number) {
     this._currentStreak = value;
-    GameHtmlElement.currentStreakElement.innerText = this._currentStreak.toString();
+    Array.from(GameHtmlElement.currentStreakElements).forEach(
+      currentStreakElement => {
+        currentStreakElement.innerText = this._currentStreak.toString();
+      }
+    );
     this.longestStreak = Math.max(this.currentStreak, this.longestStreak);
   }
 
@@ -20,7 +24,11 @@ export class GameStreakManager {
   static set longestStreak(value: number) {
     if (value == this._longestStreak) return;
     this._longestStreak = value;
-    GameHtmlElement.longestStreakElement.innerText = this._longestStreak.toString();
+    Array.from(GameHtmlElement.longestStreakElements).forEach(
+      longestStreakElement => {
+        longestStreakElement.innerText = this._longestStreak.toString();
+      }
+    );
     GameStorage.save({ longestStreak: this._longestStreak });
   }
 
@@ -33,7 +41,5 @@ export class GameStreakManager {
     if (gameData) this.longestStreak = gameData.longestStreak;
 
     GameSignal.answeredCorrectly.add(() => this.currentStreak++);
-
-    GameSignal.gamePlayCountDownTimeOver.add(() => (this.currentStreak = 0));
   }
 }
