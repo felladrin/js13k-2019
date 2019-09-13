@@ -17,14 +17,16 @@ export class GameTopBar {
 
   public static changeInnerHTML(innerHTML: string): Promise<void> {
     return new Promise((resolve): void => {
+      const updateOpacity = (value: number): void => {
+        GameHtmlElement.headerCenter.style.opacity = (value / 100).toString();
+      };
+
       new Tweezer({
         start: 100,
         end: 0,
         duration: 500
       })
-        .on("tick", value => {
-          GameHtmlElement.headerCenter.style.opacity = (value / 100).toString();
-        })
+        .on("tick", updateOpacity)
         .on("done", () => {
           GameHtmlElement.headerCenter.innerHTML = innerHTML;
 
@@ -33,11 +35,7 @@ export class GameTopBar {
             end: 100,
             duration: 500
           })
-            .on("tick", value => {
-              GameHtmlElement.headerCenter.style.opacity = (
-                value / 100
-              ).toString();
-            })
+            .on("tick", updateOpacity)
             .on("done", resolve)
             .begin();
         })
@@ -47,6 +45,29 @@ export class GameTopBar {
 
   static displayCountDown(count): void {
     GameHtmlElement.headerRight.innerHTML = count;
+
+    if (count > 5) return;
+
+    const callAttention = (value: number): void => {
+      GameHtmlElement.headerRight.style.transform = `scale(${value / 100})`;
+    };
+
+    new Tweezer({
+      start: 100,
+      end: 200,
+      duration: 250
+    })
+      .on("tick", callAttention)
+      .on("done", () => {
+        new Tweezer({
+          start: 200,
+          end: 100,
+          duration: 250
+        })
+          .on("tick", callAttention)
+          .begin();
+      })
+      .begin();
   }
 
   static displayClockIcon(): void {

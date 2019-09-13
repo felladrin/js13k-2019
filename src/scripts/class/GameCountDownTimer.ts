@@ -7,11 +7,18 @@ export class GameCountDownTimer {
   private static readonly ONE_SECOND = 1000;
 
   public static initialize(): void {
-    GameSignal.answeredCorrectly.add(() => this.addBonusTime(3));
+    GameSignal.answeredCorrectly.add(() => this.addBonusTime(5));
+    GameSignal.answeredWrongly.add(() => this.deductTime(1));
   }
 
   public static addBonusTime(bonus: number): void {
     this.count += bonus;
+    GameSignal.gamePlayCountDownUpdated.emit(this.count);
+  }
+
+  public static deductTime(deduction: number): void {
+    this.count -= deduction;
+    GameSignal.gamePlayCountDownUpdated.emit(this.count);
   }
 
   public static start(initialCount: number): void {
@@ -31,7 +38,7 @@ export class GameCountDownTimer {
     this.count--;
     GameSignal.gamePlayCountDownUpdated.emit(this.count);
 
-    if (this.count == 0) {
+    if (this.count <= 0) {
       this.stop();
       GameSignal.gamePlayCountDownTimeOver.emit();
     }

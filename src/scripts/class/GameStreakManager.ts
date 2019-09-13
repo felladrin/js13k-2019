@@ -33,5 +33,7 @@ export class GameStreakManager {
     if (gameData) this.longestStreak = gameData.longestStreak;
 
     GameSignal.answeredCorrectly.add(() => this.currentStreak++);
+
+    GameSignal.gamePlayCountDownTimeOver.add(() => (this.currentStreak = 0));
   }
 }

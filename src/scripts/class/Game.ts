@@ -85,7 +85,7 @@ export class Game {
     GameSignal.sceneDisplayed.add((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
-          GameTopBar.displayNotification("Ready to start!?");
+          GameTopBar.displayNotification("Ready to start? =D");
           break;
         case Scene.Tutorial:
           GameTopBar.displayNotification("Ah, finally someone here!");

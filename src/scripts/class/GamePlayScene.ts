@@ -6,9 +6,12 @@ import { ArithmeticOperation } from "../enum/ArithmeticOperation";
 import { answersPerQuestion } from "../const/answersPerQuestion";
 import { GameSignal } from "./GameSignal";
 import { GameStreakManager } from "./GameStreakManager";
+import Tweezer from "tweezer.js";
+import { Scene } from "../enum/Scene";
 
 export class GamePlayScene {
   private static expectedAnswer: string;
+  private static buttonsBlocked = false;
 
   public static initialize(): void {
     this.listenToAnswersSelected();
@@ -17,6 +20,7 @@ export class GamePlayScene {
   private static listenToAnswersSelected(): void {
     Array.from(GameHtmlElement.answerButtons).forEach(answerButton => {
       answerButton.addEventListener("click", () => {
+        if (this.buttonsBlocked) return;
         this.processAnswer(answerButton.innerText);
       });
     });
@@ -29,7 +33,35 @@ export class GamePlayScene {
       GameSignal.answeredWrongly.emit();
     }
 
-    this.preparePhase();
+    const updateOpacity = (value: number): void => {
+      GameHtmlElement.getScene(Scene.GamePlay).style.opacity = (
+        value / 100
+      ).toString();
+    };
+
+    this.buttonsBlocked = true;
+
+    new Tweezer({
+      start: 100,
+      end: 0,
+      duration: 500
+    })
+      .on("tick", updateOpacity)
+      .on("done", () => {
+        this.preparePhase();
+
+        new Tweezer({
+          start: 0,
+          end: 100,
+          duration: 500
+        })
+          .on("tick", updateOpacity)
+          .on("done", () => {
+            this.buttonsBlocked = false;
+          })
+          .begin();
+      })
+      .begin();
   }
 
   public static setSentence(text: string): void {
