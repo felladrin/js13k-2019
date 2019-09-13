@@ -308,6 +308,30 @@ button,
   }
 }
 
+div[data-scene="Tutorial"] {
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+
+  div.colored {
+    border-radius: 0.2em;
+    border: 2px solid black;
+    line-height: 16px;
+    color: white;
+    background: rgba(33, 107, 175, 0.8);
+    padding: 10px;
+    text-align: center;
+  }
+
+  div.colored:nth-child(2n + 0) {
+    background: rgba(228, 152, 0, 0.8);
+  }
+
+  div.colored:nth-child(3n + 0) {
+    background: rgba(82, 156, 79, 0.8);
+  }
+}
+
 div[data-scene="Menu"] {
   display: grid;
   grid-template-columns: auto 1fr auto;
