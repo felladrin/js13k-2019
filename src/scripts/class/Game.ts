@@ -19,16 +19,13 @@ export class Game {
     GameSceneManager.initialize();
     GamePlayScene.initialize();
     GameCountDownTimer.initialize();
-
     GameTopBar.displayNotification("<em>Welcome!</em>");
-
     GameHtmlElement.setBackgroundId(Random.pickIntInclusive(1, 4));
-
+    this.listenToCountDownTimerOver();
     this.startBackgroundMusicOnFirstInteraction();
     this.listenToSceneChanges();
     this.listenToBackToMenuClicks();
     this.listenToButtonsHoversAndClicks();
-    this.listenToCountDownTimerOver();
   }
 
   private static listenToBackToMenuClicks(): void {
@@ -85,7 +82,7 @@ export class Game {
     GameSignal.sceneDisplayed.add((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
-          GameTopBar.displayNotification("Ready to start? =D");
+          GameTopBar.displayNotification("So, ready to start?");
           break;
         case Scene.Tutorial:
           GameTopBar.displayNotification("Ah, finally someone here!");
@@ -99,7 +96,7 @@ export class Game {
           GameCountDownTimer.start(10);
           break;
         case Scene.GameOver:
-          GameTopBar.displayNotification("Oh no!!! =(");
+          GameTopBar.displayNotification("Oh no! Time's over!");
           break;
       }
     });
