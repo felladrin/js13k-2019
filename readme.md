@@ -24,6 +24,8 @@ Time spent on this game, according to [WakaTime](https://wakatime.com/), was 52 
 - [Rimraf](https://github.com/isaacs/rimraf) for cross-platform deep folder deletion via CLI.
 - [Sass](https://github.com/sass/sass) for making CSS fun again.
 - [Tweezer.js](https://github.com/jaxgeller/tweezer.js) for allowing tweening in a so simple way.
+- [TinyPNG](https://tinypng.com/) for resizing PNGs before encoding them to base64.
+- [ImgUrify](https://github.com/asbjornenge/imgurify) for transforming images into base64 via CLI.
 - [Typescript](https://www.typescriptlang.org/) for adding superpowers to Javascript.
 - [Node.js](https://nodejs.org/) for being such an amazing platform for development.
 - [WebStorm](https://www.jetbrains.com/webstorm/) for making it so easy to refactor Typescript code.
