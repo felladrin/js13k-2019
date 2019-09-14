@@ -4,8 +4,6 @@ Game created for the 2019 [Js13kGames](https://js13kgames.com/) competition.
 
 You can play it here: <https://js13kgames.com/entries/back-read>
 
-Time spent on this game, according to [WakaTime](https://wakatime.com/), was 52 hours.
-
 ## Credits
 
 - [SoundBox](https://sb.bitsnbites.eu/) for the background music in few kilobytes.
@@ -17,7 +15,7 @@ Time spent on this game, according to [WakaTime](https://wakatime.com/), was 52 
 - [HTML-Inline](https://github.com/substack/html-inline) for making it so easy to make single-file games.
 - [Husky](https://github.com/typicode/husky) for the automation possible by hooking to git events.
 - [Mkdirp](https://github.com/substack/node-mkdirp) for cross-platform folder creation via CLI.
-- [Npm-Run-All](https://github.com/mysticatea/npm-run-all) for allowing parallel or sequential run of npm scripts.
+- [Npm-Run-All](https://github.com/mysticatea/npm-run-all) for allowing parallel and sequential run of npm scripts.
 - [Parcel](https://github.com/parcel-bundler/parcel) for being a dead-simple web app bundler.
 - [Prettier](https://prettier.io) for making the code prettier.
 - [Pretty-Quick](https://github.com/azz/pretty-quick) for allowing running Prettier only on staged files.
@@ -29,10 +27,11 @@ Time spent on this game, according to [WakaTime](https://wakatime.com/), was 52 
 - [Typescript](https://www.typescriptlang.org/) for adding superpowers to Javascript.
 - [Node.js](https://nodejs.org/) for being such an amazing platform for development.
 - [WebStorm](https://www.jetbrains.com/webstorm/) for making it so easy to refactor Typescript code.
+- [WakaTime](https://wakatime.com/) for keeping track of my 52 hours spent in this game.
 - [Git](https://git-scm.com/) for being so useful to keep track of our change of plans.
 - [Google](https://www.google.com/) for helping finding whatever we imagine.
 - [StackOverflow](https://stackoverflow.com/) for having answers for everything.
-- [Js13kGames](https://js13kgames.com/) for giving the opportunity for developers to discover wonderful libs and ways to achieve so much in so few kilobytes.
+- [Js13kGames](https://js13kgames.com/) for such an enjoyable experience.
 
 ## NPM Scripts
 
