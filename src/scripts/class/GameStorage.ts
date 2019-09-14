@@ -5,7 +5,25 @@ type GameData = {
 };
 
 export class GameStorage {
+  private static memoryStorage: GameData = { longestStreak: 0 };
+
+  public static isLocalStorageAvailable(): boolean {
+    try {
+      const tempItem = Math.random().toString(36);
+      localStorage.setItem(tempItem, tempItem);
+      localStorage.removeItem(tempItem);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   public static save(data: GameData): void {
+    if (!this.isLocalStorageAvailable()) {
+      this.memoryStorage = data;
+      return;
+    }
+
     const gameDataAsString = JSON.stringify(data);
     const cipher = this.getCipher(gameName);
     const cipheredGameData = cipher(gameDataAsString);
@@ -14,6 +32,10 @@ export class GameStorage {
   }
 
   public static load(): GameData {
+    if (!this.isLocalStorageAvailable()) {
+      return this.memoryStorage;
+    }
+
     const cipheredGameData = localStorage.getItem(gameName);
 
     if (!cipheredGameData) return null;
