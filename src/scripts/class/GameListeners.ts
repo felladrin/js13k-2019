@@ -2,7 +2,6 @@ import { GameHtmlElement } from "./GameHtmlElement";
 import { GameSceneManager } from "./GameSceneManager";
 import { Scene } from "../enum/Scene";
 import { GameTopBar } from "./GameTopBar";
-import { GameSignal } from "./GameSignal";
 import { GameStreakManager } from "./GameStreakManager";
 import { GamePlayScene } from "./GamePlayScene";
 import { GameCountDownTimer } from "./GameCountDownTimer";
@@ -71,7 +70,7 @@ export class GameListeners {
   }
 
   private static listenToSceneChanges(): void {
-    GameSignal.sceneDisplayed.add((scene: Scene) => {
+    GameSceneManager.onSceneDisplayed.add((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
           GameTopBar.displayNotification("Welcome! Ready to start?");
@@ -96,7 +95,7 @@ export class GameListeners {
   }
 
   private static listenToCountDownTimerOver(): void {
-    GameSignal.gamePlayCountDownTimeOver.add(() => {
+    GameCountDownTimer.onGamePlayCountDownTimeOver.add(() => {
       GameSceneManager.displayScene(Scene.GameOver);
     });
   }
@@ -119,7 +118,7 @@ export class GameListeners {
   }
 
   private static listenToCorrectlyAnsweredQuestions(): void {
-    GameSignal.answeredCorrectly.add(() => {
+    GamePlayScene.onAnsweredCorrectly.add(() => {
       GameTopBar.displayNotification(
         Random.pickElementFromArray([
           "Awesome!",

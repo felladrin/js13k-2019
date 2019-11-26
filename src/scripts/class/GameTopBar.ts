@@ -1,18 +1,19 @@
 import { gameName } from "../const/gameName";
-import { GameSignal } from "./GameSignal";
 import { GameHtmlElement } from "./GameHtmlElement";
 import Tweezer from "tweezer.js";
+import { Signal } from "./Signal";
+import { GameCountDownTimer } from "./GameCountDownTimer";
 
 export class GameTopBar {
   static clockIcon = GameHtmlElement.headerRight.innerHTML;
+  public static onAudioMuteChanged: Signal<boolean> = new Signal();
 
   public static initialize(): void {
     GameHtmlElement.speaker.addEventListener("click", () => this.toggleSound());
-
-    GameSignal.gamePlayCountDownStarted.add(this.displayCountDown);
-    GameSignal.gamePlayCountDownUpdated.add(this.displayCountDown);
-    GameSignal.gamePlayCountDownStopped.add(this.displayClockIcon);
-    GameSignal.gamePlayCountDownTimeOver.add(this.displayClockIcon);
+    GameCountDownTimer.onGamePlayCountDownStarted.add(this.displayCountDown);
+    GameCountDownTimer.onGamePlayCountDownUpdated.add(this.displayCountDown);
+    GameCountDownTimer.onGamePlayCountDownStopped.add(this.displayClockIcon);
+    GameCountDownTimer.onGamePlayCountDownTimeOver.add(this.displayClockIcon);
   }
 
   public static changeInnerHTML(innerHTML: string): Promise<void> {
@@ -84,7 +85,7 @@ export class GameTopBar {
     classList.toggle("on");
     classList.toggle("off");
 
-    GameSignal.audioMuteChanged.emit(this.isAudioDisabled());
+    this.onAudioMuteChanged.emit(this.isAudioDisabled());
   }
 
   public static displayNotification(innerHtml: string): void {

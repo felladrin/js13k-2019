@@ -1,5 +1,5 @@
 import { SoundBoxPlayer } from "./SoundBoxPlayer";
-import { GameSignal } from "./GameSignal";
+import { GameTopBar } from "./GameTopBar";
 
 export class GameAudio {
   public static create(
@@ -25,7 +25,7 @@ export class GameAudio {
       }
     }, 300);
 
-    GameSignal.audioMuteChanged.add((muted: boolean) => {
+    GameTopBar.onAudioMuteChanged.add((muted: boolean) => {
       audio.muted = muted;
     });
 

@@ -1,10 +1,11 @@
 import { Scene } from "../enum/Scene";
-import { GameSignal } from "./GameSignal";
 import { GameHtmlElement } from "./GameHtmlElement";
 import Tweezer from "tweezer.js";
+import { Signal } from "./Signal";
 
 export class GameSceneManager {
   public static currentScene: Scene = Scene.Menu;
+  public static onSceneDisplayed: Signal<Scene> = new Signal();
 
   static initialize(): void {
     GameSceneManager.displayScene(this.currentScene);
@@ -38,7 +39,7 @@ export class GameSceneManager {
         })
           .on("tick", updateOpacity)
           .on("done", () => {
-            GameSignal.sceneDisplayed.emit(scene);
+            this.onSceneDisplayed.emit(scene);
           })
           .begin();
       })

@@ -1,6 +1,6 @@
 import { GameStorage } from "./GameStorage";
 import { GameHtmlElement } from "./GameHtmlElement";
-import { GameSignal } from "./GameSignal";
+import { GamePlayScene } from "./GamePlayScene";
 
 export class GameStreakManager {
   static get currentStreak(): number {
@@ -40,6 +40,6 @@ export class GameStreakManager {
 
     if (gameData) this.longestStreak = gameData.longestStreak;
 
-    GameSignal.answeredCorrectly.add(() => this.currentStreak++);
+    GamePlayScene.onAnsweredCorrectly.add(() => this.currentStreak++);
   }
 }

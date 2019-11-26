@@ -4,12 +4,15 @@ import { Random } from "./Random";
 import { GameHtmlElement } from "./GameHtmlElement";
 import { ArithmeticOperation } from "../enum/ArithmeticOperation";
 import { answersPerQuestion } from "../const/answersPerQuestion";
-import { GameSignal } from "./GameSignal";
 import { GameStreakManager } from "./GameStreakManager";
 import Tweezer from "tweezer.js";
 import { Scene } from "../enum/Scene";
+import { Signal } from "./Signal";
 
 export class GamePlayScene {
+  public static onAnsweredCorrectly: Signal<void> = new Signal();
+  public static answeredWrongly: Signal<void> = new Signal();
+
   private static expectedAnswer: string;
   private static buttonsBlocked = false;
 
@@ -28,9 +31,9 @@ export class GamePlayScene {
 
   private static processAnswer(answer: string): void {
     if (answer == this.expectedAnswer) {
-      GameSignal.answeredCorrectly.emit();
+      this.onAnsweredCorrectly.emit();
     } else {
-      GameSignal.answeredWrongly.emit();
+      this.answeredWrongly.emit();
     }
 
     const updateOpacity = (value: number): void => {
