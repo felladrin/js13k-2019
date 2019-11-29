@@ -29,6 +29,8 @@ export class GameListeners {
   }
 
   private static listenToButtonsHoversAndClicks(): void {
+    if (!window.AudioContext) return;
+
     const audioContext = new AudioContext();
     const buffer = audioContext.createBuffer(1, 96e3, 48e3);
     const channelData = buffer.getChannelData(0);
