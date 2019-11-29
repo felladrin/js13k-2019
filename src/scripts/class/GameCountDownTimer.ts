@@ -23,9 +23,10 @@ export class GameCountDownTimer {
 
   public static deductTime(deduction: number): void {
     this.count -= deduction;
-    this.onGamePlayCountDownUpdated.emit(this.count);
 
-    if (this.count <= 0) {
+    if (this.count > 0) {
+      this.onGamePlayCountDownUpdated.emit(this.count);
+    } else {
       this.stop();
       this.onGamePlayCountDownTimeOver.emit();
     }
@@ -34,7 +35,7 @@ export class GameCountDownTimer {
   public static start(initialCount: number): void {
     this.count = initialCount;
     this.intervalTimerId = setInterval(() => {
-      this.handleTimeout();
+      this.deductTime(1);
     }, GameCountDownTimer.ONE_SECOND);
     this.onGamePlayCountDownStarted.emit(this.count);
   }
@@ -42,15 +43,5 @@ export class GameCountDownTimer {
   public static stop(): void {
     clearInterval(this.intervalTimerId);
     this.onGamePlayCountDownStopped.emit(this.count);
-  }
-
-  private static handleTimeout(): void {
-    this.count--;
-    this.onGamePlayCountDownUpdated.emit(this.count);
-
-    if (this.count <= 0) {
-      this.stop();
-      this.onGamePlayCountDownTimeOver.emit();
-    }
   }
 }
