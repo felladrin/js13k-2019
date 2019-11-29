@@ -13,7 +13,7 @@ export class GameCountDownTimer {
 
   public static initialize(): void {
     GamePlayScene.onAnsweredCorrectly.add(() => this.addBonusTime(5));
-    GamePlayScene.answeredWrongly.add(() => this.deductTime(1));
+    GamePlayScene.onAnsweredWrongly.add(() => this.deductTime(1));
   }
 
   public static addBonusTime(bonus: number): void {

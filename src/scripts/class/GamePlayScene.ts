@@ -11,7 +11,7 @@ import { Signal } from "./Signal";
 
 export class GamePlayScene {
   public static onAnsweredCorrectly: Signal<void> = new Signal();
-  public static answeredWrongly: Signal<void> = new Signal();
+  public static onAnsweredWrongly: Signal<void> = new Signal();
 
   private static expectedAnswer: string;
   private static buttonsBlocked = false;
@@ -33,7 +33,7 @@ export class GamePlayScene {
     if (answer == this.expectedAnswer) {
       this.onAnsweredCorrectly.emit();
     } else {
-      this.answeredWrongly.emit();
+      this.onAnsweredWrongly.emit();
     }
 
     const updateOpacity = (value: number): void => {
