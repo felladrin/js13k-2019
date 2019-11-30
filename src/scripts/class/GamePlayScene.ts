@@ -26,6 +26,7 @@ export class GamePlayScene {
     Array.from(GameHtmlElement.answerButtons).forEach(answerButton => {
       answerButton.addEventListener("click", () => {
         if (this.buttonsBlocked) return;
+        this.blockButtons();
         this.processAnswer(answerButton.innerText);
       });
     });
@@ -38,35 +39,46 @@ export class GamePlayScene {
       this.onAnsweredWrongly.emit();
     }
 
-    const updateOpacity = (value: number): void => {
-      GameHtmlElement.getScene(Scene.GamePlay).style.opacity = (
-        value / 100
-      ).toString();
-    };
+    this.startFadeOutTween();
+  }
 
-    this.buttonsBlocked = true;
+  private static updateOpacityOnFadeTweenTick(value: number): void {
+    GameHtmlElement.getScene(Scene.GamePlay).style.opacity = (
+      value / 100
+    ).toString();
+  }
 
+  private static startFadeOutTween(): void {
     new Tweezer({
       start: 100,
       end: 0,
       duration: 500
     })
-      .on("tick", updateOpacity)
+      .on("tick", this.updateOpacityOnFadeTweenTick)
       .on("done", () => {
         this.preparePhase();
-
-        new Tweezer({
-          start: 0,
-          end: 100,
-          duration: 500
-        })
-          .on("tick", updateOpacity)
-          .on("done", () => {
-            this.buttonsBlocked = false;
-          })
-          .begin();
+        this.startFadeInTween();
       })
       .begin();
+  }
+
+  private static startFadeInTween(): void {
+    new Tweezer({
+      start: 0,
+      end: 100,
+      duration: 500
+    })
+      .on("tick", this.updateOpacityOnFadeTweenTick)
+      .on("done", () => this.unblockButtons())
+      .begin();
+  }
+
+  private static blockButtons(): void {
+    this.buttonsBlocked = true;
+  }
+
+  private static unblockButtons(): void {
+    this.buttonsBlocked = false;
   }
 
   public static setSentence(text: string): void {
