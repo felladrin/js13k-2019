@@ -8,6 +8,8 @@ import { GameStreakManager } from "./GameStreakManager";
 import Tweezer from "tweezer.js";
 import { Scene } from "../enum/Scene";
 import { Signal } from "./Signal";
+import { vowels } from "../const/vowels";
+import { consonants } from "../const/consonants";
 
 export class GamePlayScene {
   public static onAnsweredCorrectly: Signal<void> = new Signal();
@@ -126,35 +128,9 @@ export class GamePlayScene {
     const selectedWord = Random.pickElementFromArray(randomSet);
     const selectedCharIndex = Random.pickIndexFromLength(selectedWord.length);
     const selectedChar = selectedWord[selectedCharIndex];
-    const vowels = ["A", "E", "I", "O", "U"];
-    const consonants = [
-      "B",
-      "C",
-      "D",
-      "F",
-      "G",
-      "H",
-      "J",
-      "K",
-      "L",
-      "M",
-      "N",
-      "P",
-      "Q",
-      "R",
-      "S",
-      "T",
-      "V",
-      "W",
-      "X",
-      "Y",
-      "Z"
-    ];
-
+    const answers = [];
     const selectedCharIsAVowel =
       vowels.indexOf(selectedChar.toUpperCase()) >= 0;
-
-    const answers = [];
 
     if (selectedCharIsAVowel) {
       for (let i = 0; i < answersPerQuestion; i++) {
