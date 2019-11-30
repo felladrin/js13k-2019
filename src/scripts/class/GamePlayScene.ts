@@ -88,7 +88,9 @@ export class GamePlayScene {
     if (GameStreakManager.currentStreak < 10) {
       this.prepareWhatIsTheWord();
       return;
-    } else if (GameStreakManager.currentStreak < 20) {
+    }
+
+    if (GameStreakManager.currentStreak < 20) {
       if (Random.pickIntInclusive(0, 1)) {
         this.prepareWhatIsTheWord();
       } else {
@@ -132,41 +134,19 @@ export class GamePlayScene {
     const selectedCharIsAVowel =
       vowels.indexOf(selectedChar.toUpperCase()) >= 0;
 
-    if (selectedCharIsAVowel) {
-      for (let i = 0; i < answersPerQuestion; i++) {
-        const randomVowelIndex = Random.pickIndexFromLength(vowels.length);
+    for (let i = 0; i < answersPerQuestion; i++) {
+      const characters = selectedCharIsAVowel ? vowels : consonants;
+      const randomCharIndex = Random.pickIndexFromLength(characters.length);
+      const selectedChar = characters.splice(randomCharIndex, 1)[0];
+      const mutatedWord =
+        selectedWord.substr(0, selectedCharIndex) +
+        selectedChar +
+        selectedWord.substr(selectedCharIndex + 1);
 
-        const selectedVowel = vowels.splice(randomVowelIndex, 1)[0];
-
-        const mutatedWord =
-          selectedWord.substr(0, selectedCharIndex) +
-          selectedVowel +
-          selectedWord.substr(selectedCharIndex + 1);
-
-        if (this.wordExists(mutatedWord)) {
-          i--;
-        } else {
-          answers.push(selectedVowel);
-        }
-      }
-    } else {
-      for (let i = 0; i < answersPerQuestion; i++) {
-        const randomConsonantIndex = Random.pickIndexFromLength(
-          consonants.length
-        );
-
-        const selectedConsonant = consonants.splice(randomConsonantIndex, 1)[0];
-
-        const mutatedWord =
-          selectedWord.substr(0, selectedCharIndex) +
-          selectedConsonant +
-          selectedWord.substr(selectedCharIndex + 1);
-
-        if (this.wordExists(mutatedWord)) {
-          i--;
-        } else {
-          answers.push(selectedConsonant);
-        }
+      if (this.wordExists(mutatedWord)) {
+        i--;
+      } else {
+        answers.push(selectedChar);
       }
     }
 
