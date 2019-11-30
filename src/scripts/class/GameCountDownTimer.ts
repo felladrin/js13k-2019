@@ -10,6 +10,7 @@ export class GameCountDownTimer {
   private static count = 0;
   private static intervalTimerId = 0;
   private static readonly ONE_SECOND = 1000;
+  private static isRunning = false;
 
   public static initialize(): void {
     GamePlayScene.onAnsweredCorrectly.add(() => this.addBonusTime(5));
@@ -33,15 +34,19 @@ export class GameCountDownTimer {
   }
 
   public static start(initialCount: number): void {
+    if (this.isRunning) return;
+
     this.count = initialCount;
     this.intervalTimerId = setInterval(() => {
       this.deductTime(1);
     }, GameCountDownTimer.ONE_SECOND);
+    this.isRunning = true;
     this.onGamePlayCountDownStarted.emit(this.count);
   }
 
   public static stop(): void {
     clearInterval(this.intervalTimerId);
+    this.isRunning = false;
     this.onGamePlayCountDownStopped.emit(this.count);
   }
 }

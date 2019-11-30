@@ -23,7 +23,7 @@ export class GameSceneManager {
     })
       .on("tick", updateOpacity)
       .on("done", () => {
-        for (const sceneKey in Scene) {
+        for (const sceneKey of Object.keys(Scene)) {
           const sceneElement = GameHtmlElement.getScene(Scene[sceneKey]);
           if (scene == sceneKey) {
             sceneElement.classList.remove("inactive");

@@ -17,13 +17,13 @@ export class GameMenu {
       this.rotate();
     });
 
-    const menuOptions = GameHtmlElement.menuCarousel.children;
-    for (let i = 0; i < menuOptions.length; i++) {
-      const menuOption = menuOptions[i] as HTMLDivElement;
-      menuOption.addEventListener("click", () => {
-        GameSceneManager.displayScene(menuOption.dataset["option"] as Scene);
-      });
-    }
+    Array.from(GameHtmlElement.menuCarousel.children).forEach(
+      (menuOption: HTMLDivElement) => {
+        menuOption.addEventListener("click", () => {
+          GameSceneManager.displayScene(menuOption.dataset["option"] as Scene);
+        });
+      }
+    );
   }
 
   private static rotate(): void {

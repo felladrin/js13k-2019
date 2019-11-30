@@ -91,7 +91,7 @@ export class GamePlayScene {
 
   public static setAnswers<T>(answers: Array<T>): void {
     Random.shuffle(answers);
-    for (let i = 0; i < answersPerQuestion; i++) {
+    for (let i = 0; i < answers.length; i++) {
       GameHtmlElement.getAnswerButton(i).innerText = answers[i].toString();
     }
   }
@@ -145,9 +145,11 @@ export class GamePlayScene {
     const answers = [];
     const selectedCharIsAVowel =
       vowels.indexOf(selectedChar.toUpperCase()) >= 0;
+    const characters = selectedCharIsAVowel
+      ? Array.from(vowels)
+      : Array.from(consonants);
 
-    for (let i = 0; i < answersPerQuestion; i++) {
-      const characters = selectedCharIsAVowel ? vowels : consonants;
+    do {
       const randomCharIndex = Random.pickIndexFromLength(characters.length);
       const selectedChar = characters.splice(randomCharIndex, 1)[0];
       const mutatedWord =
@@ -155,12 +157,8 @@ export class GamePlayScene {
         selectedChar +
         selectedWord.substr(selectedCharIndex + 1);
 
-      if (this.wordExists(mutatedWord)) {
-        i--;
-      } else {
-        answers.push(selectedChar);
-      }
-    }
+      if (!this.wordExists(mutatedWord)) answers.push(selectedChar);
+    } while (answers.length < answersPerQuestion);
 
     const selectedCharIsNotInTheAnswers =
       answers.indexOf(selectedChar.toUpperCase()) == -1;
@@ -233,15 +231,11 @@ export class GamePlayScene {
     this.setAnswers(answers);
   }
 
-  public static wordExists(word: string): boolean {
-    for (let i = 0; i < similarWords.length; i++) {
-      const similarWordsSet = similarWords[i];
-      for (let j = 0; j < similarWordsSet.length; j++) {
-        const similarWord = similarWordsSet[j];
-        if (word.toLowerCase() == similarWord.toLowerCase()) return true;
-      }
-    }
-
-    return false;
+  private static wordExists(word: string): boolean {
+    return similarWords.some(similarWordSet =>
+      similarWordSet.some(
+        similarWord => word.toLowerCase() == similarWord.toLowerCase()
+      )
+    );
   }
 }
