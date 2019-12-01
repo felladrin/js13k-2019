@@ -21,103 +21,11 @@
  *    distribution.
  */
 export class SoundBoxPlayer {
-  private oscSin = (value): number => Math.sin(value * 6.283184);
-  private oscSaw = (value): number => 2 * (value % 1) - 1;
-  private oscSquare = (value): number => (value % 1 < 0.5 ? 1 : -1);
-  private oscTri = (value): number => {
-    const v2 = (value % 1) * 4;
-    if (v2 < 2) return v2 - 1;
-    return 3 - v2;
-  };
-  private mOscillators = [
-    this.oscSin,
-    this.oscSquare,
-    this.oscSaw,
-    this.oscTri
-  ];
   private mSong;
   private readonly mLastRow;
   private mCurrentCol;
   private readonly mNumWords;
   private readonly mMixBuf;
-  private getNoteFreq = (n): number => {
-    // 174.61.. / 44100 = 0.003959503758 (F3)
-    return 0.003959503758 * Math.pow(2, (n - 128) / 12);
-  };
-  private createNote = (instr, n, rowLen): Int32Array => {
-    const osc1 = this.mOscillators[instr.i[0]],
-      o1vol = instr.i[1],
-      o1xenv = instr.i[3],
-      osc2 = this.mOscillators[instr.i[4]],
-      o2vol = instr.i[5],
-      o2xenv = instr.i[8],
-      noiseVol = instr.i[9],
-      attack = instr.i[10] * instr.i[10] * 4,
-      sustain = instr.i[11] * instr.i[11] * 4,
-      release = instr.i[12] * instr.i[12] * 4,
-      releaseInv = 1 / release,
-      arpInterval = rowLen * Math.pow(2, 2 - instr.i[14]);
-
-    let arp = instr.i[13];
-
-    const noteBuf = new Int32Array(attack + sustain + release);
-
-    // Re-trig oscillators
-    let c1 = 0,
-      c2 = 0;
-
-    // Local variables.
-    let j, j2, e, t, rsample, o1t, o2t;
-
-    // Generate one note (attack + sustain + release)
-    for (j = 0, j2 = 0; j < attack + sustain + release; j++, j2++) {
-      if (j2 >= 0) {
-        // Switch arpeggio note.
-        arp = (arp >> 8) | ((arp & 255) << 4);
-        j2 -= arpInterval;
-
-        // Calculate note frequencies for the oscillators
-        o1t = this.getNoteFreq(n + (arp & 15) + instr.i[2] - 128);
-        o2t =
-          this.getNoteFreq(n + (arp & 15) + instr.i[6] - 128) *
-          (1 + 0.0008 * instr.i[7]);
-      }
-
-      // Envelope
-      e = 1;
-      if (j < attack) {
-        e = j / attack;
-      } else if (j >= attack + sustain) {
-        e -= (j - attack - sustain) * releaseInv;
-      }
-
-      // Oscillator 1
-      t = o1t;
-      if (o1xenv) {
-        t *= e * e;
-      }
-      c1 += t;
-      rsample = osc1(c1) * o1vol;
-
-      // Oscillator 2
-      t = o2t;
-      if (o2xenv) {
-        t *= e * e;
-      }
-      c2 += t;
-      rsample += osc2(c2) * o2vol;
-
-      // Noise oscillator
-      if (noiseVol) {
-        rsample += (2 * Math.random() - 1) * noiseVol;
-      }
-
-      // Add to (mono) channel buffer
-      noteBuf[j] = (80 * rsample * e) | 0;
-    }
-
-    return noteBuf;
-  };
 
   constructor(song) {
     // Define the song
@@ -278,6 +186,7 @@ export class SoundBoxPlayer {
     this.mCurrentCol++;
     return this.mCurrentCol / this.mSong.numChannels;
   };
+
   public createWave = (): Uint8Array => {
     // Create WAVE header
     const headerLen = 44;
@@ -342,5 +251,104 @@ export class SoundBoxPlayer {
 
     // Return the WAVE formatted typed array
     return wave;
+  };
+
+  private oscSin = (value): number => Math.sin(value * 6.283184);
+
+  private oscSaw = (value): number => 2 * (value % 1) - 1;
+
+  private oscSquare = (value): number => (value % 1 < 0.5 ? 1 : -1);
+
+  private oscTri = (value): number => {
+    const v2 = (value % 1) * 4;
+    if (v2 < 2) return v2 - 1;
+    return 3 - v2;
+  };
+
+  private mOscillators = [
+    this.oscSin,
+    this.oscSquare,
+    this.oscSaw,
+    this.oscTri
+  ];
+
+  private getNoteFreq = (n): number => {
+    // 174.61.. / 44100 = 0.003959503758 (F3)
+    return 0.003959503758 * Math.pow(2, (n - 128) / 12);
+  };
+
+  private createNote = (instr, n, rowLen): Int32Array => {
+    const osc1 = this.mOscillators[instr.i[0]],
+      o1vol = instr.i[1],
+      o1xenv = instr.i[3],
+      osc2 = this.mOscillators[instr.i[4]],
+      o2vol = instr.i[5],
+      o2xenv = instr.i[8],
+      noiseVol = instr.i[9],
+      attack = instr.i[10] * instr.i[10] * 4,
+      sustain = instr.i[11] * instr.i[11] * 4,
+      release = instr.i[12] * instr.i[12] * 4,
+      releaseInv = 1 / release,
+      arpInterval = rowLen * Math.pow(2, 2 - instr.i[14]);
+
+    let arp = instr.i[13];
+
+    const noteBuf = new Int32Array(attack + sustain + release);
+
+    // Re-trig oscillators
+    let c1 = 0,
+      c2 = 0;
+
+    // Local variables.
+    let j, j2, e, t, rsample, o1t, o2t;
+
+    // Generate one note (attack + sustain + release)
+    for (j = 0, j2 = 0; j < attack + sustain + release; j++, j2++) {
+      if (j2 >= 0) {
+        // Switch arpeggio note.
+        arp = (arp >> 8) | ((arp & 255) << 4);
+        j2 -= arpInterval;
+
+        // Calculate note frequencies for the oscillators
+        o1t = this.getNoteFreq(n + (arp & 15) + instr.i[2] - 128);
+        o2t =
+          this.getNoteFreq(n + (arp & 15) + instr.i[6] - 128) *
+          (1 + 0.0008 * instr.i[7]);
+      }
+
+      // Envelope
+      e = 1;
+      if (j < attack) {
+        e = j / attack;
+      } else if (j >= attack + sustain) {
+        e -= (j - attack - sustain) * releaseInv;
+      }
+
+      // Oscillator 1
+      t = o1t;
+      if (o1xenv) {
+        t *= e * e;
+      }
+      c1 += t;
+      rsample = osc1(c1) * o1vol;
+
+      // Oscillator 2
+      t = o2t;
+      if (o2xenv) {
+        t *= e * e;
+      }
+      c2 += t;
+      rsample += osc2(c2) * o2vol;
+
+      // Noise oscillator
+      if (noiseVol) {
+        rsample += (2 * Math.random() - 1) * noiseVol;
+      }
+
+      // Add to (mono) channel buffer
+      noteBuf[j] = (80 * rsample * e) | 0;
+    }
+
+    return noteBuf;
   };
 }
