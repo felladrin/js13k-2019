@@ -1,28 +1,31 @@
 import { Signal } from "./Signal";
 import { GamePlayScene } from "./GamePlayScene";
+import { tokens } from "typed-inject";
 
 export class GameCountDownTimer {
-  public static onGamePlayCountDownStarted: Signal<number> = new Signal();
-  public static onGamePlayCountDownUpdated: Signal<number> = new Signal();
-  public static onGamePlayCountDownStopped: Signal<number> = new Signal();
-  public static onGamePlayCountDownTimeOver: Signal<void> = new Signal();
+  public static inject = tokens("gamePlayScene");
+  public onGamePlayCountDownStarted: Signal<number> = new Signal();
+  public onGamePlayCountDownUpdated: Signal<number> = new Signal();
+  public onGamePlayCountDownStopped: Signal<number> = new Signal();
+  public onGamePlayCountDownTimeOver: Signal<void> = new Signal();
+  private count = 0;
+  private intervalTimerId = 0;
+  private readonly ONE_SECOND = 1000;
+  private isRunning = false;
 
-  private static count = 0;
-  private static intervalTimerId = 0;
-  private static readonly ONE_SECOND = 1000;
-  private static isRunning = false;
+  constructor(private gamePlayScene: GamePlayScene) {}
 
-  public static initialize(): void {
-    GamePlayScene.onAnsweredCorrectly.add(() => this.addBonusTime(5));
-    GamePlayScene.onAnsweredWrongly.add(() => this.deductTime(1));
+  public initialize(): void {
+    this.gamePlayScene.onAnsweredCorrectly.add(() => this.addBonusTime(5));
+    this.gamePlayScene.onAnsweredWrongly.add(() => this.deductTime(1));
   }
 
-  public static addBonusTime(bonus: number): void {
+  public addBonusTime(bonus: number): void {
     this.count += bonus;
     this.onGamePlayCountDownUpdated.emit(this.count);
   }
 
-  public static deductTime(deduction: number): void {
+  public deductTime(deduction: number): void {
     this.count -= deduction;
 
     if (this.count > 0) {
@@ -33,18 +36,18 @@ export class GameCountDownTimer {
     }
   }
 
-  public static start(initialCount: number): void {
+  public start(initialCount: number): void {
     if (this.isRunning) return;
 
     this.count = initialCount;
     this.intervalTimerId = setInterval(() => {
       this.deductTime(1);
-    }, GameCountDownTimer.ONE_SECOND);
+    }, this.ONE_SECOND);
     this.isRunning = true;
     this.onGamePlayCountDownStarted.emit(this.count);
   }
 
-  public static stop(): void {
+  public stop(): void {
     clearInterval(this.intervalTimerId);
     this.isRunning = false;
     this.onGamePlayCountDownStopped.emit(this.count);

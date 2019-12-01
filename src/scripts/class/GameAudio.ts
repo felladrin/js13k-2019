@@ -1,8 +1,13 @@
 import { SoundBoxPlayer } from "./SoundBoxPlayer";
 import { GameTopBar } from "./GameTopBar";
+import { tokens } from "typed-inject";
 
 export class GameAudio {
-  public static create(
+  public static inject = tokens("gameTopBar");
+
+  constructor(private gameTopBar: GameTopBar) {}
+
+  public create(
     song,
     volume = 1.0,
     autoplay = false,
@@ -25,7 +30,7 @@ export class GameAudio {
       }
     }, 300);
 
-    GameTopBar.onAudioMuteChanged.add((muted: boolean) => {
+    this.gameTopBar.onAudioMuteChanged.add((muted: boolean) => {
       audio.muted = muted;
     });
 

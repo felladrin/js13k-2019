@@ -10,99 +10,46 @@ import { Scene } from "../enum/Scene";
 import { Signal } from "./Signal";
 import { vowels } from "../const/vowels";
 import { consonants } from "../const/consonants";
+import { tokens } from "typed-inject";
 
 export class GamePlayScene {
-  public static onAnsweredCorrectly: Signal<void> = new Signal();
-  public static onAnsweredWrongly: Signal<void> = new Signal();
+  public static inject = tokens("gameHtmlElement", "gameStreakManager");
+  public onAnsweredCorrectly: Signal<void> = new Signal();
+  public onAnsweredWrongly: Signal<void> = new Signal();
+  private expectedAnswer: string;
+  private buttonsBlocked = false;
 
-  private static expectedAnswer: string;
-  private static buttonsBlocked = false;
+  constructor(
+    private gameHtmlElement: GameHtmlElement,
+    private gameStreakManager: GameStreakManager
+  ) {}
 
-  public static initialize(): void {
+  public initialize(): void {
     this.listenToAnswersSelected();
   }
 
-  private static listenToAnswersSelected(): void {
-    Array.from(GameHtmlElement.answerButtons).forEach(answerButton => {
-      answerButton.addEventListener("click", () => {
-        if (this.buttonsBlocked) return;
-        this.blockButtons();
-        this.processAnswer(answerButton.innerText);
-      });
-    });
+  public setSentence(text: string): void {
+    this.gameHtmlElement.sentenceElement.innerText = text;
   }
 
-  private static processAnswer(answer: string): void {
-    if (answer == this.expectedAnswer) {
-      this.onAnsweredCorrectly.emit();
-    } else {
-      this.onAnsweredWrongly.emit();
-    }
-
-    this.startFadeOutTween();
+  public setQuestion(text: string): void {
+    this.gameHtmlElement.questionElement.innerText = text;
   }
 
-  private static updateOpacityOnFadeTweenTick(value: number): void {
-    GameHtmlElement.getScene(Scene.GamePlay).style.opacity = (
-      value / 100
-    ).toString();
-  }
-
-  private static startFadeOutTween(): void {
-    new Tweezer({
-      start: 100,
-      end: 0,
-      duration: 500
-    })
-      .on("tick", this.updateOpacityOnFadeTweenTick)
-      .on("done", () => {
-        this.preparePhase();
-        this.startFadeInTween();
-      })
-      .begin();
-  }
-
-  private static startFadeInTween(): void {
-    new Tweezer({
-      start: 0,
-      end: 100,
-      duration: 500
-    })
-      .on("tick", this.updateOpacityOnFadeTweenTick)
-      .on("done", () => this.unblockButtons())
-      .begin();
-  }
-
-  private static blockButtons(): void {
-    this.buttonsBlocked = true;
-  }
-
-  private static unblockButtons(): void {
-    this.buttonsBlocked = false;
-  }
-
-  public static setSentence(text: string): void {
-    GameHtmlElement.sentenceElement.innerText = text;
-  }
-
-  public static setQuestion(text: string): void {
-    GameHtmlElement.questionElement.innerText = text;
-  }
-
-  public static setAnswers<T>(answers: Array<T>): void {
+  public setAnswers<T>(answers: Array<T>): void {
     Random.shuffle(answers);
     for (let i = 0; i < answers.length; i++) {
-      GameHtmlElement.getAnswerButton(i).innerText = answers[i].toString();
+      this.gameHtmlElement.getAnswerButton(i).innerText = answers[i].toString();
     }
   }
 
-  public static preparePhase(): void {
-    if (GameStreakManager.currentStreak < 10) {
+  public preparePhase(): void {
+    if (this.gameStreakManager.currentStreak < 10) {
       this.prepareWhatIsTheWord();
       return;
     }
 
-    if (GameStreakManager.currentStreak < 20) {
+    if (this.gameStreakManager.currentStreak < 20) {
       if (Random.pickIntInclusive(0, 1)) {
         this.prepareWhatIsTheWord();
       } else {
@@ -124,7 +71,66 @@ export class GamePlayScene {
     }
   }
 
-  private static prepareWhatIsTheWord(): void {
+  private listenToAnswersSelected(): void {
+    Array.from(this.gameHtmlElement.answerButtons).forEach(answerButton => {
+      answerButton.addEventListener("click", () => {
+        if (this.buttonsBlocked) return;
+        this.blockButtons();
+        this.processAnswer(answerButton.innerText);
+      });
+    });
+  }
+
+  private processAnswer(answer: string): void {
+    if (answer == this.expectedAnswer) {
+      this.onAnsweredCorrectly.emit();
+    } else {
+      this.onAnsweredWrongly.emit();
+    }
+
+    this.startFadeOutTween();
+  }
+
+  private updateOpacityOnFadeTweenTick(value: number): void {
+    this.gameHtmlElement.getScene(Scene.GamePlay).style.opacity = (
+      value / 100
+    ).toString();
+  }
+
+  private startFadeOutTween(): void {
+    new Tweezer({
+      start: 100,
+      end: 0,
+      duration: 500
+    })
+      .on("tick", value => this.updateOpacityOnFadeTweenTick(value))
+      .on("done", () => {
+        this.preparePhase();
+        this.startFadeInTween();
+      })
+      .begin();
+  }
+
+  private startFadeInTween(): void {
+    new Tweezer({
+      start: 0,
+      end: 100,
+      duration: 500
+    })
+      .on("tick", value => this.updateOpacityOnFadeTweenTick(value))
+      .on("done", () => this.unblockButtons())
+      .begin();
+  }
+
+  private blockButtons(): void {
+    this.buttonsBlocked = true;
+  }
+
+  private unblockButtons(): void {
+    this.buttonsBlocked = false;
+  }
+
+  private prepareWhatIsTheWord(): void {
     const randomSet = [...Random.pickElementFromArray(similarWords)];
     const answers = [];
     for (let i = 0; i < answersPerQuestion; i++) {
@@ -137,7 +143,7 @@ export class GamePlayScene {
     this.setAnswers(answers);
   }
 
-  private static prepareFindTheMissingLetter(): void {
+  private prepareFindTheMissingLetter(): void {
     const randomSet = Random.pickElementFromArray(similarWords);
     const selectedWord = Random.pickElementFromArray(randomSet);
     const selectedCharIndex = Random.pickIndexFromLength(selectedWord.length);
@@ -180,7 +186,7 @@ export class GamePlayScene {
     this.setAnswers(answers);
   }
 
-  private static prepareWhatIsTheResult(): void {
+  private prepareWhatIsTheResult(): void {
     let result = 0;
     let numberOne = 0;
     let numberTwo = 0;
@@ -231,7 +237,7 @@ export class GamePlayScene {
     this.setAnswers(answers);
   }
 
-  private static wordExists(word: string): boolean {
+  private wordExists(word: string): boolean {
     return similarWords.some(similarWordSet =>
       similarWordSet.some(
         similarWord => word.toLowerCase() == similarWord.toLowerCase()

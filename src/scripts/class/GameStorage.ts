@@ -5,9 +5,9 @@ type GameData = {
 };
 
 export class GameStorage {
-  private static memoryStorage: GameData = { longestStreak: 0 };
+  private memoryStorage: GameData = { longestStreak: 0 };
 
-  public static isLocalStorageAvailable(): boolean {
+  public isLocalStorageAvailable(): boolean {
     try {
       const tempItem = Math.random().toString(36);
       localStorage.setItem(tempItem, tempItem);
@@ -18,7 +18,7 @@ export class GameStorage {
     }
   }
 
-  public static save(data: GameData): void {
+  public save(data: GameData): void {
     if (!this.isLocalStorageAvailable()) {
       this.memoryStorage = data;
       return;
@@ -31,7 +31,7 @@ export class GameStorage {
     localStorage.setItem(gameName, cipheredGameData);
   }
 
-  public static load(): GameData {
+  public load(): GameData {
     if (!this.isLocalStorageAvailable()) {
       return this.memoryStorage;
     }
@@ -47,7 +47,7 @@ export class GameStorage {
   }
 
   /** @see https://stackoverflow.com/a/54026460 */
-  private static getCipher(salt: string): (text: string) => string {
+  private getCipher(salt: string): (text: string) => string {
     const textToChars: (text) => number[] = text =>
       text.split("").map(c => c.charCodeAt(0));
 
@@ -67,7 +67,7 @@ export class GameStorage {
   }
 
   /** @see https://stackoverflow.com/a/54026460 */
-  private static getDecipher(salt: string): (encoded: string) => string {
+  private getDecipher(salt: string): (encoded: string) => string {
     const textToChars: (text) => number[] = text =>
       text.split("").map(c => c.charCodeAt(0));
 

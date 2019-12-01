@@ -1,33 +1,43 @@
 import { GameSceneManager } from "./GameSceneManager";
 import { Scene } from "../enum/Scene";
 import { GameHtmlElement } from "./GameHtmlElement";
+import { tokens } from "typed-inject";
 
 export class GameMenu {
-  private static cellCount = GameHtmlElement.menuCarousel.children.length;
-  private static selectedIndex = 0;
+  public static inject = tokens("gameSceneManager", "gameHtmlElement");
+  private cellCount = this.gameHtmlElement.menuCarousel.children.length;
+  private selectedIndex = 0;
 
-  static initialize(): void {
-    GameHtmlElement.previousButton.addEventListener("click", () => {
+  constructor(
+    private gameSceneManager: GameSceneManager,
+    private gameHtmlElement: GameHtmlElement
+  ) {}
+
+  initialize(): void {
+    this.gameHtmlElement.previousButton.addEventListener("click", () => {
       this.selectedIndex--;
       this.rotate();
     });
 
-    GameHtmlElement.nextButton.addEventListener("click", () => {
+    this.gameHtmlElement.nextButton.addEventListener("click", () => {
       this.selectedIndex++;
       this.rotate();
     });
 
-    Array.from(GameHtmlElement.menuCarousel.children).forEach(
+    Array.from(this.gameHtmlElement.menuCarousel.children).forEach(
       (menuOption: HTMLDivElement) => {
         menuOption.addEventListener("click", () => {
-          GameSceneManager.displayScene(menuOption.dataset["option"] as Scene);
+          this.gameSceneManager.displayScene(
+            menuOption.dataset["option"] as Scene
+          );
         });
       }
     );
   }
 
-  private static rotate(): void {
+  private rotate(): void {
     const angle = (this.selectedIndex / this.cellCount) * -360;
-    GameHtmlElement.menuCarousel.style.transform = "rotateY(" + angle + "deg)";
+    this.gameHtmlElement.menuCarousel.style.transform =
+      "rotateY(" + angle + "deg)";
   }
 }

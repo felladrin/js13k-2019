@@ -1,65 +1,45 @@
 import { Scene } from "../enum/Scene";
 
 export class GameHtmlElement {
-  public static menuCarousel: HTMLDivElement = document.querySelector(
-    ".menu-carousel"
-  );
+  public readonly menuCarousel: HTMLDivElement;
+  public readonly previousButton: HTMLDivElement;
+  public readonly nextButton: HTMLDivElement;
+  public readonly headerCenter: HTMLDivElement;
+  public readonly headerRight: HTMLDivElement;
+  public readonly speaker: HTMLDivElement;
+  public readonly sentenceElement: HTMLDivElement;
+  public readonly questionElement: HTMLDivElement;
+  public readonly currentStreakElements: NodeListOf<HTMLDivElement>;
+  public readonly longestStreakElements: NodeListOf<HTMLDivElement>;
+  public readonly answerButtons: NodeListOf<HTMLDivElement>;
+  public readonly backToMenuButtons: NodeListOf<HTMLDivElement>;
+  public readonly allButtons: NodeListOf<HTMLDivElement>;
 
-  public static previousButton: HTMLDivElement = document.querySelector(
-    ".previous.button"
-  );
+  constructor() {
+    this.menuCarousel = document.querySelector(".menu-carousel");
+    this.previousButton = document.querySelector(".previous.button");
+    this.nextButton = document.querySelector(".next.button");
+    this.headerCenter = document.querySelector(".header .center");
+    this.headerRight = document.querySelector(".header .right");
+    this.speaker = document.querySelector(".speaker");
+    this.sentenceElement = document.querySelector(".sentence");
+    this.questionElement = document.querySelector(".question");
+    this.currentStreakElements = document.querySelectorAll(".current-streak");
+    this.longestStreakElements = document.querySelectorAll(".longest-streak");
+    this.answerButtons = document.querySelectorAll(".answer");
+    this.backToMenuButtons = document.querySelectorAll(".back-to-menu.button");
+    this.allButtons = document.querySelectorAll(".button");
+  }
 
-  public static nextButton: HTMLDivElement = document.querySelector(
-    ".next.button"
-  );
-
-  public static headerCenter: HTMLDivElement = document.querySelector(
-    ".header .center"
-  );
-
-  public static headerRight: HTMLDivElement = document.querySelector(
-    ".header .right"
-  );
-
-  public static speaker: HTMLDivElement = document.querySelector(".speaker");
-
-  public static sentenceElement: HTMLDivElement = document.querySelector(
-    ".sentence"
-  );
-
-  public static questionElement: HTMLDivElement = document.querySelector(
-    ".question"
-  );
-
-  public static currentStreakElements: NodeListOf<
-    HTMLDivElement
-  > = document.querySelectorAll(".current-streak");
-
-  public static longestStreakElements: NodeListOf<
-    HTMLDivElement
-  > = document.querySelectorAll(".longest-streak");
-
-  public static answerButtons: NodeListOf<
-    HTMLDivElement
-  > = document.querySelectorAll(".answer");
-
-  public static backToMenuButtons: NodeListOf<
-    HTMLDivElement
-  > = document.querySelectorAll(".back-to-menu.button");
-
-  public static allButtons: NodeListOf<
-    HTMLDivElement
-  > = document.querySelectorAll(".button");
-
-  public static getScene(scene: Scene): HTMLDivElement {
+  public getScene(scene: Scene): HTMLDivElement {
     return document.querySelector(`div[data-scene="${scene}"]`);
   }
 
-  public static getAnswerButton(id: number): HTMLDivElement {
+  public getAnswerButton(id: number): HTMLDivElement {
     return document.querySelector(`.answer[data-id="${id}"]`);
   }
 
-  public static setBackgroundId(id: number): void {
+  public setBackgroundId(id: number): void {
     const containerClassList = document.querySelector(`.container`).classList;
     for (let i = 1; i < 5; i++) {
       containerClassList.remove(`background${i}`);

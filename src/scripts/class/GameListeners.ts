@@ -8,9 +8,30 @@ import { GameCountDownTimer } from "./GameCountDownTimer";
 import { GameAudio } from "./GameAudio";
 import { Random } from "./Random";
 import { backgroundMusic } from "../const/backgroundMusic";
+import { tokens } from "typed-inject";
 
 export class GameListeners {
-  public static initialize(): void {
+  public static inject = tokens(
+    "gameHtmlElement",
+    "gameSceneManager",
+    "gameTopBar",
+    "gameStreakManager",
+    "gamePlayScene",
+    "gameCountDownTimer",
+    "gameAudio"
+  );
+
+  constructor(
+    private gameHtmlElement: GameHtmlElement,
+    private gameSceneManager: GameSceneManager,
+    private gameTopBar: GameTopBar,
+    private gameStreakManager: GameStreakManager,
+    private gamePlayScene: GamePlayScene,
+    private gameCountDownTimer: GameCountDownTimer,
+    private gameAudio: GameAudio
+  ) {}
+
+  public initialize(): void {
     this.listenToBackToMenuClicks();
     this.listenToButtonsHoversAndClicks();
     this.listenToCountDownTimerOver();
@@ -20,15 +41,17 @@ export class GameListeners {
     this.listenToWindowLoadToSetARandomBackground();
   }
 
-  private static listenToBackToMenuClicks(): void {
-    Array.from(GameHtmlElement.backToMenuButtons).forEach(backToStartButton => {
-      backToStartButton.addEventListener("click", () => {
-        GameSceneManager.displayScene(Scene.Menu);
-      });
-    });
+  private listenToBackToMenuClicks(): void {
+    Array.from(this.gameHtmlElement.backToMenuButtons).forEach(
+      backToStartButton => {
+        backToStartButton.addEventListener("click", () => {
+          this.gameSceneManager.displayScene(Scene.Menu);
+        });
+      }
+    );
   }
 
-  private static listenToButtonsHoversAndClicks(): void {
+  private listenToButtonsHoversAndClicks(): void {
     if (!window.AudioContext) return;
 
     const audioContext = new AudioContext();
@@ -50,9 +73,9 @@ export class GameListeners {
         ? null
         : Math.sin(i / 6000 - Math.sin(i / 90) * Math.sin(i / 91)) * t(i, n);
 
-    Array.from(GameHtmlElement.allButtons).forEach(button => {
+    Array.from(this.gameHtmlElement.allButtons).forEach(button => {
       button.addEventListener("click", () => {
-        if (GameTopBar.isAudioDisabled()) return;
+        if (this.gameTopBar.isAudioDisabled()) return;
         for (let i = 96e3; i--; ) channelData[i] = clickSound(i);
         const source = audioContext.createBufferSource();
         source.buffer = buffer;
@@ -61,7 +84,7 @@ export class GameListeners {
       });
 
       button.addEventListener("mouseenter", () => {
-        if (GameTopBar.isAudioDisabled()) return;
+        if (this.gameTopBar.isAudioDisabled()) return;
         for (let i = 96e3; i--; ) channelData[i] = hoverSound(i);
         const s = audioContext.createBufferSource();
         s.buffer = buffer;
@@ -71,40 +94,40 @@ export class GameListeners {
     });
   }
 
-  private static listenToSceneChanges(): void {
-    GameSceneManager.onSceneDisplayed.add((scene: Scene) => {
+  private listenToSceneChanges(): void {
+    this.gameSceneManager.onSceneDisplayed.add((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
-          GameTopBar.displayNotification("Welcome! Ready to start?");
+          this.gameTopBar.displayNotification("Welcome! Ready to start?");
           break;
         case Scene.Tutorial:
-          GameTopBar.displayNotification("Ah, finally someone here!");
+          this.gameTopBar.displayNotification("Ah, finally someone here!");
           break;
         case Scene.About:
-          GameTopBar.displayNotification("Curious, huh!?");
+          this.gameTopBar.displayNotification("Curious, huh!?");
           break;
         case Scene.GamePlay:
-          GameTopBar.displayNotification("Good Luck!");
-          GameStreakManager.currentStreak = 0;
-          GamePlayScene.preparePhase();
-          GameCountDownTimer.start(10);
+          this.gameTopBar.displayNotification("Good Luck!");
+          this.gameStreakManager.currentStreak = 0;
+          this.gamePlayScene.preparePhase();
+          this.gameCountDownTimer.start(10);
           break;
         case Scene.GameOver:
-          GameTopBar.displayNotification("Oh no! Time's over!");
+          this.gameTopBar.displayNotification("Oh no! Time's over!");
           break;
       }
     });
   }
 
-  private static listenToCountDownTimerOver(): void {
-    GameCountDownTimer.onGamePlayCountDownTimeOver.add(() => {
-      GameSceneManager.displayScene(Scene.GameOver);
+  private listenToCountDownTimerOver(): void {
+    this.gameCountDownTimer.onGamePlayCountDownTimeOver.add(() => {
+      this.gameSceneManager.displayScene(Scene.GameOver);
     });
   }
 
-  private static listenToFirstInteractionToStartBackgroundMusic(): void {
+  private listenToFirstInteractionToStartBackgroundMusic(): void {
     const startSong = (): void => {
-      GameAudio.create(backgroundMusic, 0.2, true, true);
+      this.gameAudio.create(backgroundMusic, 0.2, true, true);
       document.removeEventListener("mousemove", startSong);
       document.removeEventListener("touchstart", startSong);
     };
@@ -113,15 +136,16 @@ export class GameListeners {
     document.addEventListener("touchstart", startSong);
   }
 
-  private static listenToWindowLoadToSetARandomBackground(): void {
+  private listenToWindowLoadToSetARandomBackground(): void {
     window.addEventListener("load", () => {
-      GameHtmlElement.setBackgroundId(Random.pickIntInclusive(1, 4));
+      this.gameHtmlElement.setBackgroundId(Random.pickIntInclusive(1, 4));
     });
   }
 
-  private static listenToCorrectlyAnsweredQuestions(): void {
-    GamePlayScene.onAnsweredCorrectly.add(() => {
-      GameTopBar.displayNotification(
+  private listenToCorrectlyAnsweredQuestions(): void {
+    this.gamePlayScene.onAnsweredCorrectly.add(() => {
+      this.gameStreakManager.increaseStreak();
+      this.gameTopBar.displayNotification(
         Random.pickElementFromArray([
           "Awesome!",
           "Perfect!",

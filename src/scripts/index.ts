@@ -1,4 +1,4 @@
 import "../styles/index.scss";
-import { Game } from "./class/Game";
+import { injector } from "./const/injector";
 
-Game.initialize();
+injector.resolve("game").initialize();

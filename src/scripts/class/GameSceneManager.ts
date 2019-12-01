@@ -2,18 +2,24 @@ import { Scene } from "../enum/Scene";
 import { GameHtmlElement } from "./GameHtmlElement";
 import Tweezer from "tweezer.js";
 import { Signal } from "./Signal";
+import { tokens } from "typed-inject";
 
 export class GameSceneManager {
-  public static currentScene: Scene = Scene.Menu;
-  public static onSceneDisplayed: Signal<Scene> = new Signal();
+  public static inject = tokens("gameHtmlElement");
+  public currentScene: Scene = Scene.Menu;
+  public onSceneDisplayed: Signal<Scene> = new Signal();
 
-  static initialize(): void {
-    GameSceneManager.displayScene(this.currentScene);
+  constructor(private gameHtmlElement: GameHtmlElement) {}
+
+  initialize(): void {
+    this.displayScene(this.currentScene);
   }
 
-  static displayScene(scene: Scene): void {
+  displayScene(scene: Scene): void {
     const updateOpacity = (value: number): void => {
-      GameHtmlElement.getScene(scene).style.opacity = (value / 100).toString();
+      this.gameHtmlElement.getScene(scene).style.opacity = (
+        value / 100
+      ).toString();
     };
 
     new Tweezer({
@@ -24,7 +30,7 @@ export class GameSceneManager {
       .on("tick", updateOpacity)
       .on("done", () => {
         for (const sceneKey of Object.keys(Scene)) {
-          const sceneElement = GameHtmlElement.getScene(Scene[sceneKey]);
+          const sceneElement = this.gameHtmlElement.getScene(Scene[sceneKey]);
           if (scene == sceneKey) {
             sceneElement.classList.remove("inactive");
           } else {
