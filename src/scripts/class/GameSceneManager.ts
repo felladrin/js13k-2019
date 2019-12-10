@@ -1,13 +1,18 @@
 import { Scene } from "../enum/Scene";
 import { GameHtmlElement } from "./GameHtmlElement";
 import Tweezer from "tweezer.js";
-import { Signal } from "./Signal";
 import { tokens } from "typed-inject";
+import { TypedEventDispatcher, TypedEvent } from "typed-event-dispatcher";
 
 export class GameSceneManager {
   public static inject = tokens("gameHtmlElement");
   public currentScene: Scene = Scene.Menu;
-  public onSceneDisplayed: Signal<Scene> = new Signal();
+
+  public get onSceneDisplayed(): TypedEvent<Scene> {
+    return this.onSceneDisplayedDispatcher.getter;
+  }
+
+  private onSceneDisplayedDispatcher = new TypedEventDispatcher<Scene>();
 
   constructor(private gameHtmlElement: GameHtmlElement) {}
 
@@ -45,7 +50,7 @@ export class GameSceneManager {
         })
           .on("tick", updateOpacity)
           .on("done", () => {
-            this.onSceneDisplayed.emit(scene);
+            this.onSceneDisplayedDispatcher.dispatch(scene);
           })
           .begin();
       })

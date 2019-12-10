@@ -95,7 +95,7 @@ export class GameListeners {
   }
 
   private listenToSceneChanges(): void {
-    this.gameSceneManager.onSceneDisplayed.add((scene: Scene) => {
+    this.gameSceneManager.onSceneDisplayed.addListener(scene => {
       switch (scene) {
         case Scene.Menu:
           this.gameTopBar.displayNotification("Welcome! Ready to start?");
@@ -120,7 +120,7 @@ export class GameListeners {
   }
 
   private listenToCountDownTimerOver(): void {
-    this.gameCountDownTimer.onGamePlayCountDownTimeOver.add(() => {
+    this.gameCountDownTimer.onGamePlayCountDownTimeOver.addListener(() => {
       this.gameSceneManager.displayScene(Scene.GameOver);
     });
   }
@@ -143,7 +143,7 @@ export class GameListeners {
   }
 
   private listenToCorrectlyAnsweredQuestions(): void {
-    this.gamePlayScene.onAnsweredCorrectly.add(() => {
+    this.gamePlayScene.onAnsweredCorrectly.addListener(() => {
       this.gameStreakManager.increaseStreak();
       this.gameTopBar.displayNotification(
         Random.pickElementFromArray([
