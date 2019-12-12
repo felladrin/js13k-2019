@@ -34,7 +34,7 @@
     "rimraf": "^3.0.0",
     "sass": "^1.23.7",
     "tweezer.js": "^1.5.0",
-    "typed-event-dispatcher": "^1.0.0",
+    "typed-event-dispatcher": "^1.0.1",
     "typed-inject": "^2.1.1",
     "typescript": "^3.7.2"
   },
