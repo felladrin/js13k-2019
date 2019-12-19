@@ -1,13 +1,16 @@
 import { gameName } from "../const/gameName";
 import { GameHtmlElement } from "./GameHtmlElement";
 import Tweezer from "tweezer.js";
-import { Signal } from "./Signal";
 import { GameCountDownTimer } from "./GameCountDownTimer";
 import { tokens } from "typed-inject";
+import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
 
 export class GameTopBar {
+  public get onAudioMuteChanged(): TypedEvent<boolean> {
+    return this.onAudioMuteChangedDispatcher;
+  }
   public static inject = tokens("gameHtmlElement", "gameCountDownTimer");
-  public onAudioMuteChanged: Signal<boolean> = new Signal();
+  private onAudioMuteChangedDispatcher = new TypedEventDispatcher<boolean>();
   private readonly clockIcon: string;
 
   constructor(
@@ -21,16 +24,16 @@ export class GameTopBar {
     this.gameHtmlElement.speaker.addEventListener("click", () =>
       this.toggleSound()
     );
-    this.gameCountDownTimer.onGamePlayCountDownStarted.add(count =>
+    this.gameCountDownTimer.onGamePlayCountDownStarted.addListener(count =>
       this.displayCountDown(count)
     );
-    this.gameCountDownTimer.onGamePlayCountDownUpdated.add(count =>
+    this.gameCountDownTimer.onGamePlayCountDownUpdated.addListener(count =>
       this.displayCountDown(count)
     );
-    this.gameCountDownTimer.onGamePlayCountDownStopped.add(() =>
+    this.gameCountDownTimer.onGamePlayCountDownStopped.addListener(() =>
       this.displayClockIcon()
     );
-    this.gameCountDownTimer.onGamePlayCountDownTimeOver.add(() =>
+    this.gameCountDownTimer.onGamePlayCountDownTimeOver.addListener(() =>
       this.displayClockIcon()
     );
   }
@@ -107,7 +110,7 @@ export class GameTopBar {
     classList.toggle("on");
     classList.toggle("off");
 
-    this.onAudioMuteChanged.emit(this.isAudioDisabled());
+    this.onAudioMuteChangedDispatcher.dispatch(this.isAudioDisabled());
   }
 
   public displayNotification(innerHtml: string): void {

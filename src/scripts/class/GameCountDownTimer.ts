@@ -1,13 +1,31 @@
-import { Signal } from "./Signal";
 import { GamePlayScene } from "./GamePlayScene";
 import { tokens } from "typed-inject";
+import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
 
 export class GameCountDownTimer {
+  public get onGamePlayCountDownTimeOver(): TypedEvent {
+    return this.onGamePlayCountDownTimeOverDispatcher.getter;
+  }
+  public get onGamePlayCountDownStopped(): TypedEvent<number> {
+    return this.onGamePlayCountDownStoppedDispatcher.getter;
+  }
+  public get onGamePlayCountDownUpdated(): TypedEvent<number> {
+    return this.onGamePlayCountDownUpdatedDispatcher.getter;
+  }
+  public get onGamePlayCountDownStarted(): TypedEvent<number> {
+    return this.onGamePlayCountDownStartedDispatcher.getter;
+  }
   public static inject = tokens("gamePlayScene");
-  public onGamePlayCountDownStarted: Signal<number> = new Signal();
-  public onGamePlayCountDownUpdated: Signal<number> = new Signal();
-  public onGamePlayCountDownStopped: Signal<number> = new Signal();
-  public onGamePlayCountDownTimeOver: Signal<void> = new Signal();
+  private onGamePlayCountDownStartedDispatcher = new TypedEventDispatcher<
+    number
+  >();
+  private onGamePlayCountDownUpdatedDispatcher = new TypedEventDispatcher<
+    number
+  >();
+  private onGamePlayCountDownStoppedDispatcher = new TypedEventDispatcher<
+    number
+  >();
+  private onGamePlayCountDownTimeOverDispatcher = new TypedEventDispatcher();
   private count = 0;
   private intervalTimerId = 0;
   private readonly ONE_SECOND = 1000;
@@ -16,23 +34,25 @@ export class GameCountDownTimer {
   constructor(private gamePlayScene: GamePlayScene) {}
 
   public initialize(): void {
-    this.gamePlayScene.onAnsweredCorrectly.add(() => this.addBonusTime(5));
-    this.gamePlayScene.onAnsweredWrongly.add(() => this.deductTime(1));
+    this.gamePlayScene.onAnsweredCorrectly.addListener(() =>
+      this.addBonusTime(5)
+    );
+    this.gamePlayScene.onAnsweredWrongly.addListener(() => this.deductTime(1));
   }
 
   public addBonusTime(bonus: number): void {
     this.count += bonus;
-    this.onGamePlayCountDownUpdated.emit(this.count);
+    this.onGamePlayCountDownUpdatedDispatcher.dispatch(this.count);
   }
 
   public deductTime(deduction: number): void {
     this.count -= deduction;
 
     if (this.count > 0) {
-      this.onGamePlayCountDownUpdated.emit(this.count);
+      this.onGamePlayCountDownUpdatedDispatcher.dispatch(this.count);
     } else {
       this.stop();
-      this.onGamePlayCountDownTimeOver.emit();
+      this.onGamePlayCountDownTimeOverDispatcher.dispatch();
     }
   }
 
@@ -44,12 +64,12 @@ export class GameCountDownTimer {
       this.deductTime(1);
     }, this.ONE_SECOND);
     this.isRunning = true;
-    this.onGamePlayCountDownStarted.emit(this.count);
+    this.onGamePlayCountDownStartedDispatcher.dispatch(this.count);
   }
 
   public stop(): void {
     clearInterval(this.intervalTimerId);
     this.isRunning = false;
-    this.onGamePlayCountDownStopped.emit(this.count);
+    this.onGamePlayCountDownStoppedDispatcher.dispatch(this.count);
   }
 }

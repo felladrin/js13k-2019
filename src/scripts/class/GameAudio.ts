@@ -30,7 +30,7 @@ export class GameAudio {
       }
     }, 300);
 
-    this.gameTopBar.onAudioMuteChanged.add((muted: boolean) => {
+    this.gameTopBar.onAudioMuteChanged.addListener((muted: boolean) => {
       audio.muted = muted;
     });
 

@@ -7,7 +7,7 @@ You can play it here: <https://js13kgames.com/entries/back-read>
 ## Credits
 
 - [SoundBox](https://sb.bitsnbites.eu/) for the background music in few kilobytes.
-- [Signal Class](https://github.com/rgr-myrg/signal-ts) for the Signal/Slot pattern used to make the game reactive.
+- [Typed Event Dispatcher](https://github.com/felladrin/typed-event-dispatcher) for the publish/subscribe pattern used to make the game reactive.
 - [MiniSoundEditor](https://xem.github.io/MiniSoundEditor/) for the micro sounds using AudioContext.
 - [ESLint](https://eslint.org/) for helping with code quality.
 - [Typescript-Eslint](https://github.com/typescript-eslint/typescript-eslint) for allowing ESLint evaluation over Typescript code.

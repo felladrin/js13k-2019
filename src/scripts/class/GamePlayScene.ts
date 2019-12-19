@@ -7,15 +7,21 @@ import { answersPerQuestion } from "../const/answersPerQuestion";
 import { GameStreakManager } from "./GameStreakManager";
 import Tweezer from "tweezer.js";
 import { Scene } from "../enum/Scene";
-import { Signal } from "./Signal";
 import { vowels } from "../const/vowels";
 import { consonants } from "../const/consonants";
 import { tokens } from "typed-inject";
+import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
 
 export class GamePlayScene {
+  public get onAnsweredWrongly(): TypedEvent {
+    return this.onAnsweredWronglyDispatcher.getter;
+  }
+  public get onAnsweredCorrectly(): TypedEvent {
+    return this.onAnsweredCorrectlyDispatcher.getter;
+  }
   public static inject = tokens("gameHtmlElement", "gameStreakManager");
-  public onAnsweredCorrectly: Signal<void> = new Signal();
-  public onAnsweredWrongly: Signal<void> = new Signal();
+  private onAnsweredCorrectlyDispatcher = new TypedEventDispatcher();
+  private onAnsweredWronglyDispatcher = new TypedEventDispatcher();
   private expectedAnswer: string;
   private buttonsBlocked = false;
 
@@ -83,9 +89,9 @@ export class GamePlayScene {
 
   private processAnswer(answer: string): void {
     if (answer == this.expectedAnswer) {
-      this.onAnsweredCorrectly.emit();
+      this.onAnsweredCorrectlyDispatcher.dispatch();
     } else {
-      this.onAnsweredWrongly.emit();
+      this.onAnsweredWronglyDispatcher.dispatch();
     }
 
     this.startFadeOutTween();
