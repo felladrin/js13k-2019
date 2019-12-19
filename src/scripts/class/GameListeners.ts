@@ -33,7 +33,7 @@ export class GameListeners {
 
   public initialize(): void {
     this.listenToBackToMenuClicks();
-    this.listenToButtonsHoversAndClicks();
+    // this.listenToButtonsHoversAndClicks();
     this.listenToCountDownTimerOver();
     this.listenToFirstInteractionToStartBackgroundMusic();
     this.listenToSceneChanges();
@@ -51,6 +51,7 @@ export class GameListeners {
     );
   }
 
+  /*
   private listenToButtonsHoversAndClicks(): void {
     if (!window.AudioContext) return;
 
@@ -93,6 +94,7 @@ export class GameListeners {
       });
     });
   }
+  */
 
   private listenToSceneChanges(): void {
     this.gameSceneManager.onSceneDisplayed.addListener(scene => {
