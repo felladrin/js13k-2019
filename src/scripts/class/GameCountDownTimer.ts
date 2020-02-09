@@ -1,6 +1,6 @@
 import { GamePlayScene } from "./GamePlayScene";
 import { tokens } from "typed-inject";
-import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
+import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher/ts";
 
 export class GameCountDownTimer {
   public get onGamePlayCountDownTimeOver(): TypedEvent {
@@ -27,7 +27,7 @@ export class GameCountDownTimer {
   >();
   private onGamePlayCountDownTimeOverDispatcher = new TypedEventDispatcher();
   private count = 0;
-  private intervalTimerId = 0;
+  private intervalTimerId: NodeJS.Timeout = null;
   private readonly ONE_SECOND = 1000;
   private isRunning = false;
 

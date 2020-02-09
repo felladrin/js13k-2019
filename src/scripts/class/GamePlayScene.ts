@@ -10,7 +10,7 @@ import { Scene } from "../enum/Scene";
 import { vowels } from "../const/vowels";
 import { consonants } from "../const/consonants";
 import { tokens } from "typed-inject";
-import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
+import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher/ts";
 
 export class GamePlayScene {
   public get onAnsweredWrongly(): TypedEvent {

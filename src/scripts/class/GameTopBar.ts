@@ -3,11 +3,11 @@ import { GameHtmlElement } from "./GameHtmlElement";
 import Tweezer from "tweezer.js";
 import { GameCountDownTimer } from "./GameCountDownTimer";
 import { tokens } from "typed-inject";
-import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
+import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher/ts";
 
 export class GameTopBar {
   public get onAudioMuteChanged(): TypedEvent<boolean> {
-    return this.onAudioMuteChangedDispatcher;
+    return this.onAudioMuteChangedDispatcher.getter;
   }
   public static inject = tokens("gameHtmlElement", "gameCountDownTimer");
   private onAudioMuteChangedDispatcher = new TypedEventDispatcher<boolean>();

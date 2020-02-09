@@ -2,7 +2,7 @@ import { Scene } from "../enum/Scene";
 import { GameHtmlElement } from "./GameHtmlElement";
 import Tweezer from "tweezer.js";
 import { tokens } from "typed-inject";
-import { TypedEventDispatcher, TypedEvent } from "typed-event-dispatcher";
+import { TypedEventDispatcher, TypedEvent } from "typed-event-dispatcher/ts";
 
 export class GameSceneManager {
   public static inject = tokens("gameHtmlElement");
