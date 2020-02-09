@@ -10,13 +10,14 @@
     "make-dist-dir": "mkdirp dist/bundled dist/inlined dist/zipped",
     "parcel-build": "parcel build src/index.html -d dist/bundled --no-source-maps --experimental-scope-hoisting",
     "inline-build": "html-inline -i dist/bundled/index.html -o dist/inlined/index.html",
-    "zip": "node ./scripts/zip.js",
+    "zip": "ts-node scripts/zip.ts",
     "lint": "eslint \"src/**/*.{js,ts}\" --fix"
   },
   "author": "Victor Nogueira <victor@victornogueira.app>",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
+    "@types/archiver": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^2.12.0",
     "@typescript-eslint/parser": "^2.12.0",
     "archiver": "^3.1.1",
@@ -33,6 +34,7 @@
     "pretty-quick": "^2.0.1",
     "rimraf": "^3.0.0",
     "sass": "^1.23.7",
+    "ts-node": "^8.6.2",
     "tweezer.js": "^1.5.0",
     "typed-event-dispatcher": "^1.1.0",
     "typed-inject": "^2.1.1",

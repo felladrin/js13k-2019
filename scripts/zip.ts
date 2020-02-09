@@ -1,9 +1,9 @@
-const fs = require("fs");
-const archiver = require("archiver");
+import { createWriteStream } from "fs";
+import archiver from "archiver";
 
 const distDir = `${process.cwd()}/dist`;
 const outputFilePath = `${distDir}/zipped/dist.zip`;
-const output = fs.createWriteStream(outputFilePath);
+const output = createWriteStream(outputFilePath);
 const archive = archiver("zip", { zlib: { level: 9 } });
 
 output.on("close", () => {
