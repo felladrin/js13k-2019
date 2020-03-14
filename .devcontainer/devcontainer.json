@@ -1,9 +1,0 @@
-{
-  "name": "Node.js 12 & TypeScript",
-  "dockerFile": "Dockerfile",
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
-  },
-  "remoteUser": "node",
-  "extensions": ["dbaeumer.vscode-eslint"]
-}
