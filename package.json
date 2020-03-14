@@ -2,6 +2,7 @@
   "name": "js13k-2019",
   "version": "1.0.0",
   "description": "Game created for the Js13kGames competition from 2019.",
+  "private": true,
   "scripts": {
     "start": "run-p parcel",
     "build": "run-s clean-dist-dir make-dist-dir parcel-build inline-build zip",
@@ -17,15 +18,15 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "@types/archiver": "^3.0.0",
-    "@typescript-eslint/eslint-plugin": "^2.19.0",
-    "@typescript-eslint/parser": "^2.19.0",
+    "@types/archiver": "^3.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
     "archiver": "^3.1.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "html-inline": "^1.2.0",
-    "husky": "^4.2.1",
+    "husky": "^4.2.3",
     "mkdirp": "^1.0.3",
     "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.4",
@@ -33,12 +34,12 @@
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
     "rimraf": "^3.0.2",
-    "sass": "^1.25.0",
+    "sass": "^1.26.3",
     "ts-node": "^8.6.2",
     "tweezer.js": "^1.5.0",
-    "typed-event-dispatcher": "^1.2.0",
+    "typed-event-dispatcher": "^1.4.1",
     "typed-inject": "^2.1.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.3"
   },
   "husky": {
     "hooks": {
