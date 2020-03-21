@@ -1,6 +1,5 @@
 {
-  "image": "node:lts-alpine",
-  "postCreateCommand": "apk update && apk add git openssh",
+  "image": "node:lts-buster",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
   "mounts": [
