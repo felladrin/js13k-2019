@@ -7,12 +7,7 @@ export class GameAudio {
 
   constructor(private gameTopBar: GameTopBar) {}
 
-  public create(
-    song,
-    volume = 1.0,
-    autoplay = false,
-    loop = false
-  ): HTMLAudioElement {
+  public create(song, volume = 1.0, autoplay = false, loop = false): HTMLAudioElement {
     const audio = document.createElement("audio");
     audio.volume = volume;
     audio.autoplay = autoplay;
@@ -24,9 +19,7 @@ export class GameAudio {
       if (player.generate() >= 1) {
         clearInterval(progressChecker);
         const wave = player.createWave();
-        audio.src = URL.createObjectURL(
-          new Blob([wave], { type: "audio/wav" })
-        );
+        audio.src = URL.createObjectURL(new Blob([wave], { type: "audio/wav" }));
       }
     }, 300);
 

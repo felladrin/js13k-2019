@@ -8,10 +8,7 @@ export class GameMenu {
   private cellCount = this.gameHtmlElement.menuCarousel.children.length;
   private selectedIndex = 0;
 
-  constructor(
-    private gameSceneManager: GameSceneManager,
-    private gameHtmlElement: GameHtmlElement
-  ) {}
+  constructor(private gameSceneManager: GameSceneManager, private gameHtmlElement: GameHtmlElement) {}
 
   initialize(): void {
     this.gameHtmlElement.previousButton.addEventListener("click", () => {
@@ -24,20 +21,15 @@ export class GameMenu {
       this.rotate();
     });
 
-    Array.from(this.gameHtmlElement.menuCarousel.children).forEach(
-      (menuOption: HTMLDivElement) => {
-        menuOption.addEventListener("click", () => {
-          this.gameSceneManager.displayScene(
-            menuOption.dataset["option"] as Scene
-          );
-        });
-      }
-    );
+    Array.from(this.gameHtmlElement.menuCarousel.children).forEach((menuOption: HTMLDivElement) => {
+      menuOption.addEventListener("click", () => {
+        this.gameSceneManager.displayScene(menuOption.dataset["option"] as Scene);
+      });
+    });
   }
 
   private rotate(): void {
     const angle = (this.selectedIndex / this.cellCount) * -360;
-    this.gameHtmlElement.menuCarousel.style.transform =
-      "rotateY(" + angle + "deg)";
+    this.gameHtmlElement.menuCarousel.style.transform = "rotateY(" + angle + "deg)";
   }
 }

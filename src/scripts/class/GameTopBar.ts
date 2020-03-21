@@ -13,37 +13,22 @@ export class GameTopBar {
   private onAudioMuteChangedDispatcher = new TypedEventDispatcher<boolean>();
   private readonly clockIcon: string;
 
-  constructor(
-    private gameHtmlElement: GameHtmlElement,
-    private gameCountDownTimer: GameCountDownTimer
-  ) {
+  constructor(private gameHtmlElement: GameHtmlElement, private gameCountDownTimer: GameCountDownTimer) {
     this.clockIcon = this.gameHtmlElement.headerRight.innerHTML;
   }
 
   public initialize(): void {
-    this.gameHtmlElement.speaker.addEventListener("click", () =>
-      this.toggleSound()
-    );
-    this.gameCountDownTimer.onGamePlayCountDownStarted.addListener(count =>
-      this.displayCountDown(count)
-    );
-    this.gameCountDownTimer.onGamePlayCountDownUpdated.addListener(count =>
-      this.displayCountDown(count)
-    );
-    this.gameCountDownTimer.onGamePlayCountDownStopped.addListener(() =>
-      this.displayClockIcon()
-    );
-    this.gameCountDownTimer.onGamePlayCountDownTimeOver.addListener(() =>
-      this.displayClockIcon()
-    );
+    this.gameHtmlElement.speaker.addEventListener("click", () => this.toggleSound());
+    this.gameCountDownTimer.onGamePlayCountDownStarted.addListener(count => this.displayCountDown(count));
+    this.gameCountDownTimer.onGamePlayCountDownUpdated.addListener(count => this.displayCountDown(count));
+    this.gameCountDownTimer.onGamePlayCountDownStopped.addListener(() => this.displayClockIcon());
+    this.gameCountDownTimer.onGamePlayCountDownTimeOver.addListener(() => this.displayClockIcon());
   }
 
   public changeInnerHTML(innerHTML: string): Promise<void> {
     return new Promise((resolve): void => {
       const updateOpacity = (value: number): void => {
-        this.gameHtmlElement.headerCenter.style.opacity = (
-          value / 100
-        ).toString();
+        this.gameHtmlElement.headerCenter.style.opacity = (value / 100).toString();
       };
 
       new Tweezer({
@@ -74,8 +59,7 @@ export class GameTopBar {
     if (count > 5) return;
 
     const callAttention = (value: number): void => {
-      this.gameHtmlElement.headerRight.style.transform = `scale(${value /
-        100})`;
+      this.gameHtmlElement.headerRight.style.transform = `scale(${value / 100})`;
     };
 
     new Tweezer({

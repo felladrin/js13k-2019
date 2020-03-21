@@ -5,10 +5,7 @@ import { tokens } from "typed-inject";
 export class GameStreakManager {
   public static inject = tokens("gameStorage", "gameHtmlElement");
 
-  constructor(
-    private gameStorage: GameStorage,
-    private gameHtmlElement: GameHtmlElement
-  ) {}
+  constructor(private gameStorage: GameStorage, private gameHtmlElement: GameHtmlElement) {}
 
   private _currentStreak = 0;
 
@@ -18,11 +15,9 @@ export class GameStreakManager {
 
   set currentStreak(value: number) {
     this._currentStreak = value;
-    Array.from(this.gameHtmlElement.currentStreakElements).forEach(
-      currentStreakElement => {
-        currentStreakElement.innerText = this._currentStreak.toString();
-      }
-    );
+    Array.from(this.gameHtmlElement.currentStreakElements).forEach(currentStreakElement => {
+      currentStreakElement.innerText = this._currentStreak.toString();
+    });
     this.longestStreak = Math.max(this.currentStreak, this.longestStreak);
   }
 
@@ -35,11 +30,9 @@ export class GameStreakManager {
   set longestStreak(value: number) {
     if (value == this._longestStreak) return;
     this._longestStreak = value;
-    Array.from(this.gameHtmlElement.longestStreakElements).forEach(
-      longestStreakElement => {
-        longestStreakElement.innerText = this._longestStreak.toString();
-      }
-    );
+    Array.from(this.gameHtmlElement.longestStreakElements).forEach(longestStreakElement => {
+      longestStreakElement.innerText = this._longestStreak.toString();
+    });
     this.gameStorage.save({ longestStreak: this._longestStreak });
   }
 

@@ -48,14 +48,11 @@ export class GameStorage {
 
   /** @see https://stackoverflow.com/a/54026460 */
   private getCipher(salt: string): (text: string) => string {
-    const textToChars: (text) => number[] = text =>
-      text.split("").map(c => c.charCodeAt(0));
+    const textToChars: (text) => number[] = text => text.split("").map(c => c.charCodeAt(0));
 
-    const byteHex: (n) => string = n =>
-      ("0" + Number(n).toString(16)).substr(-2);
+    const byteHex: (n) => string = n => ("0" + Number(n).toString(16)).substr(-2);
 
-    const applySaltToChar: (code) => number = code =>
-      textToChars(salt).reduce((a, b) => a ^ b, code);
+    const applySaltToChar: (code) => number = code => textToChars(salt).reduce((a, b) => a ^ b, code);
 
     return (text: string): string =>
       text
@@ -68,11 +65,9 @@ export class GameStorage {
 
   /** @see https://stackoverflow.com/a/54026460 */
   private getDecipher(salt: string): (encoded: string) => string {
-    const textToChars: (text) => number[] = text =>
-      text.split("").map(c => c.charCodeAt(0));
+    const textToChars: (text) => number[] = text => text.split("").map(c => c.charCodeAt(0));
 
-    const applySaltToChar: (code) => number = code =>
-      textToChars(salt).reduce((a, b) => a ^ b, code);
+    const applySaltToChar: (code) => number = code => textToChars(salt).reduce((a, b) => a ^ b, code);
 
     return (encoded: string): string =>
       encoded

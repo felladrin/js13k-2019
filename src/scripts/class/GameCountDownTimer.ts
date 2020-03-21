@@ -16,15 +16,9 @@ export class GameCountDownTimer {
     return this.onGamePlayCountDownStartedDispatcher.getter;
   }
   public static inject = tokens("gamePlayScene");
-  private onGamePlayCountDownStartedDispatcher = new TypedEventDispatcher<
-    number
-  >();
-  private onGamePlayCountDownUpdatedDispatcher = new TypedEventDispatcher<
-    number
-  >();
-  private onGamePlayCountDownStoppedDispatcher = new TypedEventDispatcher<
-    number
-  >();
+  private onGamePlayCountDownStartedDispatcher = new TypedEventDispatcher<number>();
+  private onGamePlayCountDownUpdatedDispatcher = new TypedEventDispatcher<number>();
+  private onGamePlayCountDownStoppedDispatcher = new TypedEventDispatcher<number>();
   private onGamePlayCountDownTimeOverDispatcher = new TypedEventDispatcher();
   private count = 0;
   private intervalTimerId: NodeJS.Timeout = null;
@@ -34,9 +28,7 @@ export class GameCountDownTimer {
   constructor(private gamePlayScene: GamePlayScene) {}
 
   public initialize(): void {
-    this.gamePlayScene.onAnsweredCorrectly.addListener(() =>
-      this.addBonusTime(5)
-    );
+    this.gamePlayScene.onAnsweredCorrectly.addListener(() => this.addBonusTime(5));
     this.gamePlayScene.onAnsweredWrongly.addListener(() => this.deductTime(1));
   }
 

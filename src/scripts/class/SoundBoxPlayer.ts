@@ -107,11 +107,7 @@ export class SoundBoxPlayer {
 
             // Copy note from the note cache
             const noteBuf = noteCache[n];
-            for (
-              j = 0, i = rowStartSample * 2;
-              j < noteBuf.length;
-              j++, i += 2
-            ) {
+            for (j = 0, i = rowStartSample * 2; j < noteBuf.length; j++, i += 2) {
               chnBuf[i] += noteBuf[j];
             }
           }
@@ -139,12 +135,7 @@ export class SoundBoxPlayer {
             // Distortion
             if (dist) {
               rsample *= dist;
-              rsample =
-                rsample < 1
-                  ? rsample > -1
-                    ? this.oscSin(rsample * 0.25)
-                    : -1
-                  : 1;
+              rsample = rsample < 1 ? (rsample > -1 ? this.oscSin(rsample * 0.25) : -1) : 1;
               rsample /= dist;
             }
 
@@ -265,12 +256,7 @@ export class SoundBoxPlayer {
     return 3 - v2;
   };
 
-  private mOscillators = [
-    this.oscSin,
-    this.oscSquare,
-    this.oscSaw,
-    this.oscTri
-  ];
+  private mOscillators = [this.oscSin, this.oscSquare, this.oscSaw, this.oscTri];
 
   private getNoteFreq = (n): number => {
     // 174.61.. / 44100 = 0.003959503758 (F3)
@@ -311,9 +297,7 @@ export class SoundBoxPlayer {
 
         // Calculate note frequencies for the oscillators
         o1t = this.getNoteFreq(n + (arp & 15) + instr.i[2] - 128);
-        o2t =
-          this.getNoteFreq(n + (arp & 15) + instr.i[6] - 128) *
-          (1 + 0.0008 * instr.i[7]);
+        o2t = this.getNoteFreq(n + (arp & 15) + instr.i[6] - 128) * (1 + 0.0008 * instr.i[7]);
       }
 
       // Envelope

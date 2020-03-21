@@ -11,15 +11,7 @@ import { backgroundMusic } from "../const/backgroundMusic";
 import { tokens } from "typed-inject";
 
 export class GameListeners {
-  public static inject = tokens(
-    "gameHtmlElement",
-    "gameSceneManager",
-    "gameTopBar",
-    "gameStreakManager",
-    "gamePlayScene",
-    "gameCountDownTimer",
-    "gameAudio"
-  );
+  public static inject = tokens("gameHtmlElement", "gameSceneManager", "gameTopBar", "gameStreakManager", "gamePlayScene", "gameCountDownTimer", "gameAudio");
 
   constructor(
     private gameHtmlElement: GameHtmlElement,
@@ -42,13 +34,11 @@ export class GameListeners {
   }
 
   private listenToBackToMenuClicks(): void {
-    Array.from(this.gameHtmlElement.backToMenuButtons).forEach(
-      backToStartButton => {
-        backToStartButton.addEventListener("click", () => {
-          this.gameSceneManager.displayScene(Scene.Menu);
-        });
-      }
-    );
+    Array.from(this.gameHtmlElement.backToMenuButtons).forEach(backToStartButton => {
+      backToStartButton.addEventListener("click", () => {
+        this.gameSceneManager.displayScene(Scene.Menu);
+      });
+    });
   }
 
   /*
@@ -97,7 +87,7 @@ export class GameListeners {
   */
 
   private listenToSceneChanges(): void {
-    this.gameSceneManager.onSceneDisplayed.addListener(scene => {
+    this.gameSceneManager.onSceneDisplayed.addListener((scene: Scene) => {
       switch (scene) {
         case Scene.Menu:
           this.gameTopBar.displayNotification("Welcome! Ready to start?");

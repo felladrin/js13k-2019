@@ -8,15 +8,7 @@ import { GameSceneManager } from "./GameSceneManager";
 import { tokens } from "typed-inject";
 
 export class Game {
-  public static inject = tokens(
-    "gameTopBar",
-    "gameStreakManager",
-    "gameMenu",
-    "gameSceneManager",
-    "gamePlayScene",
-    "gameCountDownTimer",
-    "gameListeners"
-  );
+  public static inject = tokens("gameTopBar", "gameStreakManager", "gameMenu", "gameSceneManager", "gamePlayScene", "gameCountDownTimer", "gameListeners");
 
   constructor(
     private gameTopBar: GameTopBar,

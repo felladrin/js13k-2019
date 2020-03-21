@@ -22,9 +22,7 @@ export class GameSceneManager {
 
   displayScene(scene: Scene): void {
     const updateOpacity = (value: number): void => {
-      this.gameHtmlElement.getScene(scene).style.opacity = (
-        value / 100
-      ).toString();
+      this.gameHtmlElement.getScene(scene).style.opacity = (value / 100).toString();
     };
 
     new Tweezer({
