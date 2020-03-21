@@ -19,8 +19,8 @@
   "dependencies": {},
   "devDependencies": {
     "@types/archiver": "^3.1.0",
-    "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.23.0",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
     "archiver": "^3.1.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
@@ -35,9 +35,9 @@
     "pretty-quick": "^2.0.1",
     "rimraf": "^3.0.2",
     "sass": "^1.26.3",
-    "ts-node": "^8.6.2",
+    "ts-node": "^8.7.0",
     "tweezer.js": "^1.5.0",
-    "typed-event-dispatcher": "^1.4.1",
+    "typed-event-dispatcher": "^1.5.0",
     "typed-inject": "^2.1.1",
     "typescript": "^3.8.3"
   },
