@@ -1,14 +1,14 @@
-import { GameHtmlElement } from "./GameHtmlElement";
-import { GameSceneManager } from "./GameSceneManager";
-import { Scene } from "../enum/Scene";
-import { GameTopBar } from "./GameTopBar";
-import { GameStreakManager } from "./GameStreakManager";
-import { GamePlayScene } from "./GamePlayScene";
-import { GameCountDownTimer } from "./GameCountDownTimer";
-import { GameAudio } from "./GameAudio";
-import { Random } from "./Random";
-import { backgroundMusic } from "../const/backgroundMusic";
 import { tokens } from "typed-inject";
+import { backgroundMusic } from "../const/backgroundMusic";
+import { Scene } from "../enum/Scene";
+import { GameAudio } from "./GameAudio";
+import { GameCountDownTimer } from "./GameCountDownTimer";
+import { GameHtmlElement } from "./GameHtmlElement";
+import { GamePlayScene } from "./GamePlayScene";
+import { GameSceneManager } from "./GameSceneManager";
+import { GameStreakManager } from "./GameStreakManager";
+import { GameTopBar } from "./GameTopBar";
+import { Random } from "./Random";
 
 export class GameListeners {
   public static inject = tokens("gameHtmlElement", "gameSceneManager", "gameTopBar", "gameStreakManager", "gamePlayScene", "gameCountDownTimer", "gameAudio");
@@ -25,7 +25,7 @@ export class GameListeners {
 
   public initialize(): void {
     this.listenToBackToMenuClicks();
-    // this.listenToButtonsHoversAndClicks();
+    this.listenToButtonsHoversAndClicks();
     this.listenToCountDownTimerOver();
     this.listenToFirstInteractionToStartBackgroundMusic();
     this.listenToSceneChanges();
@@ -34,14 +34,13 @@ export class GameListeners {
   }
 
   private listenToBackToMenuClicks(): void {
-    Array.from(this.gameHtmlElement.backToMenuButtons).forEach(backToStartButton => {
+    Array.from(this.gameHtmlElement.backToMenuButtons).forEach((backToStartButton) => {
       backToStartButton.addEventListener("click", () => {
         this.gameSceneManager.displayScene(Scene.Menu);
       });
     });
   }
 
-  /*
   private listenToButtonsHoversAndClicks(): void {
     if (!window.AudioContext) return;
 
@@ -54,17 +53,11 @@ export class GameListeners {
     gainNode.gain.value = 0.1;
     gainNode.connect(audioContext.destination);
 
-    const clickSound: (i) => null | number = i =>
-      i > n
-        ? null
-        : Math.sin(i / 8000 - Math.sin(i / 60) * Math.sin(i / 61)) * t(i, n);
+    const clickSound: (i) => null | number = (i) => (i > n ? null : Math.sin(i / 8000 - Math.sin(i / 60) * Math.sin(i / 61)) * t(i, n));
 
-    const hoverSound: (i) => null | number = i =>
-      i > n
-        ? null
-        : Math.sin(i / 6000 - Math.sin(i / 90) * Math.sin(i / 91)) * t(i, n);
+    const hoverSound: (i) => null | number = (i) => (i > n ? null : Math.sin(i / 6000 - Math.sin(i / 90) * Math.sin(i / 91)) * t(i, n));
 
-    Array.from(this.gameHtmlElement.allButtons).forEach(button => {
+    Array.from(this.gameHtmlElement.allButtons).forEach((button) => {
       button.addEventListener("click", () => {
         if (this.gameTopBar.isAudioDisabled()) return;
         for (let i = 96e3; i--; ) channelData[i] = clickSound(i);
@@ -84,7 +77,6 @@ export class GameListeners {
       });
     });
   }
-  */
 
   private listenToSceneChanges(): void {
     this.gameSceneManager.onSceneDisplayed.addListener((scene: Scene) => {
@@ -149,7 +141,7 @@ export class GameListeners {
           "Fabulous!",
           "Fantastic!",
           "Phenomenal!",
-          "Wonderful!"
+          "Wonderful!",
         ])
       );
     });

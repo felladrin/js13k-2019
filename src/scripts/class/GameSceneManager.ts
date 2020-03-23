@@ -1,8 +1,8 @@
+import Tweezer from "tweezer.js";
+import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher/ts";
+import { tokens } from "typed-inject";
 import { Scene } from "../enum/Scene";
 import { GameHtmlElement } from "./GameHtmlElement";
-import Tweezer from "tweezer.js";
-import { tokens } from "typed-inject";
-import { TypedEventDispatcher, TypedEvent } from "typed-event-dispatcher/ts";
 
 export class GameSceneManager {
   public static inject = tokens("gameHtmlElement");
@@ -28,7 +28,7 @@ export class GameSceneManager {
     new Tweezer({
       start: 100,
       end: 0,
-      duration: 500
+      duration: 500,
     })
       .on("tick", updateOpacity)
       .on("done", () => {
@@ -44,7 +44,7 @@ export class GameSceneManager {
         new Tweezer({
           start: 0,
           end: 100,
-          duration: 500
+          duration: 500,
         })
           .on("tick", updateOpacity)
           .on("done", () => {

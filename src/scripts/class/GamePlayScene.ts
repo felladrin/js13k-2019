@@ -1,16 +1,16 @@
-import { QuestionType } from "../enum/QuestionType";
-import { similarWords } from "../const/similarWords";
-import { Random } from "./Random";
-import { GameHtmlElement } from "./GameHtmlElement";
-import { ArithmeticOperation } from "../enum/ArithmeticOperation";
-import { answersPerQuestion } from "../const/answersPerQuestion";
-import { GameStreakManager } from "./GameStreakManager";
 import Tweezer from "tweezer.js";
-import { Scene } from "../enum/Scene";
-import { vowels } from "../const/vowels";
-import { consonants } from "../const/consonants";
-import { tokens } from "typed-inject";
 import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher/ts";
+import { tokens } from "typed-inject";
+import { answersPerQuestion } from "../const/answersPerQuestion";
+import { consonants } from "../const/consonants";
+import { similarWords } from "../const/similarWords";
+import { vowels } from "../const/vowels";
+import { ArithmeticOperation } from "../enum/ArithmeticOperation";
+import { QuestionType } from "../enum/QuestionType";
+import { Scene } from "../enum/Scene";
+import { GameHtmlElement } from "./GameHtmlElement";
+import { GameStreakManager } from "./GameStreakManager";
+import { Random } from "./Random";
 
 export class GamePlayScene {
   public get onAnsweredWrongly(): TypedEvent {
@@ -75,7 +75,7 @@ export class GamePlayScene {
   }
 
   private listenToAnswersSelected(): void {
-    Array.from(this.gameHtmlElement.answerButtons).forEach(answerButton => {
+    Array.from(this.gameHtmlElement.answerButtons).forEach((answerButton) => {
       answerButton.addEventListener("click", () => {
         if (this.buttonsBlocked) return;
         this.blockButtons();
@@ -102,9 +102,9 @@ export class GamePlayScene {
     new Tweezer({
       start: 100,
       end: 0,
-      duration: 500
+      duration: 500,
     })
-      .on("tick", value => this.updateOpacityOnFadeTweenTick(value))
+      .on("tick", (value) => this.updateOpacityOnFadeTweenTick(value))
       .on("done", () => {
         this.preparePhase();
         this.startFadeInTween();
@@ -116,9 +116,9 @@ export class GamePlayScene {
     new Tweezer({
       start: 0,
       end: 100,
-      duration: 500
+      duration: 500,
     })
-      .on("tick", value => this.updateOpacityOnFadeTweenTick(value))
+      .on("tick", (value) => this.updateOpacityOnFadeTweenTick(value))
       .on("done", () => this.unblockButtons())
       .begin();
   }
@@ -227,6 +227,6 @@ export class GamePlayScene {
   }
 
   private wordExists(word: string): boolean {
-    return similarWords.some(similarWordSet => similarWordSet.some(similarWord => word.toLowerCase() == similarWord.toLowerCase()));
+    return similarWords.some((similarWordSet) => similarWordSet.some((similarWord) => word.toLowerCase() == similarWord.toLowerCase()));
   }
 }

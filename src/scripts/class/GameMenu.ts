@@ -1,7 +1,7 @@
-import { GameSceneManager } from "./GameSceneManager";
+import { tokens } from "typed-inject";
 import { Scene } from "../enum/Scene";
 import { GameHtmlElement } from "./GameHtmlElement";
-import { tokens } from "typed-inject";
+import { GameSceneManager } from "./GameSceneManager";
 
 export class GameMenu {
   public static inject = tokens("gameSceneManager", "gameHtmlElement");

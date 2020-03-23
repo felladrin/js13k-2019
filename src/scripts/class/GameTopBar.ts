@@ -1,9 +1,9 @@
-import { gameName } from "../const/gameName";
-import { GameHtmlElement } from "./GameHtmlElement";
 import Tweezer from "tweezer.js";
-import { GameCountDownTimer } from "./GameCountDownTimer";
-import { tokens } from "typed-inject";
 import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher/ts";
+import { tokens } from "typed-inject";
+import { gameName } from "../const/gameName";
+import { GameCountDownTimer } from "./GameCountDownTimer";
+import { GameHtmlElement } from "./GameHtmlElement";
 
 export class GameTopBar {
   public get onAudioMuteChanged(): TypedEvent<boolean> {
@@ -19,8 +19,8 @@ export class GameTopBar {
 
   public initialize(): void {
     this.gameHtmlElement.speaker.addEventListener("click", () => this.toggleSound());
-    this.gameCountDownTimer.onGamePlayCountDownStarted.addListener(count => this.displayCountDown(count));
-    this.gameCountDownTimer.onGamePlayCountDownUpdated.addListener(count => this.displayCountDown(count));
+    this.gameCountDownTimer.onGamePlayCountDownStarted.addListener((count) => this.displayCountDown(count));
+    this.gameCountDownTimer.onGamePlayCountDownUpdated.addListener((count) => this.displayCountDown(count));
     this.gameCountDownTimer.onGamePlayCountDownStopped.addListener(() => this.displayClockIcon());
     this.gameCountDownTimer.onGamePlayCountDownTimeOver.addListener(() => this.displayClockIcon());
   }
@@ -34,7 +34,7 @@ export class GameTopBar {
       new Tweezer({
         start: 100,
         end: 0,
-        duration: 500
+        duration: 500,
       })
         .on("tick", updateOpacity)
         .on("done", () => {
@@ -43,7 +43,7 @@ export class GameTopBar {
           new Tweezer({
             start: 0,
             end: 100,
-            duration: 500
+            duration: 500,
           })
             .on("tick", updateOpacity)
             .on("done", resolve)
@@ -65,14 +65,14 @@ export class GameTopBar {
     new Tweezer({
       start: 100,
       end: 200,
-      duration: 250
+      duration: 250,
     })
       .on("tick", callAttention)
       .on("done", () => {
         new Tweezer({
           start: 200,
           end: 100,
-          duration: 250
+          duration: 250,
         })
           .on("tick", callAttention)
           .begin();

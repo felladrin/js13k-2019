@@ -1,6 +1,6 @@
-import { SoundBoxPlayer } from "./SoundBoxPlayer";
-import { GameTopBar } from "./GameTopBar";
 import { tokens } from "typed-inject";
+import { GameTopBar } from "./GameTopBar";
+import { SoundBoxPlayer } from "./SoundBoxPlayer";
 
 export class GameAudio {
   public static inject = tokens("gameTopBar");

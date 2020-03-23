@@ -1,11 +1,11 @@
-import { GameListeners } from "./GameListeners";
-import { GameCountDownTimer } from "./GameCountDownTimer";
-import { GamePlayScene } from "./GamePlayScene";
-import { GameTopBar } from "./GameTopBar";
-import { GameStreakManager } from "./GameStreakManager";
-import { GameMenu } from "./GameMenu";
-import { GameSceneManager } from "./GameSceneManager";
 import { tokens } from "typed-inject";
+import { GameCountDownTimer } from "./GameCountDownTimer";
+import { GameListeners } from "./GameListeners";
+import { GameMenu } from "./GameMenu";
+import { GamePlayScene } from "./GamePlayScene";
+import { GameSceneManager } from "./GameSceneManager";
+import { GameStreakManager } from "./GameStreakManager";
+import { GameTopBar } from "./GameTopBar";
 
 export class Game {
   public static inject = tokens("gameTopBar", "gameStreakManager", "gameMenu", "gameSceneManager", "gamePlayScene", "gameCountDownTimer", "gameListeners");

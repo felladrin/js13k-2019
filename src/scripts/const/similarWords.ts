@@ -38,5 +38,5 @@ export const similarWords = [
   ["grain", "chain", "brain", "drain", "plain", "train"],
   ["gain", "pain", "rain", "main"],
   ["creep", "sheep", "sweep", "sleep", "steep", "cheep"],
-  ["keep", "peep", "weep", "jeep", "beep"]
+  ["keep", "peep", "weep", "jeep", "beep"],
 ];

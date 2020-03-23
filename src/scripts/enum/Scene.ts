@@ -3,5 +3,5 @@ export enum Scene {
   Tutorial = "Tutorial",
   About = "About",
   GamePlay = "GamePlay",
-  GameOver = "GameOver"
+  GameOver = "GameOver",
 }

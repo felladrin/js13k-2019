@@ -1,6 +1,6 @@
-import { GamePlayScene } from "./GamePlayScene";
-import { tokens } from "typed-inject";
 import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher/ts";
+import { tokens } from "typed-inject";
+import { GamePlayScene } from "./GamePlayScene";
 
 export class GameCountDownTimer {
   public get onGamePlayCountDownTimeOver(): TypedEvent {

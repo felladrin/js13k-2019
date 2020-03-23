@@ -31,7 +31,7 @@ export const backgroundMusic = {
         171, // FX_PAN_AMT
         6, // FX_PAN_FREQ
         79, // FX_DELAY_AMT
-        6 // FX_DELAY_TIME
+        6, // FX_DELAY_TIME
       ],
       // Patterns
       p: [, , 1, 1, 1, 1, 1, 1, 1, 2],
@@ -39,13 +39,13 @@ export const backgroundMusic = {
       c: [
         {
           n: [143, , 155, 148, 155, 150, 143, , 155, 150, 155, 150, 146, 145, 141, , 143, , 155, 148, 155, 150, 143, , 155, 143, 155, 150, 146, , 148, 150],
-          f: [2, 12, , 13, , , , , , , , , , , , , , , , , , , , , , , , , , , , , 48, 35, , 25]
+          f: [2, 12, , 13, , , , , , , , , , , , , , , , , , , , , , , , , , , , , 48, 35, , 25],
         },
         {
           n: [143, , 155, 148, 155, 150, 143, , 155, 150, 155, 150, 146, 145, 141, , 143, , 155, 148, 155, 150, 143, , 155],
-          f: [, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , 2, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , 188]
-        }
-      ]
+          f: [, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , 2, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , 188],
+        },
+      ],
     },
     {
       // Instrument 1
@@ -77,7 +77,7 @@ export const backgroundMusic = {
         81, // FX_PAN_AMT
         6, // FX_PAN_FREQ
         43, // FX_DELAY_AMT
-        6 // FX_DELAY_TIME
+        6, // FX_DELAY_TIME
       ],
       // Patterns
       p: [1, 1, 1, 1, 1, 1, 1, 1],
@@ -148,11 +148,11 @@ export const backgroundMusic = {
             ,
             ,
             136,
-            133
+            133,
           ],
-          f: [12, , 12, , , , , , , , , , , , , , , , , , , , , , , , , , , , 12, , 28, , 36, , , , , , , , , , , , , , , , , , , , , , , , , , , , 28]
-        }
-      ]
+          f: [12, , 12, , , , , , , , , , , , , , , , , , , , , , , , , , , , 12, , 28, , 36, , , , , , , , , , , , , , , , , , , , , , , , , , , , 28],
+        },
+      ],
     },
     {
       // Instrument 2
@@ -184,7 +184,7 @@ export const backgroundMusic = {
         39, // FX_PAN_AMT
         3, // FX_PAN_FREQ
         0, // FX_DELAY_AMT
-        3 // FX_DELAY_TIME
+        3, // FX_DELAY_TIME
       ],
       // Patterns
       p: [1, 1, 1, 1, 2, 2, 2, 2, , , 2, 2, 2, 2, 2],
@@ -256,8 +256,8 @@ export const backgroundMusic = {
             67,
             ,
             ,
-            68
-          ]
+            68,
+          ],
         },
         {
           n: [
@@ -292,7 +292,7 @@ export const backgroundMusic = {
             135,
             135,
             135,
-            135
+            135,
           ],
           f: [
             13,
@@ -358,10 +358,10 @@ export const backgroundMusic = {
             ,
             ,
             32,
-            17
-          ]
-        }
-      ]
+            17,
+          ],
+        },
+      ],
     },
     {
       // Instrument 3
@@ -393,7 +393,7 @@ export const backgroundMusic = {
         47, // FX_PAN_AMT
         3, // FX_PAN_FREQ
         63, // FX_DELAY_AMT
-        3 // FX_DELAY_TIME
+        3, // FX_DELAY_TIME
       ],
       // Patterns
       p: [, , , , 1, 2, 1, 2, 1, 4, 3, 3, 3, 3, 2, 4],
@@ -401,21 +401,21 @@ export const backgroundMusic = {
       c: [
         {
           n: [119, , 131, , 131, , 131, 119, , 131, , 119, 131, , 131, 131, 119, , 131, , 131, , 131, 119, , 131, , 119, 131, , 131, 131],
-          f: []
+          f: [],
         },
         {
           n: [115, , 127, , 127, , 127, 115, , 127, , 115, 127, , 127, 127, 112, , 124, , 124, , 124, 112, , 124, , 112, 122, , 122, 122],
-          f: []
+          f: [],
         },
         {
           n: [119, , 131, , 132, , 132, 131, , 119, 131, , 132, , 132, 129, 119, , 131, , 132, , 132, 131, , 119, 131, 119, 132, , 132, 129],
-          f: []
+          f: [],
         },
         {
           n: [119, , 131, , 131, , 131, 119, , 131, , 119, 131, , 131, 131, 119, , 131, , 131, , 131, 119, , , , , , , , 129],
-          f: []
-        }
-      ]
+          f: [],
+        },
+      ],
     },
     {
       // Instrument 4
@@ -447,7 +447,7 @@ export const backgroundMusic = {
         67, // FX_PAN_AMT
         6, // FX_PAN_FREQ
         39, // FX_DELAY_AMT
-        1 // FX_DELAY_TIME
+        1, // FX_DELAY_TIME
       ],
       // Patterns
       p: [, , , 10, 1, 1, 1, 1, , , , 10, 1, 1, 1, 10],
@@ -515,9 +515,9 @@ export const backgroundMusic = {
             147,
             ,
             ,
-            147
+            147,
           ],
-          f: []
+          f: [],
         },
         { n: [], f: [] },
         { n: [], f: [] },
@@ -592,11 +592,11 @@ export const backgroundMusic = {
             147,
             147,
             147,
-            147
+            147,
           ],
-          f: [, , , , , , , , , , , , , , , , , , , , , , , , 24, , , , 24, , , , , , , , , , , , , , , , , , , , , , , , , , , , 121, , , , 255]
-        }
-      ]
+          f: [, , , , , , , , , , , , , , , , , , , , , , , , 24, , , , 24, , , , , , , , , , , , , , , , , , , , , , , , , , , , 121, , , , 255],
+        },
+      ],
     },
     {
       // Instrument 5
@@ -628,12 +628,12 @@ export const backgroundMusic = {
         147, // FX_PAN_AMT
         6, // FX_PAN_FREQ
         121, // FX_DELAY_AMT
-        6 // FX_DELAY_TIME
+        6, // FX_DELAY_TIME
       ],
       // Patterns
       p: [],
       // Columns
-      c: []
+      c: [],
     },
     {
       // Instrument 6
@@ -665,12 +665,12 @@ export const backgroundMusic = {
         147, // FX_PAN_AMT
         6, // FX_PAN_FREQ
         121, // FX_DELAY_AMT
-        6 // FX_DELAY_TIME
+        6, // FX_DELAY_TIME
       ],
       // Patterns
       p: [],
       // Columns
-      c: []
+      c: [],
     },
     {
       // Instrument 7
@@ -702,16 +702,16 @@ export const backgroundMusic = {
         147, // FX_PAN_AMT
         3, // FX_PAN_FREQ
         8, // FX_DELAY_AMT
-        6 // FX_DELAY_TIME
+        6, // FX_DELAY_TIME
       ],
       // Patterns
       p: [, 1, , , , , , , , 1, , , , , , 1],
       // Columns
-      c: [{ n: [, , , , , , , , , , , , , , , , , , , , , , , 135], f: [] }]
-    }
+      c: [{ n: [, , , , , , , , , , , , , , , , , , , , , , , 135], f: [] }],
+    },
   ],
   rowLen: 5050, // In sample lengths
   patternLen: 32, // Rows per pattern
   endPattern: 15, // End pattern
-  numChannels: 8 // Number of channels
+  numChannels: 8, // Number of channels
 };

@@ -228,7 +228,7 @@ export class SoundBoxPlayer {
       l2 & 255,
       (l2 >> 8) & 255,
       (l2 >> 16) & 255,
-      (l2 >> 24) & 255
+      (l2 >> 24) & 255,
     ]);
 
     // Append actual wave data
