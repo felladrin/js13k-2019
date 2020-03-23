@@ -1,8 +1,16 @@
 # Back Read
 
-Game created for the 2019 [Js13kGames](https://js13kgames.com/) competition.
+Game created for the 2019 [Js13kGames](https://js13kgames.com/entries/back-read) competition.
 
-You can play it here: <https://js13kgames.com/entries/back-read>
+You can play it here: <https://www.victornogueira.app/js13k-2019/>
+
+## NPM Scripts
+
+| Npm Run | Action                                           |
+| ------- | ------------------------------------------------ |
+| start   | Starts the game in development mode.             |
+| build   | Compiles, compress and zip the game for release. |
+| lint    | Checks the code quality with ESLint.             |
 
 ## Credits
 
@@ -32,11 +40,3 @@ You can play it here: <https://js13kgames.com/entries/back-read>
 - [Google](https://www.google.com/) for helping finding whatever we imagine.
 - [StackOverflow](https://stackoverflow.com/) for having answers for everything.
 - [Js13kGames](https://js13kgames.com/) for such an enjoyable experience.
-
-## NPM Scripts
-
-| Npm Run | Action                                           |
-| ------- | ------------------------------------------------ |
-| start   | Starts the game in development mode.             |
-| build   | Compiles, compress and zip the game for release. |
-| lint    | Checks the code quality with ESLint.             |
