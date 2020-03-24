@@ -1,5 +1,5 @@
 import Tweezer from "tweezer.js";
-import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher/ts";
+import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
 import { tokens } from "typed-inject";
 import { Scene } from "../enum/Scene";
 import { GameHtmlElement } from "./GameHtmlElement";
