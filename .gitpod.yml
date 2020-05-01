@@ -1,6 +1,6 @@
 tasks:
   - init: npm ci --no-optional
-    command: npm run start
+    command: npm start
 ports:
   - port: 1234
     onOpen: "open-preview"
