@@ -1,10 +1,9 @@
 import Tweezer from "tweezer.js";
 import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
 import { tokens } from "typed-inject";
-import { answersPerQuestion } from "../const/answersPerQuestion";
-import { consonants } from "../const/consonants";
+import { answersPerQuestion } from "../const/gameInfo";
+import { vowels, consonants } from "../const/alphabet";
 import { similarWords } from "../const/similarWords";
-import { vowels } from "../const/vowels";
 import { ArithmeticOperation } from "../enum/ArithmeticOperation";
 import { QuestionType } from "../enum/QuestionType";
 import { Scene } from "../enum/Scene";

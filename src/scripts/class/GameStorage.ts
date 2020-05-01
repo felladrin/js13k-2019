@@ -1,4 +1,4 @@
-import { gameName } from "../const/gameName";
+import { gameName } from "../const/gameInfo";
 
 type GameData = {
   longestStreak: number;

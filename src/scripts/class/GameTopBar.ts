@@ -1,7 +1,7 @@
 import Tweezer from "tweezer.js";
 import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
 import { tokens } from "typed-inject";
-import { gameName } from "../const/gameName";
+import { gameName } from "../const/gameInfo";
 import { GameCountDownTimer } from "./GameCountDownTimer";
 import { GameHtmlElement } from "./GameHtmlElement";
 
