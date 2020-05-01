@@ -1,12 +1,12 @@
 import "../styles/index.scss";
-import { injector } from "./const/injector";
-import { GameTopBar } from "./class/GameTopBar";
-import { GameStreakManager } from "./class/GameStreakManager";
-import { GameMenu } from "./class/GameMenu";
-import { GameSceneManager } from "./class/GameSceneManager";
-import { GamePlayScene } from "./class/GamePlayScene";
 import { GameCountDownTimer } from "./class/GameCountDownTimer";
 import { GameListeners } from "./class/GameListeners";
+import { GameMenu } from "./class/GameMenu";
+import { GamePlayScene } from "./class/GamePlayScene";
+import { GameSceneManager } from "./class/GameSceneManager";
+import { GameStreakManager } from "./class/GameStreakManager";
+import { GameTopBar } from "./class/GameTopBar";
+import { injector } from "./const/injector";
 
 injector.injectClass(GameTopBar);
 injector.injectClass(GameStreakManager);

@@ -9,8 +9,11 @@ export class GameTopBar {
   public get onAudioMuteChanged(): TypedEvent<boolean> {
     return this.onAudioMuteChangedDispatcher.getter;
   }
+
   public static inject = tokens("gameHtmlElement", "gameCountDownTimer");
+
   private onAudioMuteChangedDispatcher = new TypedEventDispatcher<boolean>();
+
   private readonly clockIcon: string;
 
   constructor(private gameHtmlElement: GameHtmlElement, private gameCountDownTimer: GameCountDownTimer) {
@@ -86,7 +89,7 @@ export class GameTopBar {
   }
 
   toggleSound(): void {
-    const classList = this.gameHtmlElement.speaker.classList;
+    const { classList } = this.gameHtmlElement.speaker;
 
     classList.toggle("on");
     classList.toggle("off");

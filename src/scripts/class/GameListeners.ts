@@ -42,18 +42,17 @@ export class GameListeners {
   private listenToButtonsHoversAndClicks(): void {
     if (!window.AudioContext) return;
 
-    const audioContext = new AudioContext();
-    const buffer = audioContext.createBuffer(1, 96e3, 48e3);
-    const channelData = buffer.getChannelData(0);
-    const t: (i, n) => number = (i, n) => (n - i) / n;
-    const n = 4e4;
-    const gainNode = audioContext.createGain();
+    const audioContext = new AudioContext(),
+      buffer = audioContext.createBuffer(1, 96e3, 48e3),
+      channelData = buffer.getChannelData(0),
+      t: (i, n) => number = (i, n) => (n - i) / n,
+      n = 4e4,
+      gainNode = audioContext.createGain();
     gainNode.gain.value = 0.1;
     gainNode.connect(audioContext.destination);
 
-    const clickSound: (i) => null | number = (i) => (i > n ? null : Math.sin(i / 8000 - Math.sin(i / 60) * Math.sin(i / 61)) * t(i, n));
-
-    const hoverSound: (i) => null | number = (i) => (i > n ? null : Math.sin(i / 6000 - Math.sin(i / 90) * Math.sin(i / 91)) * t(i, n));
+    const clickSound: (i) => null | number = (i) => (i > n ? null : Math.sin(i / 8000 - Math.sin(i / 60) * Math.sin(i / 61)) * t(i, n)),
+      hoverSound: (i) => null | number = (i) => (i > n ? null : Math.sin(i / 6000 - Math.sin(i / 90) * Math.sin(i / 91)) * t(i, n));
 
     Array.from(this.gameHtmlElement.allButtons).forEach((button) => {
       button.addEventListener("click", () => {

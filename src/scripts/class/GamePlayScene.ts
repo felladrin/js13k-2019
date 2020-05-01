@@ -2,7 +2,7 @@ import Tweezer from "tweezer.js";
 import { TypedEvent, TypedEventDispatcher } from "typed-event-dispatcher";
 import { tokens } from "typed-inject";
 import { answersPerQuestion } from "../const/gameInfo";
-import { vowels, consonants } from "../const/alphabet";
+import { consonants, vowels } from "../const/alphabet";
 import { similarWords } from "../const/similarWords";
 import { ArithmeticOperation } from "../enum/ArithmeticOperation";
 import { QuestionType } from "../enum/QuestionType";
@@ -15,13 +15,19 @@ export class GamePlayScene {
   public get onAnsweredWrongly(): TypedEvent {
     return this.onAnsweredWronglyDispatcher.getter;
   }
+
   public get onAnsweredCorrectly(): TypedEvent {
     return this.onAnsweredCorrectlyDispatcher.getter;
   }
+
   public static inject = tokens("gameHtmlElement", "gameStreakManager");
+
   private onAnsweredCorrectlyDispatcher = new TypedEventDispatcher();
+
   private onAnsweredWronglyDispatcher = new TypedEventDispatcher();
+
   private expectedAnswer: string;
+
   private buttonsBlocked = false;
 
   constructor(private gameHtmlElement: GameHtmlElement, private gameStreakManager: GameStreakManager) {
@@ -129,8 +135,8 @@ export class GamePlayScene {
   }
 
   private prepareWhatIsTheWord(): void {
-    const randomSet = [...Random.pickElementFromArray(similarWords)];
-    const answers = [];
+    const randomSet = [...Random.pickElementFromArray(similarWords)],
+      answers = [];
     for (let i = 0; i < answersPerQuestion; i++) {
       const randomWordIndex = Random.pickIndexFromLength(randomSet.length);
       answers.push(randomSet.splice(randomWordIndex, 1));
@@ -142,18 +148,18 @@ export class GamePlayScene {
   }
 
   private prepareFindTheMissingLetter(): void {
-    const randomSet = Random.pickElementFromArray(similarWords);
-    const selectedWord = Random.pickElementFromArray(randomSet);
-    const selectedCharIndex = Random.pickIndexFromLength(selectedWord.length);
-    const selectedChar = selectedWord[selectedCharIndex];
-    const answers = [];
-    const selectedCharIsAVowel = vowels.indexOf(selectedChar.toUpperCase()) >= 0;
-    const characters = selectedCharIsAVowel ? Array.from(vowels) : Array.from(consonants);
+    const randomSet = Random.pickElementFromArray(similarWords),
+      selectedWord = Random.pickElementFromArray(randomSet),
+      selectedCharIndex = Random.pickIndexFromLength(selectedWord.length),
+      selectedChar = selectedWord[selectedCharIndex],
+      answers = [],
+      selectedCharIsAVowel = vowels.indexOf(selectedChar.toUpperCase()) >= 0,
+      characters = selectedCharIsAVowel ? Array.from(vowels) : Array.from(consonants);
 
     do {
-      const randomCharIndex = Random.pickIndexFromLength(characters.length);
-      const selectedChar = characters.splice(randomCharIndex, 1)[0];
-      const mutatedWord = selectedWord.substr(0, selectedCharIndex) + selectedChar + selectedWord.substr(selectedCharIndex + 1);
+      const randomCharIndex = Random.pickIndexFromLength(characters.length),
+        selectedChar = characters.splice(randomCharIndex, 1)[0],
+        mutatedWord = selectedWord.substr(0, selectedCharIndex) + selectedChar + selectedWord.substr(selectedCharIndex + 1);
 
       if (!this.wordExists(mutatedWord)) answers.push(selectedChar);
     } while (answers.length < answersPerQuestion);
@@ -164,7 +170,7 @@ export class GamePlayScene {
       answers[Random.pickIndexFromLength(answers.length)] = selectedChar.toUpperCase();
     }
 
-    const sentence = selectedWord.substr(0, selectedCharIndex) + "_" + selectedWord.substr(selectedCharIndex + 1);
+    const sentence = `${selectedWord.substr(0, selectedCharIndex)}_${selectedWord.substr(selectedCharIndex + 1)}`;
 
     this.expectedAnswer = selectedChar.toUpperCase();
     this.setSentence(sentence);
@@ -173,10 +179,10 @@ export class GamePlayScene {
   }
 
   private prepareWhatIsTheResult(): void {
-    let result = 0;
-    let numberOne = 0;
-    let numberTwo = 0;
-    let symbol = "";
+    let numberOne = 0,
+      numberTwo = 0,
+      result = 0,
+      symbol = "";
 
     switch (Random.pickElementFromEnum(ArithmeticOperation)) {
       case ArithmeticOperation.Addition:

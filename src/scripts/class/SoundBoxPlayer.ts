@@ -22,9 +22,13 @@
  */
 export class SoundBoxPlayer {
   private mSong;
+
   private readonly mLastRow;
+
   private mCurrentCol;
+
   private readonly mNumWords;
+
   private readonly mMixBuf;
 
   constructor(song) {
@@ -44,23 +48,22 @@ export class SoundBoxPlayer {
 
   public generate = (): number => {
     // Local variables
-    let i, j, p, row, col, n, cp, k, t, rsample, rowStartSample, f;
+    let col, cp, f, i, j, k, n, p, row, rowStartSample, rsample, t;
 
     // Put performance critical items in local variables
     const chnBuf = new Int32Array(this.mNumWords),
       instr = this.mSong.songData[this.mCurrentCol],
-      rowLen = this.mSong.rowLen,
-      patternLen = this.mSong.patternLen;
+      { rowLen } = this.mSong,
+      { patternLen } = this.mSong;
 
     // Clear effect state
-    let low = 0,
-      band = 0,
-      high;
-    let lsample,
-      filterActive = false;
-
-    // Clear note cache.
-    let noteCache = [];
+    let band = 0,
+      high,
+      low = 0,
+      filterActive = false,
+      lsample,
+      // Clear note cache.
+      noteCache = [];
 
     // Patterns
     for (p = 0; p <= this.mLastRow; ++p) {
@@ -82,7 +85,7 @@ export class SoundBoxPlayer {
         // Put performance critical instrument properties in local variables
         const oscLFO = this.mOscillators[instr.i[15]],
           lfoAmt = instr.i[16] / 512,
-          lfoFreq = Math.pow(2, instr.i[17] - 9) / rowLen,
+          lfoFreq = 2 ** (instr.i[17] - 9) / rowLen,
           fxLFO = instr.i[18],
           fxFilter = instr.i[19],
           fxFreq = (instr.i[20] * 43.23529 * 3.141592) / 44100,
@@ -90,7 +93,7 @@ export class SoundBoxPlayer {
           dist = instr.i[22] * 1e-5,
           drive = instr.i[23] / 32,
           panAmt = instr.i[24] / 512,
-          panFreq = (6.283184 * Math.pow(2, instr.i[25] - 9)) / rowLen,
+          panFreq = (6.283184 * 2 ** (instr.i[25] - 9)) / rowLen,
           dlyAmt = instr.i[26] / 255,
           dly = (instr.i[27] * rowLen) & ~1; // Must be an even number
 
@@ -180,10 +183,10 @@ export class SoundBoxPlayer {
 
   public createWave = (): Uint8Array => {
     // Create WAVE header
-    const headerLen = 44;
-    const l1 = headerLen + this.mNumWords * 2 - 8;
-    const l2 = l1 - 36;
-    const wave = new Uint8Array(headerLen + this.mNumWords * 2);
+    const headerLen = 44,
+      l1 = headerLen + this.mNumWords * 2 - 8,
+      l2 = l1 - 36,
+      wave = new Uint8Array(headerLen + this.mNumWords * 2);
     wave.set([
       82,
       73,
@@ -260,7 +263,7 @@ export class SoundBoxPlayer {
 
   private getNoteFreq = (n): number => {
     // 174.61.. / 44100 = 0.003959503758 (F3)
-    return 0.003959503758 * Math.pow(2, (n - 128) / 12);
+    return 0.003959503758 * 2 ** ((n - 128) / 12);
   };
 
   private createNote = (instr, n, rowLen): Int32Array => {
@@ -275,7 +278,7 @@ export class SoundBoxPlayer {
       sustain = instr.i[11] * instr.i[11] * 4,
       release = instr.i[12] * instr.i[12] * 4,
       releaseInv = 1 / release,
-      arpInterval = rowLen * Math.pow(2, 2 - instr.i[14]);
+      arpInterval = rowLen * 2 ** (2 - instr.i[14]);
 
     let arp = instr.i[13];
 
@@ -283,10 +286,15 @@ export class SoundBoxPlayer {
 
     // Re-trig oscillators
     let c1 = 0,
-      c2 = 0;
-
-    // Local variables.
-    let j, j2, e, t, rsample, o1t, o2t;
+      c2 = 0,
+      // Local variables.
+      e,
+      j,
+      j2,
+      o1t,
+      o2t,
+      rsample,
+      t;
 
     // Generate one note (attack + sustain + release)
     for (j = 0, j2 = 0; j < attack + sustain + release; j++, j2++) {

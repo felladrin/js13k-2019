@@ -1,4 +1,3 @@
-// noinspection JSConsecutiveCommasInArrayLiteral
 export const backgroundMusic = {
   songData: [
     {

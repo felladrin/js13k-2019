@@ -2,17 +2,29 @@ import { Scene } from "../enum/Scene";
 
 export class GameHtmlElement {
   public readonly menuCarousel: HTMLDivElement;
+
   public readonly previousButton: HTMLDivElement;
+
   public readonly nextButton: HTMLDivElement;
+
   public readonly headerCenter: HTMLDivElement;
+
   public readonly headerRight: HTMLDivElement;
+
   public readonly speaker: HTMLDivElement;
+
   public readonly sentenceElement: HTMLDivElement;
+
   public readonly questionElement: HTMLDivElement;
+
   public readonly currentStreakElements: NodeListOf<HTMLDivElement>;
+
   public readonly longestStreakElements: NodeListOf<HTMLDivElement>;
+
   public readonly answerButtons: NodeListOf<HTMLDivElement>;
+
   public readonly backToMenuButtons: NodeListOf<HTMLDivElement>;
+
   public readonly allButtons: NodeListOf<HTMLDivElement>;
 
   constructor() {

@@ -5,7 +5,9 @@ import { GameSceneManager } from "./GameSceneManager";
 
 export class GameMenu {
   public static inject = tokens("gameSceneManager", "gameHtmlElement");
+
   private cellCount = this.gameHtmlElement.menuCarousel.children.length;
+
   private selectedIndex = 0;
 
   constructor(private gameSceneManager: GameSceneManager, private gameHtmlElement: GameHtmlElement) {
@@ -21,13 +23,13 @@ export class GameMenu {
 
     Array.from(this.gameHtmlElement.menuCarousel.children).forEach((menuOption: HTMLDivElement) => {
       menuOption.addEventListener("click", () => {
-        this.gameSceneManager.displayScene(menuOption.dataset["option"] as Scene);
+        this.gameSceneManager.displayScene(menuOption.dataset.option as Scene);
       });
     });
   }
 
   private rotate(): void {
     const angle = (this.selectedIndex / this.cellCount) * -360;
-    this.gameHtmlElement.menuCarousel.style.transform = "rotateY(" + angle + "deg)";
+    this.gameHtmlElement.menuCarousel.style.transform = `rotateY(${angle}deg)`;
   }
 }

@@ -1,14 +1,14 @@
-import { rootInjector } from "typed-inject";
-import { GameTopBar } from "../class/GameTopBar";
-import { GameStreakManager } from "../class/GameStreakManager";
-import { GameMenu } from "../class/GameMenu";
-import { GameSceneManager } from "../class/GameSceneManager";
-import { GamePlayScene } from "../class/GamePlayScene";
-import { GameCountDownTimer } from "../class/GameCountDownTimer";
-import { GameListeners } from "../class/GameListeners";
-import { GameStorage } from "../class/GameStorage";
-import { GameHtmlElement } from "../class/GameHtmlElement";
 import { GameAudio } from "../class/GameAudio";
+import { GameCountDownTimer } from "../class/GameCountDownTimer";
+import { GameHtmlElement } from "../class/GameHtmlElement";
+import { GameListeners } from "../class/GameListeners";
+import { GameMenu } from "../class/GameMenu";
+import { GamePlayScene } from "../class/GamePlayScene";
+import { GameSceneManager } from "../class/GameSceneManager";
+import { GameStorage } from "../class/GameStorage";
+import { GameStreakManager } from "../class/GameStreakManager";
+import { GameTopBar } from "../class/GameTopBar";
+import { rootInjector } from "typed-inject";
 
 export const injector = rootInjector
   .provideClass("gameHtmlElement", GameHtmlElement)

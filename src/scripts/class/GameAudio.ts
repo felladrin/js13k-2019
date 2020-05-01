@@ -13,15 +13,14 @@ export class GameAudio {
     audio.autoplay = autoplay;
     audio.loop = loop;
 
-    const player = new SoundBoxPlayer(song);
-
-    const progressChecker = setInterval(() => {
-      if (player.generate() >= 1) {
-        clearInterval(progressChecker);
-        const wave = player.createWave();
-        audio.src = URL.createObjectURL(new Blob([wave], { type: "audio/wav" }));
-      }
-    }, 300);
+    const player = new SoundBoxPlayer(song),
+      progressChecker = setInterval(() => {
+        if (player.generate() >= 1) {
+          clearInterval(progressChecker);
+          const wave = player.createWave();
+          audio.src = URL.createObjectURL(new Blob([wave], { type: "audio/wav" }));
+        }
+      }, 300);
 
     this.gameTopBar.onAudioMuteChanged.addListener((muted: boolean) => {
       audio.muted = muted;

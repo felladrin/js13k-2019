@@ -6,6 +6,7 @@ import { GameHtmlElement } from "./GameHtmlElement";
 
 export class GameSceneManager {
   public static inject = tokens("gameHtmlElement");
+
   public currentScene: Scene = Scene.Menu;
 
   public get onSceneDisplayed(): TypedEvent<Scene> {

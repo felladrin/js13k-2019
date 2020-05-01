@@ -1,3 +1,2 @@
-export const gameName = "Back Read";
-
-export const answersPerQuestion = 4;
+export const answersPerQuestion = 4,
+  gameName = "Back Read";
