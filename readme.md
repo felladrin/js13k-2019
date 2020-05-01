@@ -19,6 +19,7 @@ You can play it here: <https://www.victornogueira.app/js13k-2019/>
 - [MiniSoundEditor](https://xem.github.io/MiniSoundEditor/) for the micro sounds using AudioContext.
 - [ESLint](https://eslint.org/) for helping with code quality.
 - [Typescript-Eslint](https://github.com/typescript-eslint/typescript-eslint) for allowing ESLint evaluation over Typescript code.
+- [Typed Inject](https://www.npmjs.com/package/typed-inject) for making it so easy to use dependency injection.
 - [Archiver](https://github.com/archiverjs/node-archiver) for the high zip compression.
 - [HTML-Inline](https://github.com/substack/html-inline) for making it so easy to make single-file games.
 - [Husky](https://github.com/typicode/husky) for the automation possible by hooking to git events.
