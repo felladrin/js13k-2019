@@ -25,9 +25,7 @@ export class GamePlayScene {
   private expectedAnswer: string;
   private buttonsBlocked = false;
 
-  constructor(private gameHtmlElement: GameHtmlElement, private gameStreakManager: GameStreakManager) {}
-
-  public initialize(): void {
+  constructor(private gameHtmlElement: GameHtmlElement, private gameStreakManager: GameStreakManager) {
     this.listenToAnswersSelected();
   }
 

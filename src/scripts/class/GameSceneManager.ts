@@ -14,9 +14,7 @@ export class GameSceneManager {
 
   private onSceneDisplayedDispatcher = new TypedEventDispatcher<Scene>();
 
-  constructor(private gameHtmlElement: GameHtmlElement) {}
-
-  initialize(): void {
+  constructor(private gameHtmlElement: GameHtmlElement) {
     this.displayScene(this.currentScene);
   }
 

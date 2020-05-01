@@ -8,9 +8,7 @@ export class GameMenu {
   private cellCount = this.gameHtmlElement.menuCarousel.children.length;
   private selectedIndex = 0;
 
-  constructor(private gameSceneManager: GameSceneManager, private gameHtmlElement: GameHtmlElement) {}
-
-  initialize(): void {
+  constructor(private gameSceneManager: GameSceneManager, private gameHtmlElement: GameHtmlElement) {
     this.gameHtmlElement.previousButton.addEventListener("click", () => {
       this.selectedIndex--;
       this.rotate();

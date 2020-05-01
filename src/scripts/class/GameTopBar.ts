@@ -15,9 +15,6 @@ export class GameTopBar {
 
   constructor(private gameHtmlElement: GameHtmlElement, private gameCountDownTimer: GameCountDownTimer) {
     this.clockIcon = this.gameHtmlElement.headerRight.innerHTML;
-  }
-
-  public initialize(): void {
     this.gameHtmlElement.speaker.addEventListener("click", () => this.toggleSound());
     this.gameCountDownTimer.onGamePlayCountDownStarted.addListener((count) => this.displayCountDown(count));
     this.gameCountDownTimer.onGamePlayCountDownUpdated.addListener((count) => this.displayCountDown(count));

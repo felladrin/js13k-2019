@@ -9,7 +9,6 @@ import { GameListeners } from "../class/GameListeners";
 import { GameStorage } from "../class/GameStorage";
 import { GameHtmlElement } from "../class/GameHtmlElement";
 import { GameAudio } from "../class/GameAudio";
-import { Game } from "../class/Game";
 
 export const injector = rootInjector
   .provideClass("gameHtmlElement", GameHtmlElement)
@@ -21,5 +20,4 @@ export const injector = rootInjector
   .provideClass("gameSceneManager", GameSceneManager)
   .provideClass("gameMenu", GameMenu)
   .provideClass("gameAudio", GameAudio)
-  .provideClass("gameListeners", GameListeners)
-  .provideClass("game", Game);
+  .provideClass("gameListeners", GameListeners);

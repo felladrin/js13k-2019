@@ -21,9 +21,7 @@ export class GameListeners {
     private gamePlayScene: GamePlayScene,
     private gameCountDownTimer: GameCountDownTimer,
     private gameAudio: GameAudio
-  ) {}
-
-  public initialize(): void {
+  ) {
     this.listenToBackToMenuClicks();
     this.listenToButtonsHoversAndClicks();
     this.listenToCountDownTimerOver();

@@ -25,9 +25,7 @@ export class GameCountDownTimer {
   private readonly ONE_SECOND = 1000;
   private isRunning = false;
 
-  constructor(private gamePlayScene: GamePlayScene) {}
-
-  public initialize(): void {
+  constructor(private gamePlayScene: GamePlayScene) {
     this.gamePlayScene.onAnsweredCorrectly.addListener(() => this.addBonusTime(5));
     this.gamePlayScene.onAnsweredWrongly.addListener(() => this.deductTime(1));
   }

@@ -5,7 +5,11 @@ import { GameStorage } from "./GameStorage";
 export class GameStreakManager {
   public static inject = tokens("gameStorage", "gameHtmlElement");
 
-  constructor(private gameStorage: GameStorage, private gameHtmlElement: GameHtmlElement) {}
+  constructor(private gameStorage: GameStorage, private gameHtmlElement: GameHtmlElement) {
+    const gameData = this.gameStorage.load();
+
+    if (gameData) this.longestStreak = gameData.longestStreak;
+  }
 
   private _currentStreak = 0;
 
@@ -34,12 +38,6 @@ export class GameStreakManager {
       longestStreakElement.innerText = this._longestStreak.toString();
     });
     this.gameStorage.save({ longestStreak: this._longestStreak });
-  }
-
-  public initialize(): void {
-    const gameData = this.gameStorage.load();
-
-    if (gameData) this.longestStreak = gameData.longestStreak;
   }
 
   public increaseStreak(): void {
