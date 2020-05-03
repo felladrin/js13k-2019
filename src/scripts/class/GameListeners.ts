@@ -109,11 +109,11 @@ export class GameListeners {
   private listenToFirstInteractionToStartBackgroundMusic(): void {
     const startSong = (): void => {
       this.gameAudio.create(backgroundMusic, 0.2, true, true);
-      document.removeEventListener("mousemove", startSong);
+      document.removeEventListener("mousedown", startSong);
       document.removeEventListener("touchstart", startSong);
     };
 
-    document.addEventListener("mousemove", startSong);
+    document.addEventListener("mousedown", startSong);
     document.addEventListener("touchstart", startSong);
   }
 
