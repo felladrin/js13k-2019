@@ -13,17 +13,19 @@
     "inline-build": "html-inline -i dist/bundled/index.html -o dist/inlined/index.html",
     "zip": "ts-node scripts/zip.ts",
     "lint": "eslint \"src/**/*.{js,ts}\" --fix",
-    "find-duplicate-code": "jscpd src"
+    "find-duplicate-code": "jscpd src",
+    "find-circular-dependencies": "dpdm --tree false --warning false src/scripts/index.ts"
   },
   "author": "Victor Nogueira <victor@victornogueira.app>",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
     "@types/archiver": "^3.1.0",
-    "@typescript-eslint/eslint-plugin": "^2.30.0",
-    "@typescript-eslint/parser": "^2.30.0",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
     "archiver": "^4.0.1",
-    "eslint": "^6.8.0",
+    "dpdm": "^3.4.3",
+    "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
     "html-inline": "^1.2.0",
@@ -37,11 +39,11 @@
     "pretty-quick": "^2.0.1",
     "rimraf": "^3.0.2",
     "sass": "^1.26.5",
-    "ts-node": "^8.9.1",
+    "ts-node": "^8.10.1",
     "tweezer.js": "^1.5.0",
-    "typed-event-dispatcher": "^1.8.1",
+    "typed-event-dispatcher": "^1.9.0",
     "typed-inject": "^2.2.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.2"
   },
   "husky": {
     "hooks": {
