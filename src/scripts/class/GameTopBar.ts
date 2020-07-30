@@ -27,7 +27,7 @@ export class GameTopBar {
 
   public changeInnerHTML(innerHTML: string): Promise<void> {
     return new Promise((resolve): void => {
-      const updateOpacity = (value: number): void => {
+      const updateHeaderOpacity = (value: number): void => {
         this.gameHtmlElement.headerCenter.style.opacity = (value / 100).toString();
       };
 
@@ -36,7 +36,7 @@ export class GameTopBar {
         end: 0,
         duration: 500,
       })
-        .on("tick", updateOpacity)
+        .on("tick", updateHeaderOpacity)
         .on("done", () => {
           this.gameHtmlElement.headerCenter.innerHTML = innerHTML;
 
@@ -45,7 +45,7 @@ export class GameTopBar {
             end: 100,
             duration: 500,
           })
-            .on("tick", updateOpacity)
+            .on("tick", updateHeaderOpacity)
             .on("done", resolve)
             .begin();
         })
@@ -53,8 +53,8 @@ export class GameTopBar {
     });
   }
 
-  displayCountDown(count): void {
-    this.gameHtmlElement.headerRight.innerHTML = count;
+  displayCountDown(count: number): void {
+    this.gameHtmlElement.headerRight.innerHTML = count.toString();
 
     if (count > 5) return;
 

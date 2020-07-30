@@ -7,7 +7,7 @@ export class GameAudio {
 
   constructor(private gameTopBar: GameTopBar) {}
 
-  public create(song, volume = 1.0, autoplay = false, loop = false): HTMLAudioElement {
+  public create(song: unknown, volume = 1.0, autoplay = false, loop = false): HTMLAudioElement {
     const audio = document.createElement("audio");
     audio.volume = volume;
     audio.autoplay = autoplay;

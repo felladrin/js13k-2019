@@ -20,7 +20,7 @@ export class GameSceneManager {
   }
 
   displayScene(scene: Scene): void {
-    const updateOpacity = (value: number): void => {
+    const updateSceneOpacity = (value: number): void => {
       this.gameHtmlElement.getScene(scene).style.opacity = (value / 100).toString();
     };
 
@@ -29,7 +29,9 @@ export class GameSceneManager {
       end: 0,
       duration: 500,
     })
-      .on("tick", updateOpacity)
+      .on("tick", (value: number): void => {
+        this.gameHtmlElement.getScene(scene).style.opacity = (value / 100).toString();
+      })
       .on("done", () => {
         for (const sceneKey of Object.keys(Scene)) {
           const sceneElement = this.gameHtmlElement.getScene(Scene[sceneKey]);
@@ -45,7 +47,7 @@ export class GameSceneManager {
           end: 100,
           duration: 500,
         })
-          .on("tick", updateOpacity)
+          .on("tick", updateSceneOpacity)
           .on("done", () => {
             this.onSceneDisplayedDispatcher.dispatch(scene);
           })
