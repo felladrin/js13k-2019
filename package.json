@@ -11,7 +11,7 @@
     "make-dist-dir": "mkdirp dist/bundled dist/inlined dist/zipped",
     "parcel-build": "parcel build src/index.html -d dist/bundled --no-source-maps --experimental-scope-hoisting",
     "inline-build": "html-inline -i dist/bundled/index.html -o dist/inlined/index.html",
-    "zip": "ts-node scripts/zip.ts",
+    "zip": "ts-node .npm/scripts/zip.ts",
     "lint": "eslint \"src/**/*.{js,ts}\" --fix",
     "find-duplicate-code": "jscpd src",
     "find-circular-dependencies": "dpdm --tree false --warning false src/scripts/index.ts"
