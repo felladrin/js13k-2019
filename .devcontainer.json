@@ -1,7 +1,0 @@
-{
-  "image": "node:lts-buster",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
-  "workspaceFolder": "/workspace",
-  "mounts": ["source=js13k-2019-node-modules,target=/workspace/node_modules,type=volume", "source=js13k-2019-cache,target=/workspace/.cache,type=volume"],
-  "forwardPorts": [1234]
-}
